@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{5D2A0804-7140-086F-7310-9C595292519B}</ProjectGuid>
+    <ProjectGuid>{33A318EB-31FA-5068-0669-7D470A8FA4CE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-UnityScript</AssemblyName>
@@ -89,10 +89,10 @@
  <HintPath>D:/UnityFolder/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
  <Reference Include="GETween">
- <HintPath>C:/Users/User/Documents/RunnerProject/Assets/OtherAsset/GUI Animator/Common/Plugins/GETween.dll</HintPath>
+ <HintPath>C:/Users/User/Documents/RunnerProject/RunnerGame/Assets/OtherAsset/GUI Animator/Common/Plugins/GETween.dll</HintPath>
  </Reference>
  <Reference Include="GUIAnimatorFREE">
- <HintPath>C:/Users/User/Documents/RunnerProject/Assets/OtherAsset/GUI Animator/GUI Animator FREE/Plugins/GUIAnimatorFREE.dll</HintPath>
+ <HintPath>C:/Users/User/Documents/RunnerProject/RunnerGame/Assets/OtherAsset/GUI Animator/GUI Animator FREE/Plugins/GUIAnimatorFREE.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

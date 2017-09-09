@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunnerGame", "Assembly-CSharp.csproj", "{DBF685AF-47DE-334F-A230-D853BFDD5209}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RunnerGame", "Assembly-CSharp-Editor.csproj", "{2F605FD8-D526-D18F-3F07-D41F6083BAE2}"
+EndProject
+Project("{48D12B7C-FDD6-0EFC-7211-20D2A18E963E}") = "RunnerGame", "Assembly-UnityScript.unityproj", "{33A318EB-31FA-5068-0669-7D470A8FA4CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DBF685AF-47DE-334F-A230-D853BFDD5209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBF685AF-47DE-334F-A230-D853BFDD5209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBF685AF-47DE-334F-A230-D853BFDD5209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBF685AF-47DE-334F-A230-D853BFDD5209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F605FD8-D526-D18F-3F07-D41F6083BAE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F605FD8-D526-D18F-3F07-D41F6083BAE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F605FD8-D526-D18F-3F07-D41F6083BAE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F605FD8-D526-D18F-3F07-D41F6083BAE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33A318EB-31FA-5068-0669-7D470A8FA4CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33A318EB-31FA-5068-0669-7D470A8FA4CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33A318EB-31FA-5068-0669-7D470A8FA4CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33A318EB-31FA-5068-0669-7D470A8FA4CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

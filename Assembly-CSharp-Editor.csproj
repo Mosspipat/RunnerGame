@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{0C4E60CF-1F93-A21E-3747-8441DE5D7FD0}</ProjectGuid>
+    <ProjectGuid>{2F605FD8-D526-D18F-3F07-D41F6083BAE2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -116,17 +116,17 @@
  <HintPath>D:/UnityFolder/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="GETween">
- <HintPath>C:/Users/User/Documents/RunnerProject/Assets/OtherAsset/GUI Animator/Common/Plugins/GETween.dll</HintPath>
+ <HintPath>C:/Users/User/Documents/RunnerProject/RunnerGame/Assets/OtherAsset/GUI Animator/Common/Plugins/GETween.dll</HintPath>
  </Reference>
  <Reference Include="GUIAnimatorFREE">
- <HintPath>C:/Users/User/Documents/RunnerProject/Assets/OtherAsset/GUI Animator/GUI Animator FREE/Plugins/GUIAnimatorFREE.dll</HintPath>
+ <HintPath>C:/Users/User/Documents/RunnerProject/RunnerGame/Assets/OtherAsset/GUI Animator/GUI Animator FREE/Plugins/GUIAnimatorFREE.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{55DDC047-3B05-6B49-F7A3-D6A2CFB34A1F}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{DBF685AF-47DE-334F-A230-D853BFDD5209}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript.unityproj">
-      <Project>{5D2A0804-7140-086F-7310-9C595292519B}</Project>      <Name>Assembly-UnityScript</Name>    </ProjectReference>
+      <Project>{33A318EB-31FA-5068-0669-7D470A8FA4CE}</Project>      <Name>Assembly-UnityScript</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
