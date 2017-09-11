@@ -11,7 +11,7 @@ public class EnemyBehavior : MonoBehaviour {
 	void Update () {
         player = GameObject.Find("player");
         FindTarget(player);
-        this.transform.Translate(new Vector3(0, 0, 5f * Time.deltaTime));
+        this.transform.Translate(new Vector3(0, 0, 1f * Time.deltaTime));
 	}
 
     void FindTarget(GameObject player)

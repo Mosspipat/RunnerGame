@@ -19,10 +19,6 @@ public class playerController : MonoBehaviour {
     float gravity = 12.5f;
     float verticalVelpcity;
 
-    public Transform edgeLeft;
-    public Transform edgeRight;
-
-
     string way;
     public Vector3 presentWay;
     public float leftWay = -2.5f;
@@ -109,7 +105,7 @@ public class playerController : MonoBehaviour {
             verticalVelpcity = -gravity * Time.deltaTime;                   //add gravity to velcity
             if (Input.GetKeyDown(KeyCode.Space))                        
             {
-                verticalVelpcity = 5f;                                  // add velocity in single frame
+                verticalVelpcity = 3.5f;                                  // add velocity in single frame
                 AnimPlayer.SetTrigger("isJump");
             }
 

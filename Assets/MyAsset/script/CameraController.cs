@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-    public Transform playerPosition;
+    Transform playerPosition;
     Vector3 startOffsset = new Vector3(0,4,-4f); 
     Vector3 moveVector;
 
     float transition = 0f;
     float animationDuration = 2f;
     Vector3 animationOffset = new Vector3(0,5,60);
+
+    void Start()
+    {
+        playerPosition = GameObject.Find("player").transform;
+    }
+
 
 	void Update () {
         moveVector = playerPosition.position + startOffsset;
@@ -24,7 +30,7 @@ public class CameraController : MonoBehaviour {
         {
             transform.position = Vector3.Lerp(moveVector + animationOffset, moveVector, transition);
             transition += Time.deltaTime * 1 / animationDuration;
-            transform.LookAt(playerPosition.transform.position + (Vector3.up*1.5f));
+            transform.LookAt(playerPosition.position + (Vector3.up*1.5f));
         }
 
 	}

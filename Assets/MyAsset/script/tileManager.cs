@@ -12,11 +12,14 @@ public class tileManager : MonoBehaviour {
     float sizePlatform = 8.696283f;
 
 
-    public Transform playerPos;
+    Transform playerPos;
     float arriveZone = 40f;
     List<GameObject> allPlatformGame;
 
 	void Start () {
+
+        playerPos = GameObject.Find("player").transform;
+
         allPlatformGame = new List<GameObject>();
 
         for (int i = 0; i < 6; i++)
