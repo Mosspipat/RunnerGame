@@ -50,13 +50,14 @@
      <Compile Include="Assets\MyAsset\script\ButtonFunction.cs" />
      <Compile Include="Assets\MyAsset\script\CameraController.cs" />
      <Compile Include="Assets\MyAsset\script\CharacterSelection.cs" />
-     <Compile Include="Assets\MyAsset\script\EnemySpawn.cs" />
      <Compile Include="Assets\MyAsset\script\ScoreManager.cs" />
+     <Compile Include="Assets\MyAsset\script\SpawnItemOrEnemy.cs" />
      <Compile Include="Assets\MyAsset\script\TerrainMove.cs" />
      <Compile Include="Assets\MyAsset\script\TextScoreGameover.cs" />
      <Compile Include="Assets\MyAsset\script\UIPlayer.cs" />
      <Compile Include="Assets\MyAsset\script\WeaponSelection.cs" />
      <Compile Include="Assets\MyAsset\script\codeSystem.cs" />
+     <Compile Include="Assets\MyAsset\script\coin.cs" />
      <Compile Include="Assets\MyAsset\script\playerController.cs" />
      <Compile Include="Assets\MyAsset\script\tileManager.cs" />
      <Compile Include="Assets\OtherAsset\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_Demo.cs" />

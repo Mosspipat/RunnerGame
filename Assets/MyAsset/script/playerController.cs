@@ -159,6 +159,11 @@ public class playerController : MonoBehaviour {
             Application.LoadLevel("gameover");
             isDead = true;
         }
+        else if (obj.name == "coin")
+        {
+            Debug.Log("get coin");
+            Destroy(obj);
+        }
     }
 
     void MoveTerrianFollowPlayer()

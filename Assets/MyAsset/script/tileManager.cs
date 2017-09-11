@@ -18,6 +18,7 @@ public class tileManager : MonoBehaviour {
 
 	void Start () {
         allPlatformGame = new List<GameObject>();
+
         for (int i = 0; i < 6; i++)
         {
             if (i <= 2)
@@ -55,15 +56,15 @@ public class tileManager : MonoBehaviour {
         }
         else
         {
-            int randomNumplatform = Random.Range(1, 6);
-            GameObject floor = Instantiate(platform[randomNumplatform], new Vector3(
-                                   starterplatform.position.x,
-                starterplatform.position.y,                                                     //Random platform
-                                   spawnPlatformPoint),
-                               starterplatform.rotation) as GameObject;
-            floor.transform.SetParent(this.transform);
-            spawnPlatformPoint += sizePlatform;
-            allPlatformGame.Add(floor);
+            int randomNumplatform = Random.Range(1, 7);
+                GameObject floor = Instantiate(platform[randomNumplatform], new Vector3(
+                                       starterplatform.position.x,
+                                       starterplatform.position.y,                                                     //Random platform
+                                       spawnPlatformPoint),
+                                   starterplatform.rotation) as GameObject;
+                floor.transform.SetParent(this.transform);
+                spawnPlatformPoint += sizePlatform;
+                allPlatformGame.Add(floor);
         }
     }
 
@@ -73,4 +74,6 @@ public class tileManager : MonoBehaviour {
         Destroy(allPlatformGame[0]);
         allPlatformGame.RemoveAt(0);
     }
+
+
 }
