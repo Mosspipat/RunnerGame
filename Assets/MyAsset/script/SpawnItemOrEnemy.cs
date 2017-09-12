@@ -8,6 +8,7 @@ public class SpawnItemOrEnemy : MonoBehaviour {
     public GameObject Enemy;
     public Transform spawnPointer;
     GameObject coinObj;
+    GameObject enemyObj;
 
     tileManager tileManage;
 
@@ -21,7 +22,8 @@ public class SpawnItemOrEnemy : MonoBehaviour {
         }
         else if (randomSpawn == 2)
         {
-            SpawnMonsterTypeOne();
+            int randomPointerSpawn = Random.Range(0, 9);
+            SpawnMonsterTypeOne(randomPointerSpawn);
         }
     }
 
@@ -35,13 +37,11 @@ public class SpawnItemOrEnemy : MonoBehaviour {
         }
     }
 
-    void SpawnMonsterTypeOne()
+    void SpawnMonsterTypeOne(int randomPointer)
     {
-        foreach (Transform pointer in spawnPointer)
-        {
-            coinObj = Instantiate(Enemy, pointer.transform.position,Enemy.transform.rotation) as GameObject;
-            coinObj.name = "monsterOne";
-        } 
+        
+        enemyObj = Instantiate(Enemy,spawnPointer.GetChild(randomPointer).position,Enemy.transform.rotation) as GameObject;
+        enemyObj.name = "monsterOne";
     }
 
 

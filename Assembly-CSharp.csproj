@@ -60,6 +60,7 @@
      <Compile Include="Assets\MyAsset\script\coin.cs" />
      <Compile Include="Assets\MyAsset\script\playerController.cs" />
      <Compile Include="Assets\MyAsset\script\tileManager.cs" />
+     <Compile Include="Assets\ObjBehavior.cs" />
      <Compile Include="Assets\OtherAsset\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_Demo.cs" />
      <Compile Include="Assets\OtherAsset\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_UIs.cs" />
      <Compile Include="Assets\OtherAsset\GE Common Assets\GE Orbit Camera\Scripts\GE_OrbitCamera.cs" />

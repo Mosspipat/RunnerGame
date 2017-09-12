@@ -14,6 +14,7 @@ public class playerController : MonoBehaviour {
 
     Rigidbody RBPlayer;
     CharacterController controlCha;
+    BoxCollider BCPlayer;
     public float forceSpeed;
     Vector3 moveVector;
     float gravity = 12.5f;
@@ -35,6 +36,7 @@ public class playerController : MonoBehaviour {
 	void Start () {
         RBPlayer = this.transform.GetComponent<Rigidbody>();
         controlCha = this.transform.GetComponent<CharacterController>();
+        BCPlayer = this.transform.GetComponent<BoxCollider>();
         this.transform.position = new Vector3(0f,this.transform.position.y,this.transform.position.z);
         way = "middle";
 
@@ -105,8 +107,9 @@ public class playerController : MonoBehaviour {
             verticalVelpcity = -gravity * Time.deltaTime;                   //add gravity to velcity
             if (Input.GetKeyDown(KeyCode.Space))                        
             {
-                verticalVelpcity = 3.5f;                                  // add velocity in single frame
-                AnimPlayer.SetTrigger("isJump");
+                verticalVelpcity = 4f;                                  // add velocity in single frame
+                StartJump();
+                Invoke("StopJump",0.6f);
             }
 
             if (Input.GetKeyDown(KeyCode.S))
@@ -115,8 +118,6 @@ public class playerController : MonoBehaviour {
                 Invoke("StopSlide", 1);
             }
         }
-
-
         else
         {
             verticalVelpcity -= gravity * Time.deltaTime;               //add  gravity to velocity 
@@ -160,6 +161,17 @@ public class playerController : MonoBehaviour {
             Debug.Log("get coin");
             Destroy(obj);
         }
+        else if (obj.name == "log")
+        {
+            Debug.Log("Log hit Leg");
+            AnimPlayer.SetTrigger("isLegHit");
+        }
+        else if (obj.name == "headLog")
+        {
+            Debug.Log("Log hit Head");
+            AnimPlayer.SetTrigger("isHeadHit");
+        }
+
     }
 
     void MoveTerrianFollowPlayer()
@@ -191,6 +203,21 @@ public class playerController : MonoBehaviour {
     void StopSlide()
     {
         controlCha.center = new Vector3(controlCha.center.x,controlCha.center.y*2,controlCha.center.z);
+        controlCha.height *= 2;
+    }
+
+    void StartJump()
+    {
+        AnimPlayer.SetTrigger("isJump");
+        BCPlayer.center *= 2;
+        controlCha.center = new Vector3(controlCha.center.x,controlCha.center.y*1.5f,controlCha.center.z);
+        controlCha.height /= 2;
+    }
+
+    void StopJump()
+    {
+        BCPlayer.center /= 2;
+        controlCha.center = new Vector3(controlCha.center.x,controlCha.center.y/1.5f,controlCha.center.z);
         controlCha.height *= 2;
     }
 }
