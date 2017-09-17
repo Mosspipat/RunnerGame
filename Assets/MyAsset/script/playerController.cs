@@ -15,6 +15,7 @@ public class playerController : MonoBehaviour {
     Rigidbody RBPlayer;
     CharacterController controlCha;
     BoxCollider BCPlayer;
+    Progressbar PBplayer;
     public float forceSpeed;
     Vector3 moveVector;
     float gravity = 12.5f;
@@ -36,6 +37,7 @@ public class playerController : MonoBehaviour {
 	void Start () {
         RBPlayer = this.transform.GetComponent<Rigidbody>();
         controlCha = this.transform.GetComponent<CharacterController>();
+        PBplayer = GameObject.Find("Main Camera").transform.GetChild(0).GetComponent<Progressbar>();
         BCPlayer = this.transform.GetComponent<BoxCollider>();
         this.transform.position = new Vector3(0f,this.transform.position.y,this.transform.position.z);
         way = "middle";
@@ -72,6 +74,7 @@ public class playerController : MonoBehaviour {
             way = "left";
             Debug.Log("goLeftWay");
             Debug.Log(offsetPlayerMin);
+            AnimPlayer.SetTrigger("isLeft");
         }
         if (Input.GetKeyDown(KeyCode.D)&& way == "middle")
         {
@@ -79,6 +82,7 @@ public class playerController : MonoBehaviour {
             way = "right";
             Debug.Log("goRightWay");
             Debug.Log(offsetPlayerMax);
+            AnimPlayer.SetTrigger("isRight");
         }
         // Left Move
         if (Input.GetKeyDown(KeyCode.D)&& way == "left")
@@ -86,6 +90,7 @@ public class playerController : MonoBehaviour {
             presentWay = new Vector3(this.transform.position.x + rightWay,this.transform.position.y,this.transform.position.z);
             way = "middle";
             Debug.Log("goMiddleWay");
+            AnimPlayer.SetTrigger("isRight");
         }
 
         // Right Move
@@ -94,6 +99,7 @@ public class playerController : MonoBehaviour {
             presentWay = new Vector3(this.transform.position.x + leftWay,this.transform.position.y,this.transform.position.z);
             way = "middle";
             Debug.Log("goMiddleWay");
+            AnimPlayer.SetTrigger("isLeft");
         }
 
         /*if (Input.GetKeyDown(KeyCode.S))
@@ -116,6 +122,13 @@ public class playerController : MonoBehaviour {
             {
                 StartSlide();
                 Invoke("StopSlide", 1);
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                AnimPlayer.SetTrigger("isAttack");
+                moveVector.z = 0;
+                controlCha.enabled =false;
+                Invoke("StartRun", 1f);
             }
         }
         else
@@ -152,7 +165,6 @@ public class playerController : MonoBehaviour {
         }
         else if (obj.name == "obstacle_tree")
         {
-            Time.timeScale = 0;
             Application.LoadLevel("gameover");
             isDead = true;
         }
@@ -164,11 +176,13 @@ public class playerController : MonoBehaviour {
         else if (obj.name == "log")
         {
             Debug.Log("Log hit Leg");
+            PBplayer.GetDamage(1);
             AnimPlayer.SetTrigger("isLegHit");
         }
         else if (obj.name == "headLog")
         {
             Debug.Log("Log hit Head");
+            PBplayer.GetDamage(1);
             AnimPlayer.SetTrigger("isHeadHit");
         }
 
@@ -219,5 +233,10 @@ public class playerController : MonoBehaviour {
         BCPlayer.center /= 2;
         controlCha.center = new Vector3(controlCha.center.x,controlCha.center.y/1.5f,controlCha.center.z);
         controlCha.height *= 2;
+    }
+
+    void StartRun()
+    {
+        controlCha.enabled = true;
     }
 }

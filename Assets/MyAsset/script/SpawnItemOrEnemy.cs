@@ -15,7 +15,7 @@ public class SpawnItemOrEnemy : MonoBehaviour {
 	void Start () {
         tileManage = GameObject.Find("tileManager").GetComponent<tileManager>();    
 
-        int randomSpawn = Random.Range(1, 3);
+        int randomSpawn = Random.Range(1, 2);
         if (randomSpawn == 1)
         {
             SpawnCoin();

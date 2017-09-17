@@ -10,19 +10,15 @@ public class ObjBehavior : MonoBehaviour {
         AnimObj = GetComponent<Animator>();
 	}
 	
-	void Update () {
-		
-	}
-
     void OnTriggerEnter(Collider obj)                               //Interact with item
     {
         if (this.gameObject.name == "log"&&obj.name == "player")
         {
-            AnimObj.SetTrigger("hit");
+            AnimObj.SetTrigger("isHit");
         }
         if (this.gameObject.name == "headLog"&&obj.name == "player")
         {
-            AnimObj.SetTrigger("hit");
+            AnimObj.SetTrigger("isHit");
         }
     }
 }
