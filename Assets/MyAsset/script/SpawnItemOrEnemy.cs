@@ -6,6 +6,7 @@ public class SpawnItemOrEnemy : MonoBehaviour {
 
     public GameObject Coin;
     public GameObject Enemy;
+    public GameObject EnemyShoot;
     public Transform spawnPointer;
     GameObject coinObj;
     GameObject enemyObj;
@@ -15,7 +16,7 @@ public class SpawnItemOrEnemy : MonoBehaviour {
 	void Start () {
         tileManage = GameObject.Find("tileManager").GetComponent<tileManager>();    
 
-        int randomSpawn = Random.Range(1, 2);
+        int randomSpawn = Random.Range(1, 4);
         if (randomSpawn == 1)
         {
             SpawnCoin();
@@ -24,6 +25,11 @@ public class SpawnItemOrEnemy : MonoBehaviour {
         {
             int randomPointerSpawn = Random.Range(0, 9);
             SpawnMonsterTypeOne(randomPointerSpawn);
+        }
+        else if (randomSpawn == 3)
+        {
+            int randomPointerSpawn = Random.Range(0, 9);
+            SpawnMonsterTypeTwo(randomPointerSpawn);
         }
     }
 
@@ -39,10 +45,14 @@ public class SpawnItemOrEnemy : MonoBehaviour {
 
     void SpawnMonsterTypeOne(int randomPointer)
     {
-        
-        enemyObj = Instantiate(Enemy,spawnPointer.GetChild(randomPointer).position,Enemy.transform.rotation) as GameObject;
+        enemyObj = Instantiate(Enemy,spawnPointer.GetChild(randomPointer).position,spawnPointer.GetChild(randomPointer).transform.rotation) as GameObject;
         enemyObj.name = "monsterOne";
     }
 
+    void SpawnMonsterTypeTwo(int randomPointer)
+    {
+        enemyObj = Instantiate(EnemyShoot,spawnPointer.GetChild(randomPointer).position,spawnPointer.GetChild(randomPointer).transform.rotation) as GameObject;
+        enemyObj.name = "monsterShoot";
+    }
 
 }

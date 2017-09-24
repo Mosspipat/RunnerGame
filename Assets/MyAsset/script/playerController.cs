@@ -185,7 +185,18 @@ public class playerController : MonoBehaviour {
             PBplayer.GetDamage(1);
             AnimPlayer.SetTrigger("isHeadHit");
         }
-
+        else if (obj.tag == "enemy")
+        {
+            Debug.Log("enemy hit Player");
+            PBplayer.GetDamage(1);
+            AnimPlayer.SetTrigger("isLegHit");
+        }
+        else if (obj.name == "bullet")
+        {
+            Debug.Log("bullet hit Player");
+            PBplayer.GetDamage(1);
+            AnimPlayer.SetTrigger("isLegHit");
+        }
     }
 
     void MoveTerrianFollowPlayer()
