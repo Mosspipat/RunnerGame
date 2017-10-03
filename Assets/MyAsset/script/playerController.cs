@@ -34,6 +34,9 @@ public class playerController : MonoBehaviour {
 
     Animator AnimPlayer;
 
+    public GameObject power;
+    public Transform spawnPowerPoint;
+
 	void Start () {
         RBPlayer = this.transform.GetComponent<Rigidbody>();
         controlCha = this.transform.GetComponent<CharacterController>();
@@ -126,9 +129,11 @@ public class playerController : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.R))
             {
                 AnimPlayer.SetTrigger("isAttack");
-                moveVector.z = 0;
+                Instantiate(power, spawnPowerPoint.transform.position, spawnPowerPoint.transform.rotation);
+
+                /*moveVector.z = 0;
                 controlCha.enabled =false;
-                Invoke("StartRun", 1f);
+                Invoke("StartRun", 1f);*/
             }
         }
         else

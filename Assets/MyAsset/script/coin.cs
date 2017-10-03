@@ -12,7 +12,7 @@ public class coin : MonoBehaviour {
 	}
 	
 	void Update () {
-        this.transform.Rotate(new Vector3(Time.deltaTime*20f, 0, 0));
+        this.transform.Rotate(new Vector3(Time.deltaTime*100f, 0, 0));
         DestroyitSelf();
 	}
 
