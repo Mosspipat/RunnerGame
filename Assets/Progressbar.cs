@@ -15,12 +15,16 @@ public class Progressbar : MonoBehaviour {
 
     bool canIncreaseEnergy;
 
+    CameraController cc;
+
     void Start()
     {
         loadHealthbar = this.transform.GetChild(0).GetChild(0).GetComponent<Image>();
         loadEnergybar = this.transform.GetChild(1).GetChild(0).GetComponent<Image>();
         canIncreaseEnergy = true;
         pc = GameObject.Find("player").GetComponent<playerController>();
+
+        cc = GameObject.Find("Main Camera").transform.GetComponent<CameraController>();
     }
 
     void Update()
@@ -28,6 +32,7 @@ public class Progressbar : MonoBehaviour {
         healthBar();
         EnergyBar();
         skillTime();
+        LowHealhEffectCheck();
     }
 
     #region DetailPlayer
@@ -87,6 +92,21 @@ public class Progressbar : MonoBehaviour {
         if (canIncreaseEnergy == true)
         {
             energy += 0.5f * Time.deltaTime;
+        }
+    }
+    #endregion
+
+    #region LowHealhEffectCheck
+    void LowHealhEffectCheck()
+    {
+        if (health <= 1)
+        {
+            /*cc.lowHealth = true;*/
+            pc.StartLowHealthAnimation();
+        }
+        else
+        {
+            pc.StopLowHealthAnimation();
         }
     }
     #endregion

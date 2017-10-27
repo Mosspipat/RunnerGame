@@ -33,9 +33,13 @@ public class playerController : MonoBehaviour {
     float offsetPlayerMax;
 
     Animator AnimPlayer;
+    Animator AnimUIHit;
+    Animator AnimUILowHealth;
 
     public GameObject power;
     public Transform spawnPowerPoint;
+
+    CameraController CC;
 
 	void Start () {
         RBPlayer = this.transform.GetComponent<Rigidbody>();
@@ -51,6 +55,10 @@ public class playerController : MonoBehaviour {
         Debug.Log(offsetPlayerMax);
 
         AnimPlayer = GetComponent<Animator>();
+        AnimUIHit = GameObject.Find("Main Camera").transform.GetChild(0).GetChild(2).GetComponent<Animator>();
+        AnimUILowHealth = GameObject.Find("Main Camera").transform.GetChild(0).GetChild(3).GetComponent<Animator>();
+
+        CC = GameObject.Find("Main Camera").GetComponent<CameraController>();
 	}
 	
 	void Update () {
@@ -183,24 +191,28 @@ public class playerController : MonoBehaviour {
             Debug.Log("Log hit Leg");
             PBplayer.GetDamage(1);
             AnimPlayer.SetTrigger("isLegHit");
+            BangAnimation();
         }
         else if (obj.name == "headLog")
         {
             Debug.Log("Log hit Head");
             PBplayer.GetDamage(1);
             AnimPlayer.SetTrigger("isHeadHit");
+            BangAnimation();
         }
         else if (obj.tag == "enemy")
         {
             Debug.Log("enemy hit Player");
             PBplayer.GetDamage(1);
             AnimPlayer.SetTrigger("isLegHit");
+            BangAnimation();
         }
         else if (obj.name == "bullet")
         {
             Debug.Log("bullet hit Player");
             PBplayer.GetDamage(1);
             AnimPlayer.SetTrigger("isLegHit");
+            BangAnimation();
         }
     }
 
@@ -222,7 +234,7 @@ public class playerController : MonoBehaviour {
                 PosbeforeTerrianPlayerSecond);
         }
     }
-
+    #region actionControl
     void StartSlide()
     {
         AnimPlayer.SetTrigger("isSlide");
@@ -255,4 +267,22 @@ public class playerController : MonoBehaviour {
     {
         controlCha.enabled = true;
     }
+    #endregion
+
+    #region UIAnimation
+    void BangAnimation()
+    {
+        AnimUIHit.SetTrigger("isHit");
+        CC.ShakeCamera();
+    }
+    public void StartLowHealthAnimation()
+    {
+        AnimUILowHealth.SetBool("isLowHealth", true);
+    }
+    public void StopLowHealthAnimation()
+    {
+        AnimUILowHealth.SetBool("isLowHealth", false);
+    }
+
+    #endregion
 }
