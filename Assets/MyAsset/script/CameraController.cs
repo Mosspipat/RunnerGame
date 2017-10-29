@@ -12,8 +12,9 @@ public class CameraController : MonoBehaviour {
     float animationDuration = 2f;
     Vector3 animationOffset = new Vector3(0,5,60);
 
-    public bool lowHealth{ set; get;}
+    public bool lowHealth{set; get;}
     bool isPosion = true;
+    public bool isSpeed{set;get;}
     List<Quaternion> positionLerp;                         //lerp EulerView for Shake Camera
 
     void Start()
@@ -31,12 +32,29 @@ public class CameraController : MonoBehaviour {
 	void Update () {
         moveVector = playerPosition.position + startOffsset;
         moveVector.y = Mathf.Clamp(moveVector.y, 3, 5);                     //fix camera not out allow between the Y;
-        if (transition > 1f )         //adddition lowHealth = false     /*&& isPosion == false*/
+        if(transition > 1f &&isSpeed == false)         //adddition lowHealth = false     /* && isPosion == false */ or /* isSpeed == false*/
         {
             /*moveVector.x = -0.5f;*/                                               //Fix camera to zero not follow player move
             moveVector.y = 3f;
-            transform.position = moveVector;
+            /*transform.position = moveVector;*/
+            transform.position = Vector3.Lerp(this.transform.position,moveVector,Time.deltaTime*5);
             this.transform.rotation =  Quaternion.Slerp(transform.rotation,Quaternion.Euler(10,0,0), Time.deltaTime);    //return To SamePoint form hit action
+        }
+
+         #region Skill speed Effect
+        else if(isSpeed == true)                                           
+        {
+            transform.position = Vector3.Lerp(this.transform.position,moveVector+ Vector3.forward*3- Vector3.up*2,Time.deltaTime*5); 
+            this.transform.rotation =  Quaternion.Slerp(transform.rotation,Quaternion.Euler(10,0,0), Time.deltaTime);
+            Invoke("SpeedEffect",5f);
+        }
+        #endregion
+
+        else
+        {
+            transform.position = Vector3.Lerp(moveVector + animationOffset, moveVector, transition);
+            transition += Time.deltaTime * 1 / animationDuration;
+            transform.LookAt(playerPosition.position + (Vector3.up*2.5f));
         }
 
         /* #region low HealthEffect
@@ -52,13 +70,6 @@ public class CameraController : MonoBehaviour {
             Invoke("LowHealthEffect",2f);
         }
         #endregion*/
-
-        else
-        {
-            transform.position = Vector3.Lerp(moveVector + animationOffset, moveVector, transition);
-            transition += Time.deltaTime * 1 / animationDuration;
-            transform.LookAt(playerPosition.position + (Vector3.up*2.5f));
-        }
 	}
 
     #region CameraEffect
@@ -83,6 +94,11 @@ public class CameraController : MonoBehaviour {
     {
         isPosion = true;
     }*/
+
+    public void SpeedEffect()                 //Later test Effect Camera Invoke
+    {
+        isSpeed = false;
+    }
 
     #endregion
 }

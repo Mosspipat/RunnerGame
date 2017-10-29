@@ -17,6 +17,8 @@ public class Progressbar : MonoBehaviour {
 
     CameraController cc;
 
+    public GameObject effectSpeed;
+
     void Start()
     {
         loadHealthbar = this.transform.GetChild(0).GetChild(0).GetComponent<Image>();
@@ -55,6 +57,9 @@ public class Progressbar : MonoBehaviour {
             canIncreaseEnergy = false;
             Time.timeScale = 2f;
             Invoke("StopTimingSkill", 5f);
+
+            cc.isSpeed = true;
+            effectSpeed.active = true;                  //active particle Speed
         }
     }
     #endregion
@@ -85,6 +90,7 @@ public class Progressbar : MonoBehaviour {
     {
         Time.timeScale = 1f;
         canIncreaseEnergy = true;
+        effectSpeed.active = false;
     }
 
     void IncreaseEnergy()

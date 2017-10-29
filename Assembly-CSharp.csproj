@@ -46,22 +46,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Bullet.cs" />
-     <Compile Include="Assets\EnemyBehavior.cs" />
+     <Compile Include="Assets\MyAsset\script\Bullet.cs" />
      <Compile Include="Assets\MyAsset\script\ButtonFunction.cs" />
      <Compile Include="Assets\MyAsset\script\CameraController.cs" />
      <Compile Include="Assets\MyAsset\script\CharacterSelection.cs" />
+     <Compile Include="Assets\MyAsset\script\EnemyBehavior.cs" />
+     <Compile Include="Assets\MyAsset\script\ObjBehavior.cs" />
+     <Compile Include="Assets\MyAsset\script\Power.cs" />
+     <Compile Include="Assets\MyAsset\script\Progressbar.cs" />
      <Compile Include="Assets\MyAsset\script\ScoreManager.cs" />
      <Compile Include="Assets\MyAsset\script\SpawnItemOrEnemy.cs" />
      <Compile Include="Assets\MyAsset\script\TerrainMove.cs" />
      <Compile Include="Assets\MyAsset\script\TextScoreGameover.cs" />
      <Compile Include="Assets\MyAsset\script\UIPlayer.cs" />
+     <Compile Include="Assets\MyAsset\script\WeaponBehavior.cs" />
      <Compile Include="Assets\MyAsset\script\WeaponSelection.cs" />
      <Compile Include="Assets\MyAsset\script\codeSystem.cs" />
      <Compile Include="Assets\MyAsset\script\coin.cs" />
      <Compile Include="Assets\MyAsset\script\playerController.cs" />
      <Compile Include="Assets\MyAsset\script\tileManager.cs" />
-     <Compile Include="Assets\ObjBehavior.cs" />
      <Compile Include="Assets\OtherAsset\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_Demo.cs" />
      <Compile Include="Assets\OtherAsset\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_UIs.cs" />
      <Compile Include="Assets\OtherAsset\GE Common Assets\GE Orbit Camera\Scripts\GE_OrbitCamera.cs" />
@@ -106,9 +109,6 @@
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_DemoPlaySound.cs" />
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_OpenOtherScene.cs" />
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo Basic (CSharp)\Scripts\GUIAnimatorFREEDemo.cs" />
-     <Compile Include="Assets\Power.cs" />
-     <Compile Include="Assets\Progressbar.cs" />
-     <Compile Include="Assets\WeaponBehavior.cs" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Readme.txt" />
      <None Include="Assets\Fantasy nature\Double Sided Shaders\Double Sided Transparent Diffuse Bump Cutout.shader" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Fog and Ambient reference.txt" />

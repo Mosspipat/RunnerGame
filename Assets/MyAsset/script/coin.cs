@@ -5,6 +5,7 @@ using UnityEngine;
 public class coin : MonoBehaviour {
 
     GameObject player;
+    public GameObject CoinEffect;
     float offsetBackwardPlayer = 10f;
 
 	void Start () {
@@ -20,6 +21,8 @@ public class coin : MonoBehaviour {
     {
         if (obj.name == "player")
         {
+            GameObject effect = Instantiate(CoinEffect, this.transform.position, Quaternion.identity);
+            Destroy(effect, 3f);
             Destroy(this.gameObject);
         }
     }
