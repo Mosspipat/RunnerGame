@@ -1,9 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MyAsset\script\tileManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\CraftSlot.cs">
     <Files>
-      <File FileName="Assets\MyAsset\script\playerController.cs" Line="42" Column="1" />
-      <File FileName="Assets\MyAsset\script\tileManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\MyAsset\script\CraftItem.cs" Line="35" Column="19" />
+      <File FileName="Assets\bookIngredient.cs" Line="22" Column="10" />
+      <File FileName="Assets\MyAsset\script\Ingredient.cs" Line="27" Column="67" />
+      <File FileName="Assets\Slot.cs" Line="50" Column="21" />
+      <File FileName="Assets\CraftSlot.cs" Line="26" Column="127" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

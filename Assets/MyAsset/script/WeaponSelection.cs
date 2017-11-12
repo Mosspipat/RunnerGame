@@ -14,8 +14,6 @@ public class WeaponSelection : MonoBehaviour {
 
     public void OnMouseDown()
     {
-
-
         for (int i = 0; i < CSplayer.allWeapon.Count; i++)                              //foreach place weapon's Position to original Position;
         {
             CSplayer.allWeapon[i].transform.position = CSplayer.allWeaponPos[i];
@@ -31,6 +29,5 @@ public class WeaponSelection : MonoBehaviour {
         CSplayer.typeWeapon.text = this.gameObject.name;
 
         Debug.Log("selected :" + numWeapon);
-
     }
 }

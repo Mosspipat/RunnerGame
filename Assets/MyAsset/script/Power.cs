@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Power : MonoBehaviour {
 
+    public GameObject effectImpact;
+
 	void Start () {
         Destroy(this.gameObject, 1f);
 	}
@@ -16,6 +18,8 @@ public class Power : MonoBehaviour {
     {
         if (obj.tag == "enemy")
         {
+            GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
+            Destroy(smoke, 4f);
             Debug.Log("kill enemy");
             Destroy(obj.gameObject);
             Destroy(this.gameObject);

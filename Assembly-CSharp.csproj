@@ -46,14 +46,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CraftSlot.cs" />
      <Compile Include="Assets\MyAsset\script\Bullet.cs" />
      <Compile Include="Assets\MyAsset\script\ButtonFunction.cs" />
      <Compile Include="Assets\MyAsset\script\CameraController.cs" />
      <Compile Include="Assets\MyAsset\script\CharacterSelection.cs" />
+     <Compile Include="Assets\MyAsset\script\CraftItem.cs" />
      <Compile Include="Assets\MyAsset\script\EnemyBehavior.cs" />
+     <Compile Include="Assets\MyAsset\script\Ingredient.cs" />
      <Compile Include="Assets\MyAsset\script\ObjBehavior.cs" />
      <Compile Include="Assets\MyAsset\script\Power.cs" />
      <Compile Include="Assets\MyAsset\script\Progressbar.cs" />
+     <Compile Include="Assets\MyAsset\script\RootBox.cs" />
      <Compile Include="Assets\MyAsset\script\ScoreManager.cs" />
      <Compile Include="Assets\MyAsset\script\SpawnItemOrEnemy.cs" />
      <Compile Include="Assets\MyAsset\script\TerrainMove.cs" />
@@ -109,6 +113,8 @@
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_DemoPlaySound.cs" />
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_OpenOtherScene.cs" />
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo Basic (CSharp)\Scripts\GUIAnimatorFREEDemo.cs" />
+     <Compile Include="Assets\Slot.cs" />
+     <Compile Include="Assets\bookIngredient.cs" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Readme.txt" />
      <None Include="Assets\Fantasy nature\Double Sided Shaders\Double Sided Transparent Diffuse Bump Cutout.shader" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Fog and Ambient reference.txt" />

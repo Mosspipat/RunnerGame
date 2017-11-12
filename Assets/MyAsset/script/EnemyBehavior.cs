@@ -8,6 +8,8 @@ public class EnemyBehavior : MonoBehaviour {
     public GameObject bullet;
     public Transform spawnBulletPoint;
 
+    public GameObject effectSpeed;
+
     float offset = 20f;
     float enemyCheckPlayerPoint;
     bool shoot;
@@ -39,6 +41,7 @@ public class EnemyBehavior : MonoBehaviour {
     void BehaviorTwo()
     {
         this.transform.Translate(new Vector3(0, 0, 10f * Time.deltaTime));           //Move forward Only
+        effectSpeed.active = true;
     }
 
     void BehaviorThree()
