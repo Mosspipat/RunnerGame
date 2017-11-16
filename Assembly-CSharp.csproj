@@ -46,7 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CompleteToUseItem.cs" />
      <Compile Include="Assets\CraftSlot.cs" />
+     <Compile Include="Assets\Items.cs" />
      <Compile Include="Assets\MyAsset\script\Bullet.cs" />
      <Compile Include="Assets\MyAsset\script\ButtonFunction.cs" />
      <Compile Include="Assets\MyAsset\script\CameraController.cs" />
@@ -113,6 +115,7 @@
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_DemoPlaySound.cs" />
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_OpenOtherScene.cs" />
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo Basic (CSharp)\Scripts\GUIAnimatorFREEDemo.cs" />
+     <Compile Include="Assets\ShelfItems.cs" />
      <Compile Include="Assets\Slot.cs" />
      <Compile Include="Assets\bookIngredient.cs" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Readme.txt" />

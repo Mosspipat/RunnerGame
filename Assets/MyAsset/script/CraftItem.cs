@@ -21,12 +21,10 @@ public class CraftItem : MonoBehaviour {
 
 	void Start () {
 
-        nameItem = GameObject.Find("plateItemName").transform.GetChild(0).GetChild(0).GetComponent<Text>();
-
-        foreach (GameObject allIngre in ingredients)
+        /*foreach (GameObject allIngre in ingredients)              //Check start ingredient 
         {
             Debug.Log(allIngre.name);
-        }
+        }*/
 
         for (int i = 0; i < 2; i++)
         {
@@ -38,21 +36,6 @@ public class CraftItem : MonoBehaviour {
 
     public void Craft()
     {
-        if(inGredientToCraft[0]=="botton"&&inGredientToCraft[1]=="fruit")
-        {
-            Debug.Log("posion item Create");
-        }
-        else if(inGredientToCraft[0]=="botton"&&inGredientToCraft[1]=="leaf")
-        {
-            Debug.Log("speed item Create");
-        }
-        else if(inGredientToCraft[0]=="wood"&&inGredientToCraft[1]=="wood")
-        {
-            Debug.Log("shield item Create");
-        }
-        else if(inGredientToCraft[0]=="wood"&&inGredientToCraft[1]=="plate")
-        {
-            Debug.Log("knife item Create");
-        }
+        
     }
 }

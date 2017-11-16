@@ -20,7 +20,7 @@ public class RootBox : MonoBehaviour {
 	void Update () {
         if (animBox.GetCurrentAnimatorStateInfo(0).IsName("open") && isSpawn == true)
         {
-            SpawnIngredients(3);
+            SpawnIngredients(10);
             isSpawn =! isSpawn;
         }
     }

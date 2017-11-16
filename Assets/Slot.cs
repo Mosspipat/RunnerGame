@@ -37,7 +37,7 @@ public class Slot : MonoBehaviour {
     #region ChangeIngredientsToCraft
     public void ChooseIngredients()
     {
-        if (CI.slotCraftNum < 2)
+        if (CI.slotCraftNum < 2 && BI.inventory[numSlot] != "empty")        //check that's slot will can be fill in And not "empty" 
         {
             CI.craftSlot[CI.slotCraftNum] = BI.inventory[numSlot];          // get Ingredient's name to SlotCraft
             BI.inventory[numSlot] = "empty";                                // make Ingredient's name Empty
