@@ -5,18 +5,21 @@ using UnityEngine;
 public class tileManager : MonoBehaviour {
 
     public GameObject[] platform;
-
     public Transform starterplatform;
+
+    public GameObject[] trap;
 
     float spawnPlatformPoint = 8.696283f;                       // point for Spawn first platform  
     float sizePlatform = 8.696283f;
 
 
     Transform playerPos;
-    float arriveZone = 40f;
+    float arriveZone = 40f;                                 //set more if want to spawn more platform
     List<GameObject> allPlatformGame;
 
-	void Start () {
+    bool SpawnTrap = true;
+
+	void Start () {                                                         //Spawn StarterPlatform when start Game
 
         playerPos = GameObject.Find("player").transform;
 
@@ -25,8 +28,8 @@ public class tileManager : MonoBehaviour {
         for (int i = 0; i < 6; i++)
         {
             if (i <= 2)
-            {
-                Spawnplatform(0);                           
+            {           
+                Spawnplatform(0);                                           
             }
             else                                                            //all platform show in game;
             {
@@ -38,11 +41,18 @@ public class tileManager : MonoBehaviour {
 	
 	void Update () {
         
-        if (playerPos.position.z +arriveZone >= spawnPlatformPoint) //arrow front point player Check to The last edge platform
+        if (playerPos.position.z +arriveZone  >= spawnPlatformPoint && SpawnTrap == false) //allow front point player Check to The last edge platform
         {
                 Spawnplatform(1);           // clone (New platform)
                 DeleteOldplatform();        // delete (Old platform)
         }
+
+        else if (playerPos.position.z +arriveZone  >= spawnPlatformPoint && SpawnTrap == true) //allow front point player Check to The last edge platform
+        {
+            Spawnplatform(2);           // clone (New platform)
+            DeleteOldplatform();        // delete (Old platform)
+        }
+
 	}
     void Spawnplatform(int isRandom)
     {
@@ -51,31 +61,45 @@ public class tileManager : MonoBehaviour {
             GameObject floor = Instantiate(platform[0], new Vector3(
                 starterplatform.position.x,
                 starterplatform.position.y,                                                                         //Starter Platform
-                spawnPlatformPoint),
+                spawnPlatformPoint),                                                                            //Continue with z pos
                 starterplatform.rotation) as GameObject;
             floor.transform.SetParent(this.transform);
             spawnPlatformPoint += sizePlatform;
             allPlatformGame.Add(floor);
         }
-        else
+        else if( isRandom == 1)
         {
-            int randomNumplatform = Random.Range(1, 7);
-                GameObject floor = Instantiate(platform[randomNumplatform], new Vector3(
+            int randomNormalplatform = Random.Range(1, 7);
+            GameObject floor = Instantiate(platform[randomNormalplatform], new Vector3(
                                        starterplatform.position.x,
-                                       starterplatform.position.y,                                                     //Random platform
+                                       starterplatform.position.y,                                                     //Random Normal platform
                                        spawnPlatformPoint),
                                    starterplatform.rotation) as GameObject;
                 floor.transform.SetParent(this.transform);
                 spawnPlatformPoint += sizePlatform;
                 allPlatformGame.Add(floor);
         }
+        else if( isRandom == 2)
+        {
+            /*int randomTrapPlatform = Random.Range(7, 8);*/                        //if want more TrapPlatform Check this
+            GameObject trapFloor = Instantiate(platform[7], new Vector3(
+                starterplatform.position.x,
+                starterplatform.position.y,                                                                          //Random Trap platform
+                spawnPlatformPoint),
+                starterplatform.rotation) as GameObject;
+            trapFloor.transform.SetParent(this.transform);
+            spawnPlatformPoint += sizePlatform;
+            allPlatformGame.Add(trapFloor);
+        }
     }
-
     void DeleteOldplatform()
     {
-        Debug.Log("delete Floor");
-        Destroy(allPlatformGame[0]);
-        allPlatformGame.RemoveAt(0);
+        if (playerPos.position.z > allPlatformGame[0].transform.position.z + sizePlatform*3)
+        {
+            Debug.Log("delete Floor");
+            Destroy(allPlatformGame[0]);
+            allPlatformGame.RemoveAt(0);
+        }
     }
 
 

@@ -33,9 +33,4 @@ public class CraftItem : MonoBehaviour {
         /*Craft();
         nameItem.text = nameItemCrafted ;*/
 	}
-
-    public void Craft()
-    {
-        
-    }
 }
