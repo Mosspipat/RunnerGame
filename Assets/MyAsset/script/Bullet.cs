@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
+    public float speed;
+
 	void Start () {
 		
 	}
 	
 	void Update () {
-        this.transform.Translate(new Vector3(0, 0, 10f * Time.deltaTime));
+        this.transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
         Destroy(this.gameObject, 10f);
 	}
 

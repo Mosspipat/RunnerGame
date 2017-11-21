@@ -45,7 +45,7 @@ public class SpawnItemOrEnemy : MonoBehaviour {
 
     void SpawnMonsterTypeOne(int randomPointer)
     {
-        enemyObj = Instantiate(Enemy,spawnPointer.GetChild(randomPointer).position,spawnPointer.GetChild(randomPointer).transform.rotation) as GameObject;
+        enemyObj = Instantiate(Enemy,spawnPointer.GetChild(randomPointer).position+Vector3.up*0.5f,spawnPointer.GetChild(randomPointer).transform.rotation) as GameObject;
         enemyObj.name = "monsterOne";
     }
 

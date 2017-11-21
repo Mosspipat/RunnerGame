@@ -13,6 +13,12 @@ public class UIPlayer : MonoBehaviour {
     playerController PCstatusPlayer;
     public Transform player;
 
+    public enum Stages
+    {
+        normal,
+        dungeon
+    };
+
     void Start () {
         score = 0;
 	}
@@ -27,6 +33,8 @@ public class UIPlayer : MonoBehaviour {
     void Update () {
         scoreText.text = intergerScore.ToString()+" mile";
         RunScore();
+
+        //EventGameplay();
 	}
 
     void RunScore()
@@ -34,5 +42,43 @@ public class UIPlayer : MonoBehaviour {
         score += 1 * Time.deltaTime;
         intergerScore = (int)score / 1;
     }
+
+
+    #region SpecialEvent
+    void EventGameplay()
+    {
+        if (intergerScore %10 == 0 && intergerScore !=0)       //Bonus Stage and will not start gameplay's starter
+        {
+            Debug.Log("open Dungeon");
+            tileManager.dungeonStage = true;
+            TrapPlatform.canGateSpawn = true;
+            Invoke("CloseDungeon", 5f);
+        }
+
+        if (intergerScore %10 == 0 && intergerScore !=0)       //Bonus Stage and will not start gameplay's starter
+        {
+            Debug.Log("open boss stage");
+            /* tileManager.dungeonStage = true;
+            TrapPlatform.canGateSpawn = true;*/
+
+            Invoke("CloseBoss", 5f);
+        }
+
+
+    }
+
+    void CloseDungeon()
+    {
+        tileManager.dungeonStage = false;
+        TrapPlatform.gateSpawn = true;
+    }
+
+    void CloseBoss()
+    {
+        tileManager.dungeonStage = false;
+        TrapPlatform.gateSpawn = true;
+    }
+
+    #endregion
 
 }

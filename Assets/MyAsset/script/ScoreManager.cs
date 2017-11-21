@@ -21,7 +21,6 @@ public class ScoreManager : MonoBehaviour {
 
 	void Update()
     {
-        Debug.Log(score);
         if (PCstatusPlayer.isDead)
         {
             score = TSscoreGame.intergerScore;

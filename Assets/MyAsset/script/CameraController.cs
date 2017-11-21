@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour {
 	void Update () {
         moveVector = playerPosition.position + startOffsset;
         moveVector.y = Mathf.Clamp(moveVector.y, 3, 5);                     //fix camera not out allow between the Y;
-        if(transition > 1f &&isSpeed == false)         //adddition lowHealth = false     /* && isPosion == false */ or /* isSpeed == false*/
+        if(transition > 1f && isSpeed == false && BossBehavior.isBossApprea == false)         //adddition lowHealth = false     /* && isPosion == false */ or /* isSpeed == false*/
         {
             /*moveVector.x = -0.5f;*/                                               //Fix camera to zero not follow player move
             moveVector.y = 3f;
@@ -49,6 +49,13 @@ public class CameraController : MonoBehaviour {
             Invoke("SpeedEffect",5f);
         }
         #endregion
+
+        else if(BossBehavior.isBossApprea == true)                                           
+        {
+            transform.position = Vector3.Lerp(this.transform.position,moveVector+ Vector3.forward*3- Vector3.up*2,Time.deltaTime*5); 
+            this.transform.LookAt(GameObject.Find("Boss").transform.position);
+            Invoke("lookatBoss", 10f);
+        }
 
         else
         {
@@ -98,6 +105,11 @@ public class CameraController : MonoBehaviour {
     public void SpeedEffect()                 //Later test Effect Camera Invoke
     {
         isSpeed = false;
+    }
+
+    public void lookatBoss()
+    {
+        BossBehavior.isBossApprea = false;
     }
 
     #endregion

@@ -143,6 +143,13 @@ public class playerController : MonoBehaviour {
                 controlCha.enabled =false;
                 Invoke("StartRun", 1f);*/
             }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                this.transform.position = this.transform.position + new Vector3(0, 0, 5f);
+                /*moveVector.z = 0;
+                controlCha.enabled =false;
+                Invoke("StartRun", 1f);*/
+            }
         }
         else
         {
@@ -200,7 +207,7 @@ public class playerController : MonoBehaviour {
             AnimPlayer.SetTrigger("isHeadHit");
             BangAnimation();
         }
-        else if (obj.tag == "enemy")
+        else if (obj.tag == "enemy"||obj.tag == "trap")
         {
             Debug.Log("enemy hit Player");
             PBplayer.GetDamage(1);

@@ -17,7 +17,8 @@ public class tileManager : MonoBehaviour {
     float arriveZone = 40f;                                 //set more if want to spawn more platform
     List<GameObject> allPlatformGame;
 
-    bool SpawnTrap = true;
+    public static bool dungeonStage = false;
+    public static bool bossStage = true;
 
 	void Start () {                                                         //Spawn StarterPlatform when start Game
 
@@ -41,19 +42,27 @@ public class tileManager : MonoBehaviour {
 	
 	void Update () {
         
-        if (playerPos.position.z +arriveZone  >= spawnPlatformPoint && SpawnTrap == false) //allow front point player Check to The last edge platform
+        if (playerPos.position.z +arriveZone  >= spawnPlatformPoint && dungeonStage == false && bossStage == false) //allow front point player Check to The last edge platform
         {
-                Spawnplatform(1);           // clone (New platform)
+                Spawnplatform(1);           // clone (normal platform)
                 DeleteOldplatform();        // delete (Old platform)
         }
 
-        else if (playerPos.position.z +arriveZone  >= spawnPlatformPoint && SpawnTrap == true) //allow front point player Check to The last edge platform
+        else if (playerPos.position.z +arriveZone  >= spawnPlatformPoint && dungeonStage == true) //allow front point player Check to The last edge platform
         {
-            Spawnplatform(2);           // clone (New platform)
+            Spawnplatform(2);           // clone (dungeon platform)
+            DeleteOldplatform();        // delete (Old platform)
+        }
+
+        else if (playerPos.position.z +arriveZone  >= spawnPlatformPoint && dungeonStage == false && bossStage == true) //allow front point player Check to The last edge platform
+        {
+            Spawnplatform(0);           // clone (empty platform)
             DeleteOldplatform();        // delete (Old platform)
         }
 
 	}
+
+    #region Spawn with TypePlatform
     void Spawnplatform(int isRandom)
     {
         if (isRandom == 0)                 
@@ -94,13 +103,13 @@ public class tileManager : MonoBehaviour {
     }
     void DeleteOldplatform()
     {
-        if (playerPos.position.z > allPlatformGame[0].transform.position.z + sizePlatform*3)
+        if (playerPos.position.z > allPlatformGame[0].transform.position.z + sizePlatform*1)
         {
             Debug.Log("delete Floor");
             Destroy(allPlatformGame[0]);
             allPlatformGame.RemoveAt(0);
         }
     }
-
+    #endregion
 
 }

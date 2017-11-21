@@ -50,7 +50,7 @@ public class Progressbar : MonoBehaviour {
 
     public void skillTime()
     {
-        if (Input.GetKeyDown(KeyCode.W)&&loadEnergybar.fillAmount == 1)
+        if (Input.GetKeyDown(KeyCode.F)&&loadEnergybar.fillAmount == 1)
         {
             Debug.Log("Use Skill Timing");
             energy = 0;
