@@ -17,11 +17,13 @@ public class tileManager : MonoBehaviour {
     float arriveZone = 40f;                                 //set more if want to spawn more platform
     List<GameObject> allPlatformGame;
 
+    public GameObject boss;
+
     public static bool dungeonStage = false;
-    public static bool bossStage = true;
+    public static bool bossStage = false;
+
 
 	void Start () {                                                         //Spawn StarterPlatform when start Game
-
         playerPos = GameObject.Find("player").transform;
 
         allPlatformGame = new List<GameObject>();
@@ -58,8 +60,13 @@ public class tileManager : MonoBehaviour {
         {
             Spawnplatform(0);           // clone (empty platform)
             DeleteOldplatform();        // delete (Old platform)
+            if (BossBehavior.isBossApprea == false )
+            {
+                Debug.Log("spawnBoss");
+                GameObject bossGameplay = Instantiate(boss);
+                bossGameplay.name = "Boss";
+            }
         }
-
 	}
 
     #region Spawn with TypePlatform
@@ -109,6 +116,13 @@ public class tileManager : MonoBehaviour {
             Destroy(allPlatformGame[0]);
             allPlatformGame.RemoveAt(0);
         }
+    }
+    #endregion
+
+    #region BossSpawn
+    void SpawnBoss()
+    {
+        
     }
     #endregion
 

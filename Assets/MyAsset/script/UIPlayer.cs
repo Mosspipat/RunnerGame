@@ -34,7 +34,7 @@ public class UIPlayer : MonoBehaviour {
         scoreText.text = intergerScore.ToString()+" mile";
         RunScore();
 
-        //EventGameplay();
+        EventGameplay();
 	}
 
     void RunScore()
@@ -47,21 +47,23 @@ public class UIPlayer : MonoBehaviour {
     #region SpecialEvent
     void EventGameplay()
     {
-        if (intergerScore %10 == 0 && intergerScore !=0)       //Bonus Stage and will not start gameplay's starter
-        {
+        if (intergerScore %50 == 0 && intergerScore !=0 && tileManager.bossStage == false)       //Bonus Stage and will not start gameplay's starter
+        {                                                                                       // check it boss stage will not spawn Dungeon Stage
             Debug.Log("open Dungeon");
-            tileManager.dungeonStage = true;
             TrapPlatform.canGateSpawn = true;
-            Invoke("CloseDungeon", 5f);
+            tileManager.dungeonStage = true;
+            Invoke("CloseDungeon", 10f);
         }
 
-        if (intergerScore %10 == 0 && intergerScore !=0)       //Bonus Stage and will not start gameplay's starter
+        if (intergerScore %140 == 0 && intergerScore !=0 && tileManager.dungeonStage == false)       //Bonus Stage and will not start gameplay's starter
         {
             Debug.Log("open boss stage");
-            /* tileManager.dungeonStage = true;
-            TrapPlatform.canGateSpawn = true;*/
-
-            Invoke("CloseBoss", 5f);
+            tileManager.dungeonStage = false;
+            tileManager.bossStage = true;
+            /* if(BossBehavior.isDead == true)                        // **Change** to IF boss dead stop StageBoss go to normal stage
+            {
+                CloseBoss();
+            }*/
         }
 
 
@@ -76,7 +78,7 @@ public class UIPlayer : MonoBehaviour {
     void CloseBoss()
     {
         tileManager.dungeonStage = false;
-        TrapPlatform.gateSpawn = true;
+        TrapPlatform.gateSpawn = false;
     }
 
     #endregion

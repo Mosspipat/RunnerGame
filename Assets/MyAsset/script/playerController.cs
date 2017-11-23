@@ -41,6 +41,7 @@ public class playerController : MonoBehaviour {
 
     CameraController CC;
 
+
 	void Start () {
         RBPlayer = this.transform.GetComponent<Rigidbody>();
         controlCha = this.transform.GetComponent<CharacterController>();
@@ -67,6 +68,7 @@ public class playerController : MonoBehaviour {
         moveVector.z = forceSpeed;                                              //move vector.z 
         controlCha.Move(moveVector * Time.deltaTime);                           //addforce version playerController
         MoveTerrianFollowPlayer();
+        ChangeTargetReleasePower();
 
         LerpChangeWay(presentWay);
       
@@ -138,7 +140,6 @@ public class playerController : MonoBehaviour {
             {
                 AnimPlayer.SetTrigger("isAttack");
                 Instantiate(power, spawnPowerPoint.transform.position, spawnPowerPoint.transform.rotation);
-
                 /*moveVector.z = 0;
                 controlCha.enabled =false;
                 Invoke("StartRun", 1f);*/
@@ -223,6 +224,7 @@ public class playerController : MonoBehaviour {
         }
     }
 
+    #region UpdateFollowPlayer
     void MoveTerrianFollowPlayer()
     {
         if (this.transform.position.z >= PosbeforeTerrianPlayerSecond)
@@ -241,6 +243,20 @@ public class playerController : MonoBehaviour {
                 PosbeforeTerrianPlayerSecond);
         }
     }
+
+    void ChangeTargetReleasePower()
+    {
+        if (BossBehavior.isBossApprea == true)
+        {
+            spawnPowerPoint.LookAt(GameObject.Find("boss").transform.position); //**Change to look at boss not for press R
+        }
+        else 
+        {
+            Debug.Log("tartget none : Direct Target");
+            spawnPowerPoint.transform.rotation = new Quaternion(0,0,0,0);             
+        }
+    }
+    #endregion
     #region actionControl
     void StartSlide()
     {

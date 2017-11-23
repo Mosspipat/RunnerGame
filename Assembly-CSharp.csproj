@@ -123,6 +123,7 @@
      <Compile Include="Assets\PropsBehavior.cs" />
      <Compile Include="Assets\TrapBehavior.cs" />
      <Compile Include="Assets\TrapPlatform.cs" />
+     <Compile Include="Assets\testTrigger.cs" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Readme.txt" />
      <None Include="Assets\Fantasy nature\Double Sided Shaders\Double Sided Transparent Diffuse Bump Cutout.shader" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Fog and Ambient reference.txt" />

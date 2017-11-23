@@ -7,7 +7,8 @@ public class Power : MonoBehaviour {
     public GameObject effectImpact;
 
 	void Start () {
-        Destroy(this.gameObject, 1f);
+        Destroy(this.gameObject, 3f);
+        this.gameObject.name = "fireBall";
 	}
 	
 	void Update () {
@@ -23,6 +24,12 @@ public class Power : MonoBehaviour {
             Debug.Log("kill enemy");
             Destroy(obj.gameObject);
             Destroy(this.gameObject);
+        }
+        else if (obj.name == "Boss")
+        {
+            Destroy(this.gameObject);
+            /* GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
+            Destroy(smoke, 4f);*/
         }
     }
 

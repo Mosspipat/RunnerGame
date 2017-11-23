@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour {
 	void Update () {
         moveVector = playerPosition.position + startOffsset;
         moveVector.y = Mathf.Clamp(moveVector.y, 3, 5);                     //fix camera not out allow between the Y;
-        if(transition > 1f && isSpeed == false && BossBehavior.isBossApprea == false)         //adddition lowHealth = false     /* && isPosion == false */ or /* isSpeed == false*/
+        if(transition > 1f && isSpeed == false && BossBehavior.isLookatBoss == false)         //adddition lowHealth = false     /* && isPosion == false */ or /* isSpeed == false*/
         {
             /*moveVector.x = -0.5f;*/                                               //Fix camera to zero not follow player move
             moveVector.y = 3f;
@@ -50,10 +50,10 @@ public class CameraController : MonoBehaviour {
         }
         #endregion
 
-        else if(BossBehavior.isBossApprea == true)                                           
+        else if(BossBehavior.isLookatBoss == true)                                           
         {
             transform.position = Vector3.Lerp(this.transform.position,moveVector+ Vector3.forward*3- Vector3.up*2,Time.deltaTime*5); 
-            this.transform.LookAt(GameObject.Find("Boss").transform.position);
+            this.transform.LookAt(GameObject.Find("boss").transform.position);
             Invoke("lookatBoss", 10f);
         }
 
@@ -109,7 +109,7 @@ public class CameraController : MonoBehaviour {
 
     public void lookatBoss()
     {
-        BossBehavior.isBossApprea = false;
+        BossBehavior.isLookatBoss = false;
     }
 
     #endregion

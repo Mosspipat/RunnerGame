@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AnimationEventBoss : MonoBehaviour {
 
+    BossBehavior bossBeh;
+
     public Transform leftHand;
     public Transform rightHand;
 
@@ -17,7 +19,9 @@ public class AnimationEventBoss : MonoBehaviour {
     public static bool isTired = false;
 
     GameObject player;
-	void Start () {
+
+    void Start () {
+        bossBeh = GameObject.Find("Boss").GetComponent<BossBehavior>();
         player = GameObject.Find("player");
 	}
 	
@@ -60,12 +64,46 @@ public class AnimationEventBoss : MonoBehaviour {
     }
     public void IsAttacked()
     {
+        action = "isGoback";
         isAttacked = true;
     }
     public void FinishIsAttacked()
     {
         isAttacked = false;
     }
+
+    public void GoBack()
+    {
+        action = "isGoback";
+    }
+    public void AttackRandomType()
+    {
+        bossBeh.AttackActionType();
+    }
+
+    public void ActionOne()
+    {
+        BossBehavior.energy -= 1;
+    }
+
+    public void ActionTwo()
+    {
+        BossBehavior.energy -= 2;
+    }
+
+    public void ActionThree()
+    {
+        BossBehavior.energy -= 1;
+    }
+
+
+    public void DestroyDeadBoss()
+    {
+        Destroy(GameObject.Find("Boss"));
+        BossBehavior.isBossApprea = false;
+        tileManager.bossStage = false;
+    }
+
     /*public void Tired()
     {
         action = "isGoback"; 
