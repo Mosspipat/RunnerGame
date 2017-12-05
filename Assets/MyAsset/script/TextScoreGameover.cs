@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TextScoreGameover : MonoBehaviour {
 
-    ScoreManager SGgetScore;
+    ScoreManagerAndEvent SGgetScore;
     public Text textShowScore;
     public Text textshowBestScore;
 	
     void Start () {
-        SGgetScore = GameObject.Find("gameManager").GetComponent<ScoreManager>();
+        SGgetScore = GameObject.Find("gameManager").GetComponent<ScoreManagerAndEvent>();
     }
 	
 	void Update () {

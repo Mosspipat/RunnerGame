@@ -55,9 +55,10 @@ public class Progressbar : MonoBehaviour {
             Debug.Log("Use Skill Timing");
             energy = 0;
             canIncreaseEnergy = false;
-            Time.timeScale = 2f;
-            Invoke("StopTimingSkill", 5f);
 
+            pc.forceSpeed = 7;
+            /*Time.timeScale = 2f;*/
+            Invoke("StopTimingSkill", 5f);
             cc.isSpeed = true;
             effectSpeed.active = true;                  //active particle Speed
         }
@@ -88,7 +89,8 @@ public class Progressbar : MonoBehaviour {
     #region Skill
     void StopTimingSkill()
     {
-        Time.timeScale = 1f;
+        pc.forceSpeed = 5;
+        /*Time.timeScale = 1f;*/
         canIncreaseEnergy = true;
         effectSpeed.active = false;
     }

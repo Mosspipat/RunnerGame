@@ -32,38 +32,47 @@ public class CameraController : MonoBehaviour {
 	void Update () {
         moveVector = playerPosition.position + startOffsset;
         moveVector.y = Mathf.Clamp(moveVector.y, 3, 5);                     //fix camera not out allow between the Y;
-        if(transition > 1f && isSpeed == false && BossBehavior.isLookatBoss == false)         //adddition lowHealth = false     /* && isPosion == false */ or /* isSpeed == false*/
+        if (transition > 1f && isSpeed == false && BossBehavior.isLookatBoss == false && EndQuest.isCameraViewToplayer == false)         //adddition lowHealth = false     /* && isPosion == false */ or /* isSpeed == false*/
         {
             /*moveVector.x = -0.5f;*/                                               //Fix camera to zero not follow player move
             moveVector.y = 3f;
             /*transform.position = moveVector;*/
-            transform.position = Vector3.Lerp(this.transform.position,moveVector,Time.deltaTime*5);
-            this.transform.rotation =  Quaternion.Slerp(transform.rotation,Quaternion.Euler(10,0,0), Time.deltaTime);    //return To SamePoint form hit action
+            transform.position = Vector3.Lerp(this.transform.position, moveVector, Time.deltaTime * 5);
+            this.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(10, 0, 0), Time.deltaTime);    //return To SamePoint form hit action
         }
 
-         #region Skill speed Effect
-        else if(isSpeed == true)                                           
+         #region Camera SpeedEffect
+        else if (isSpeed == true)
         {
-            transform.position = Vector3.Lerp(this.transform.position,moveVector+ Vector3.forward*3- Vector3.up*2,Time.deltaTime*5); 
-            this.transform.rotation =  Quaternion.Slerp(transform.rotation,Quaternion.Euler(10,0,0), Time.deltaTime);
-            Invoke("SpeedEffect",5f);
+            transform.position = Vector3.Lerp(this.transform.position, moveVector + Vector3.forward * 3 - Vector3.up * 2, Time.deltaTime * 5); 
+            this.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(10, 0, 0), Time.deltaTime);
+            Invoke("SpeedEffect", 5f);
         }
         #endregion
 
-        else if(BossBehavior.isLookatBoss == true)                                           
+        #region Camera LookatBoss
+        else if (BossBehavior.isLookatBoss == true)
         {
-            transform.position = Vector3.Lerp(this.transform.position,moveVector+ Vector3.forward*3- Vector3.up*2,Time.deltaTime*5); 
+            transform.position = Vector3.Lerp(this.transform.position, moveVector + Vector3.forward * 3 - Vector3.up * 2, Time.deltaTime * 5); 
             this.transform.LookAt(GameObject.Find("boss").transform.position);
             Invoke("lookatBoss", 10f);
         }
+        #endregion
 
+        else if (EndQuest.isCameraViewToplayer == true)
+        {
+            this.transform.position = GameObject.Find("VictoryPlatform/chest").transform.position + Vector3.up * 1.5f  ;
+            this.transform.LookAt(playerPosition);
+        }
+
+        #region Camera LookatPlayer
         else
         {
             transform.position = Vector3.Lerp(moveVector + animationOffset, moveVector, transition);
             transition += Time.deltaTime * 1 / animationDuration;
             transform.LookAt(playerPosition.position + (Vector3.up*2.5f));
         }
-
+        #endregion
         /* #region low HealthEffect
         else if( lowHealth == true &&isPosion == true)                                              //Later test Effect Camera
         {
@@ -86,13 +95,13 @@ public class CameraController : MonoBehaviour {
         switch (motionCamera)
         {
             case 1 : 
-                this.transform.rotation =  Quaternion.Slerp(transform.rotation,Quaternion.Euler(45,45,45), Time.deltaTime*30);
+                this.transform.rotation =  Quaternion.Lerp(transform.rotation,Quaternion.Euler(45,45,45), Time.deltaTime*30);
                 break;
             case 2 : 
-                this.transform.rotation =  Quaternion.Slerp(transform.rotation,Quaternion.Euler(-45,-45,45), Time.deltaTime*30);
+                this.transform.rotation =  Quaternion.Lerp(transform.rotation,Quaternion.Euler(-45,-45,45), Time.deltaTime*30);
                 break;
             case 3 : 
-                this.transform.rotation =  Quaternion.Slerp(transform.rotation,Quaternion.Euler(-45,45,-45), Time.deltaTime*30);
+                this.transform.rotation =  Quaternion.Lerp(transform.rotation,Quaternion.Euler(-45,45,-45), Time.deltaTime*30);
                 break;
         }
     }
@@ -106,11 +115,9 @@ public class CameraController : MonoBehaviour {
     {
         isSpeed = false;
     }
-
     public void lookatBoss()
     {
         BossBehavior.isLookatBoss = false;
     }
-
     #endregion
 }

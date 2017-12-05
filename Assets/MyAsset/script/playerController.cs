@@ -41,7 +41,6 @@ public class playerController : MonoBehaviour {
 
     CameraController CC;
 
-
 	void Start () {
         RBPlayer = this.transform.GetComponent<Rigidbody>();
         controlCha = this.transform.GetComponent<CharacterController>();
@@ -144,9 +143,13 @@ public class playerController : MonoBehaviour {
                 controlCha.enabled =false;
                 Invoke("StartRun", 1f);*/
             }
-            if (Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKey(KeyCode.W))
             {
-                this.transform.position = this.transform.position + new Vector3(0, 0, 5f);
+                /* for (int quickjumpForward = 0; quickjumpForward < 5; quickjumpForward++)
+                {
+                    this.transform.position = this.transform.position + new Vector3(0, 0, 1f);
+                }*/
+                controlCha.Move(new Vector3(0, 0, 10f) * Time.deltaTime);
                 /*moveVector.z = 0;
                 controlCha.enabled =false;
                 Invoke("StartRun", 1f);*/

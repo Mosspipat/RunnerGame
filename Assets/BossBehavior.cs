@@ -5,14 +5,14 @@ using UnityEditorInternal;
 using UnityEngine.UI;
 public class BossBehavior : MonoBehaviour {
 
-    public Animator AnimBoss;
+    Animator AnimBoss;
     public GameObject headBoss;
     Transform bodyBoss;
 
     public static bool isLookatBoss = false;
     public static bool isBossApprea = false;
 
-    public Image healthCanvas;
+    Image healthCanvas;
     float currentHealth = 100;
     float fullHealth = 100;
     bool isLowHealth = false;

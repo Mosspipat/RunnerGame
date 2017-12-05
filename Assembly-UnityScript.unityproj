@@ -58,15 +58,18 @@
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_DemoPlaySound.js" />
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_OpenOtherScene.js" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Readme.txt" />
+     <None Include="Assets\A_piece_of_nature\Readme.txt" />
      <None Include="Assets\Fantasy nature\Double Sided Shaders\Double Sided Transparent Diffuse Bump Cutout.shader" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Fog and Ambient reference.txt" />
      <None Include="Assets\MyAsset\environment\environ3\README.txt" />
+     <None Include="Assets\Fortress Gate_Free\ReadMe.txt" />
      <None Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Readme.txt" />
      <None Include="Assets\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
      <None Include="Assets\OtherAsset\GE Common Assets\Readme.txt" />
      <None Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\!How to.txt" />
      <None Include="Assets\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\RollerBall\RollerBallGuidelines.txt" />
+     <None Include="Assets\Tiny Fantasy Icons\README.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/UnityFolder/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
