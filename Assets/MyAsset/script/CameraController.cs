@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour {
 
     public bool lowHealth{set; get;}
     bool isPosion = true;
-    public bool isSpeed{set;get;}
+    public bool isSpeed { set; get; }
     List<Quaternion> positionLerp;                         //lerp EulerView for Shake Camera
 
     void Start()
@@ -32,7 +32,7 @@ public class CameraController : MonoBehaviour {
 	void Update () {
         moveVector = playerPosition.position + startOffsset;
         moveVector.y = Mathf.Clamp(moveVector.y, 3, 5);                     //fix camera not out allow between the Y;
-        if (transition > 1f && isSpeed == false && BossBehavior.isLookatBoss == false && EndQuest.isCameraViewToplayer == false)         //adddition lowHealth = false     /* && isPosion == false */ or /* isSpeed == false*/
+        if (transition>1 &&isSpeed == false && BossBehavior.isLookatBoss == false &&EndQuest.isCameraViewToplayer == false)
         {
             /*moveVector.x = -0.5f;*/                                               //Fix camera to zero not follow player move
             moveVector.y = 3f;
@@ -42,7 +42,7 @@ public class CameraController : MonoBehaviour {
         }
 
          #region Camera SpeedEffect
-        else if (isSpeed == true)
+        else if ( isSpeed == true)
         {
             transform.position = Vector3.Lerp(this.transform.position, moveVector + Vector3.forward * 3 - Vector3.up * 2, Time.deltaTime * 5); 
             this.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(10, 0, 0), Time.deltaTime);
@@ -59,12 +59,19 @@ public class CameraController : MonoBehaviour {
         }
         #endregion
 
-        else if (EndQuest.isCameraViewToplayer == true)
+        #region Camera Lookat QuestComplete
+        else if (EndQuest.isCameraViewToplayer == true && EndQuest.isCameraViewToViewOpenedBox == false)
         {
-            this.transform.position = GameObject.Find("VictoryPlatform/chest").transform.position + Vector3.up * 1.5f  ;
-            this.transform.LookAt(playerPosition);
+            this.transform.position = GameObject.Find("victoryPlatform/chest").transform.position + Vector3.up * 2f + Vector3.forward *4f;
+            this.transform.LookAt(playerPosition.position);
         }
-
+        else if (EndQuest.isCameraViewToViewOpenedBox == true)
+        {
+            
+            this.transform.RotateAround(GameObject.Find("victoryPlatform/chest").transform.position, Vector3.up, 10f * Time.deltaTime);
+            this.transform.LookAt(playerPosition.position + (Vector3.up*2.5f));
+        }
+        #endregion
         #region Camera LookatPlayer
         else
         {

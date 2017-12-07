@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\AnimationEventBoss.cs" />
      <Compile Include="Assets\BossBehavior.cs" />
+     <Compile Include="Assets\Chest.cs" />
      <Compile Include="Assets\EndQuest.cs" />
      <Compile Include="Assets\MyAsset\script\Bullet.cs" />
      <Compile Include="Assets\MyAsset\script\ButtonFunction.cs" />

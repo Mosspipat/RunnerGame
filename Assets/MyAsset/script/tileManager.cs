@@ -130,7 +130,7 @@ public class tileManager : MonoBehaviour {
                 starterplatform.position.y,                                                                          //Random Trap platform
                 spawnPlatformPoint),
                 starterplatform.rotation) as GameObject;
-            specialFloor.name = "VictoryPlatform";
+            specialFloor.name = "victoryPlatform";
             specialFloor.transform.SetParent(this.transform);
             /*spawnPlatformPoint += sizePlatform;*/                 //was finish don't use
             allPlatformGame.Add(specialFloor);

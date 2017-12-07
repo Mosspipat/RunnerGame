@@ -5,20 +5,18 @@ using UnityEngine;
 public class EndQuest : MonoBehaviour {
 
     public static bool isCameraViewToplayer;
+    public static bool isCameraViewToViewOpenedBox;
 
 	void Start () {
         Transform Chest = GameObject.Find("chest").transform;		
 	}
 	
-	void Update () {
-		
-	}
-
     void OnTriggerEnter(Collider obj)
     {
         if (obj.name == "player")
         {
             isCameraViewToplayer = true;
+            playerController.move = "walk";
             Debug.Log("playerCheck Victory");
         }
     }

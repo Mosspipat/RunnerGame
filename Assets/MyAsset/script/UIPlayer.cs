@@ -26,7 +26,7 @@ public class UIPlayer : MonoBehaviour {
     float distantStartAndEnd;
     public Transform startPosMinimap;
     public Transform endPosMinimap;
-    float mapLengthMax = 100;
+    float mapLengthMax = 50;
 
     public enum Stages
     {

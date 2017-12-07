@@ -21,6 +21,8 @@ public class playerController : MonoBehaviour {
     float gravity = 12.5f;
     float verticalVelpcity;
 
+    public static string move;
+
     string way;
     public Vector3 presentWay;
     public float leftWay = -2.5f;
@@ -54,18 +56,19 @@ public class playerController : MonoBehaviour {
         Debug.Log(offsetPlayerMin);
         Debug.Log(offsetPlayerMax);
 
+        move = "run";
+
         AnimPlayer = GetComponent<Animator>();
-        AnimUIHit = GameObject.Find("Main Camera").transform.GetChild(0).GetChild(2).GetComponent<Animator>();
-        AnimUILowHealth = GameObject.Find("Main Camera").transform.GetChild(0).GetChild(3).GetComponent<Animator>();
+
+        AnimUIHit = GameObject.Find("Main Camera/UIPlayer/damageImage").transform.GetComponent<Animator>();
+        AnimUILowHealth = GameObject.Find("Main Camera/UIPlayer/lowHealthImage").transform.GetComponent<Animator>();
 
         CC = GameObject.Find("Main Camera").GetComponent<CameraController>();
 	}
 	
 	void Update () {
         Controller();
-        moveVector = new Vector3(0, verticalVelpcity, 0);                               //move vector.y
-        moveVector.z = forceSpeed;                                              //move vector.z 
-        controlCha.Move(moveVector * Time.deltaTime);                           //addforce version playerController
+        Move();
         MoveTerrianFollowPlayer();
         ChangeTargetReleasePower();
 
@@ -162,6 +165,24 @@ public class playerController : MonoBehaviour {
     }
 
 
+    void Move()
+    {
+        moveVector = new Vector3(0, verticalVelpcity, 0);                               //move vector.y
+        if (move == "run")
+        {
+            moveVector.z = forceSpeed;                                              //move vector.z 
+            controlCha.Move(moveVector * Time.deltaTime);                           //addforce version playerController
+        }
+        else if (move == "walk")
+        {
+            moveVector.z = 0;                                              //move vector.z 
+            controlCha.Move(moveVector * Time.deltaTime);                           //addforce version playerController
+
+            this.transform.position = Vector3.Lerp(this.transform.position, GameObject.Find("victoryPlatform/chest/searchRewardPoint").transform.position, 0.01f);
+            AnimPlayer.SetTrigger("isWalk");
+        }
+    }
+
     #region LerpMove
     void LerpChangeWay(Vector3 newWay)
     {
@@ -180,6 +201,7 @@ public class playerController : MonoBehaviour {
     }
     #endregion*/
 
+    #region Check hit Player
     void OnTriggerEnter(Collider obj)                               //Interact with item
     {
         if (obj.name == "item")
@@ -225,9 +247,15 @@ public class playerController : MonoBehaviour {
             AnimPlayer.SetTrigger("isLegHit");
             BangAnimation();
         }
+        else if( obj.name == "searchRewardPoint")
+        {
+            Debug.Log("root BoxChest");
+            AnimPlayer.SetTrigger("isSearch");
+        }
     }
+    #endregion
 
-    #region UpdateFollowPlayer
+    #region main Terrian Follow with player
     void MoveTerrianFollowPlayer()
     {
         if (this.transform.position.z >= PosbeforeTerrianPlayerSecond)
@@ -260,6 +288,7 @@ public class playerController : MonoBehaviour {
         }
     }
     #endregion
+
     #region actionControl
     void StartSlide()
     {
@@ -310,5 +339,19 @@ public class playerController : MonoBehaviour {
         AnimUILowHealth.SetBool("isLowHealth", false);
     }
 
+    #endregion
+
+    #region PlayerAnimationEvents
+    public void OpenLootBox()
+    {
+        Debug.Log("open LootBox");
+        Animator animChest = GameObject.Find("victoryPlatform/chest").transform.GetComponent<Animator>();
+        EndQuest.isCameraViewToViewOpenedBox = true;
+
+        Transform CameraView = Camera.main.transform;
+        CameraView.transform.position = GameObject.Find("victoryPlatform/chest/viewPointRotation").transform.position;
+
+        animChest.SetTrigger("isOpen");
+    }
     #endregion
 }
