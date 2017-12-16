@@ -10,12 +10,12 @@ public class playerController : MonoBehaviour {
     float PosbeforeTerrianPlayerSecond = 200;
     float nextMoveTerrianZ = 400f;
 
-    public bool isDead{ set; get; }
 
     Rigidbody RBPlayer;
     CharacterController controlCha;
     BoxCollider BCPlayer;
     Progressbar PBplayer;
+    public float maxForceSpeed;
     public float forceSpeed;
     Vector3 moveVector;
     float gravity = 12.5f;
@@ -168,6 +168,8 @@ public class playerController : MonoBehaviour {
     void Move()
     {
         moveVector = new Vector3(0, verticalVelpcity, 0);                               //move vector.y
+
+        forceSpeed += 10 * Time.deltaTime;
         if (move == "run")
         {
             moveVector.z = forceSpeed;                                              //move vector.z 
@@ -180,6 +182,11 @@ public class playerController : MonoBehaviour {
 
             this.transform.position = Vector3.Lerp(this.transform.position, GameObject.Find("victoryPlatform/chest/searchRewardPoint").transform.position, 0.01f);
             AnimPlayer.SetTrigger("isWalk");
+        }
+        // Check force Speed
+        if (forceSpeed >= maxForceSpeed)                                            // make simple forceSpeed to move
+        {
+            forceSpeed = maxForceSpeed;
         }
     }
 
@@ -211,8 +218,12 @@ public class playerController : MonoBehaviour {
         }
         else if (obj.name == "obstacle_tree")
         {
-            Application.LoadLevel("gameover");
-            isDead = true;
+            /*Application.LoadLevel("gameover");*/
+            /*isDead = true;*/
+            forceSpeed = -7f;
+            PBplayer.GetDamage(1);
+            AnimPlayer.SetTrigger("isLegHit");
+            BangAnimation();
         }
         else if (obj.name == "coin")
         {

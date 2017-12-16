@@ -83,12 +83,18 @@ public class TrapPlatform : MonoBehaviour {
     #region propsDungon
     void GateSpawn()
     {
-        if (gateSpawn == true && canGateSpawn == true )
+        if (gateSpawn == true && canGateSpawn == true)
         {
             Debug.Log("gate Spawn");
             GameObject gate = Instantiate(props[0], this.transform.Find("frontPos").transform.position, props[0].transform.rotation);
             gate.transform.SetParent(this.transform);
             gateSpawn = false;
+        }
+
+        //set "gateSpawn" next times can be spawn at first dungeon platform
+        else if (tileManager.dungeonStage == false)
+        {
+            gateSpawn = true;
         }
     }
     #endregion

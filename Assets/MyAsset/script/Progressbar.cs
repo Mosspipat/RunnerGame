@@ -43,7 +43,7 @@ public class Progressbar : MonoBehaviour {
         health -= damage;
         if (health == 0)
         {
-            pc.isDead = true;
+            ScoreManagerAndEvent.isDead = true;
             Application.LoadLevel("gameover");
         }
     }

@@ -14,26 +14,31 @@ public class SpawnItemOrEnemy : MonoBehaviour {
     tileManager tileManage;
 
 	void Start () {
+        //when start Find tileManager and get TileManagerScript
         tileManage = GameObject.Find("tileManager").GetComponent<tileManager>();    
 
+        //Random Case "Coin" or "MonterOne" or "MonsterTwo" Spawn in platform
         int randomSpawn = Random.Range(1, 4);
-        if (randomSpawn == 1)
+        switch (randomSpawn)
         {
-            SpawnCoin();
-        }
-        else if (randomSpawn == 2)
-        {
-            int randomPointerSpawn = Random.Range(0, 9);
-            SpawnMonsterTypeOne(randomPointerSpawn);
-        }
-        else if (randomSpawn == 3)
-        {
-            int randomPointerSpawn = Random.Range(0, 9);
-            SpawnMonsterTypeTwo(randomPointerSpawn);
+            //Coin
+            case 1:
+                SpawnCoin();
+            break;
+            //Monster One
+            case 2:
+                int randomPointerSpawnOne = Random.Range(0, 9);
+                SpawnMonsterTypeOne(randomPointerSpawnOne);
+                break;
+            //Monster Two
+            case 3:
+                int randomPointerSpawnTwo = Random.Range(0, 9);
+                SpawnMonsterTypeTwo(randomPointerSpawnTwo);
+                break;
         }
     }
 
-
+    #region Case Spawn Coin/Monter1/Monster2
     void SpawnCoin()
     {
         foreach (Transform pointer in spawnPointer)
@@ -54,5 +59,5 @@ public class SpawnItemOrEnemy : MonoBehaviour {
         enemyObj = Instantiate(EnemyShoot,spawnPointer.GetChild(randomPointer).position,spawnPointer.GetChild(randomPointer).transform.rotation) as GameObject;
         enemyObj.name = "monsterShoot";
     }
-
+    #endregion
 }

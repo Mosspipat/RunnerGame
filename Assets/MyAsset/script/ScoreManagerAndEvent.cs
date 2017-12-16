@@ -10,6 +10,8 @@ public class ScoreManagerAndEvent : MonoBehaviour {
     public int bestScore; 
     UIPlayer TSscoreGame;
     playerController PCstatusPlayer;
+
+    public static bool isDead = false;
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -21,7 +23,7 @@ public class ScoreManagerAndEvent : MonoBehaviour {
 
 	void Update()
     {
-        if (PCstatusPlayer.isDead)
+        if (isDead = true)
         {
             score = TSscoreGame.intergerScore;
         }

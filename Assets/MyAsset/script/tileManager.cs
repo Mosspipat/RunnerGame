@@ -20,10 +20,14 @@ public class tileManager : MonoBehaviour {
     public GameObject boss;
 
     public static bool dungeonStage = false;
+    public static int amountDungeonCanSpawn;
+
     public static bool bossStage = false;
     public static bool QuestStage = false;
 
     public static bool EndStage = false;
+
+    public static int amountSpawnedPlatform; 
 
 	void Start () {                                                         //Spawn StarterPlatform when start Game
         playerPos = GameObject.Find("player").transform;
@@ -52,13 +56,13 @@ public class tileManager : MonoBehaviour {
     {
         if (playerPos.position.z +arriveZone  >= spawnPlatformPoint && dungeonStage == false && bossStage == false && QuestStage == false && EndStage == false) //allow front point player Check to The last edge platform
         {
-            Spawnplatform(1);           // clone (normal platform)
+            Spawnplatform(1);           // spawn normal platform
             DeleteOldplatform();        // delete (Old platform)
         }
 
         else if (playerPos.position.z +arriveZone  >= spawnPlatformPoint && dungeonStage == true) //allow front point player Check to The last edge platform
         {
-            Spawnplatform(2);           // clone (dungeon platform)
+            Spawnplatform(2);           // spawn dungeon platform
             DeleteOldplatform();        // delete (Old platform)
         }
 
@@ -73,6 +77,7 @@ public class tileManager : MonoBehaviour {
                 bossGameplay.name = "Boss";
             }
         }
+        #region QuestComplete
         else if (playerPos.position.z +arriveZone  >= spawnPlatformPoint && dungeonStage == false && bossStage == false && QuestStage == true && EndStage == false) //allow front point player Check to The last edge platform
         {
             Debug.Log("Complete Stage");
@@ -82,13 +87,20 @@ public class tileManager : MonoBehaviour {
             DeleteOldplatform();        // delete (Old platform)
             EndStage = true;
         }
+        #endregion
     }
     #endregion
 
     #region TypePlatform Function
     void Spawnplatform(int typePlatform)
     {
-        if (typePlatform == 0)                 
+        amountSpawnedPlatform ++;
+
+        //0 is empty platform
+        //1 is normal platform
+        //2 is dungeon platform
+        //3 is winner platform
+        if (typePlatform == 0)                       
         {
             GameObject floor = Instantiate(platform[0], new Vector3(
                 starterplatform.position.x,
@@ -122,6 +134,14 @@ public class tileManager : MonoBehaviour {
             trapFloor.transform.SetParent(this.transform);
             spawnPlatformPoint += sizePlatform;
             allPlatformGame.Add(trapFloor);
+
+
+            //Check if Amount of dungeon stage is zero  make stage to "normal stage"
+            amountDungeonCanSpawn--;
+            if (amountDungeonCanSpawn <= 0)
+            {
+                dungeonStage = false;
+            }
         }
         else if( typePlatform == 3)
         {

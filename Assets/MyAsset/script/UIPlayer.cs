@@ -26,7 +26,7 @@ public class UIPlayer : MonoBehaviour {
     float distantStartAndEnd;
     public Transform startPosMinimap;
     public Transform endPosMinimap;
-    float mapLengthMax = 50;
+    float mapLengthMax = 1000;                //Max Range Map
 
     public enum Stages
     {
@@ -61,7 +61,6 @@ public class UIPlayer : MonoBehaviour {
         EventGameplay();
         Minimap();
 
-        CheckReleaseDungeon(3);
     }
 
     #region Run
@@ -83,17 +82,24 @@ public class UIPlayer : MonoBehaviour {
     #region SpecialEvent
     void EventGameplay()
     {
-        if (intergerScore %200 == 0 && intergerScore !=0 && tileManager.bossStage == false)       //Bonus Stage and will not start gameplay's starter
+        if (tileManager.amountSpawnedPlatform % 20 == 0 && tileManager.bossStage == false)       //Bonus Stage and will not start gameplay's starter
         {                                                                                       // check it boss stage will not spawn Dungeon Stage
             Debug.Log("open Dungeon");
-            TrapPlatform.canGateSpawn = true;
+
+            //spawn " Gate " at firstDungeon
+            TrapPlatform.canGateSpawn = true;  
+
+            //stage " Dungeon is true"
             tileManager.dungeonStage = true;
+            tileManager.amountDungeonCanSpawn = 5; // set amount stage Can Spawn dungeon
         }
 
-        if (intergerScore %300 == 0 && intergerScore !=0 && tileManager.dungeonStage == false)       //Bonus Stage and will not start gameplay's starter
+        if (tileManager.amountSpawnedPlatform == 30 && tileManager.dungeonStage == false)       //Bonus Stage and will not start gameplay's starter
         {
             Debug.Log("open boss stage");
-            tileManager.dungeonStage = false;
+            // close Dungeon stage
+            /* tileManager.dungeonStage = false;*/
+
             tileManager.bossStage = true;
             /* if(BossBehavior.isDead == true)                        // **Change** to IF boss dead stop StageBoss go to normal stage
             {
@@ -104,21 +110,6 @@ public class UIPlayer : MonoBehaviour {
         {
             Time.timeScale += 0.02f;
         }
-    }
-
-    void CheckReleaseDungeon (int countDungeonStage )
-    {
-        if (countStageDungeon == countDungeonStage)
-        {
-            CloseDungeon();
-        }
-    }
-
-    void CloseDungeon()
-    {
-        tileManager.dungeonStage = false;
-        TrapPlatform.gateSpawn = true;
-        countStageDungeon = 0;
     }
 
     void CloseBoss()
@@ -137,7 +128,9 @@ public class UIPlayer : MonoBehaviour {
         {
             calDistanceMinimap = distantStartAndEnd;
             intergerScore = (int)mapLengthMax;
-            tileManager.QuestStage = true;
+
+            //Check QuestComplete
+            tileManager.QuestStage = true;  
         }
         Vector3 distanceMinimap = new Vector3( calDistanceMinimap,0,0);
         Debug.Log("calDistanceMinimap" + calDistanceMinimap + " and " + "mapLengthMax" + mapLengthMax);
