@@ -12,7 +12,7 @@ public class Chest : MonoBehaviour {
     Transform TotalScoreUI;
 
 	void Start () {
-        TotalScoreUI = GameObject.Find("Main Camera/UIPlayer/totalScore").transform;
+        TotalScoreUI = GameObject.Find("Main Camera/ProgressPlayer/totalScore").transform;
 	}
 	
 	void Update () {

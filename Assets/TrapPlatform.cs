@@ -65,14 +65,14 @@ public class TrapPlatform : MonoBehaviour {
                 int RandomSideSwitch = Random.Range(1, 3);
                 if (RandomSideSwitch == 1)
                 {
-                    GameObject trapRoof = Instantiate(traps[3], this.transform.Find("trapPosFloor/trapPointMiddleM").transform.position + Vector3.up * 4, traps[3].transform.rotation);
+                    GameObject trapRoof = Instantiate(traps[3], this.transform.Find("trapPosFloor/trapPointMiddleM").transform.position + Vector3.up * 5, traps[3].transform.rotation);
                     trapRoof.transform.SetParent(this.transform);
                     SpawnCoin(coinPrefab, this.transform.Find("coinsPos/coinPointFrontM").transform.position);
                     SpawnCoin(coinPrefab, this.transform.Find("coinsPos/coinPointBehideM").transform.position);
                 }
                 else
                 {
-                    GameObject trapRoof = Instantiate(traps[3], this.transform.Find("trapPosFloor/trapPointMiddleM").transform.position + Vector3.up * 4, traps[3].transform.rotation * Quaternion.Euler(0, 180, 0));
+                    GameObject trapRoof = Instantiate(traps[3], this.transform.Find("trapPosFloor/trapPointMiddleM").transform.position + Vector3.up * 5, traps[3].transform.rotation * Quaternion.Euler(0, 180, 0));
                     trapRoof.transform.SetParent(this.transform);
                     SpawnCoin(coinPrefab, this.transform.Find("coinsPos/coinPointFrontM").transform.position);
                     SpawnCoin(coinPrefab, this.transform.Find("coinsPos/coinPointBehideM").transform.position);
