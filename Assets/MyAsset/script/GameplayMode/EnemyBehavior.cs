@@ -6,23 +6,21 @@ using UnityEngine.UI;
 public class EnemyBehavior : MonoBehaviour {
 
     GameObject player;
-    public GameObject bullet;
-    public Transform spawnBulletPoint;
-
     public GameObject effectSpeed;
 
-    float offset = 20f;
+    float offset = 15f;
     float enemyCheckPlayerPoint;
     bool shoot;
 
     Text powerText;
-    public int power{ get; set;}
+    public int power;
 
     void Start()
     {
         player = GameObject.Find("player");
         enemyCheckPlayerPoint = this.transform.position.z - offset;
-        powerText = GameObject.Find("power/powerAttack").GetComponent<Text>();
+        powerText = transform.Find("power/powerAttack").GetComponent<Text>();
+        powerText.text = power.ToString();
     }
 
 	void Update () {
@@ -46,18 +44,15 @@ public class EnemyBehavior : MonoBehaviour {
 
     void BehaviorTwo()
     {
-        this.transform.Translate(new Vector3(0, 0, 10f * Time.deltaTime));           //Move forward Only
+        this.transform.Find("BatRig").GetComponent<Animator>().SetTrigger("isAttack");
+        this.transform.Translate(new Vector3(0, 0, -10f * Time.deltaTime));           //Move forward Only
         effectSpeed.active = true;
     }
 
     void BehaviorThree()
     {
+        this.transform.Find("slimeRig").GetComponent<Animator>().SetTrigger("isAttack");
         FindTarget(player);                                                         //spawn Bullet
-        if (shoot == false)
-        {
-            shoot = true;
-            Invoke("ShootPlayer",1f);
-        }
     }
     
     void FindTarget(GameObject player)
@@ -65,15 +60,6 @@ public class EnemyBehavior : MonoBehaviour {
         this.transform.LookAt(player.transform.position);
     }
 
-    void ShootPlayer()
-    {
-        if(shoot == true)
-        {
-        GameObject bulletEnemy = Instantiate(bullet,spawnBulletPoint.position,spawnBulletPoint.rotation);
-        bulletEnemy.name = "bullet";
-        shoot = false;
-        }
-    }
 
     void DestroyitSelf()
     {
@@ -83,6 +69,11 @@ public class EnemyBehavior : MonoBehaviour {
             Debug.Log("delete Enemy");
         }
     }
-
-
+    void OnTriggerEnter(Collider obj)                               //Interact with item
+    {
+        if (obj.name == "player")
+        {
+            this.GetComponent<EnemyBehavior>().enabled = false;
+        }
+    }
 }

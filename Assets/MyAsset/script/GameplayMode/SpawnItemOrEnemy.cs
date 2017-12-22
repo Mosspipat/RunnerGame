@@ -9,12 +9,16 @@ public class SpawnItemOrEnemy : MonoBehaviour {
     public GameObject EnemyShoot;
 
     public GameObject ItemChestPiece;
-    public GameObject ItemHealth;
+    public GameObject ItemAttack;
+    public GameObject ItemDefence;
 
     public Transform spawnPointer;
 
     GameObject coinObj;
     GameObject enemyObj;
+    GameObject itemSpawn;
+
+    int randomSpawn;
 
     tileManager tileManage;
 
@@ -23,13 +27,26 @@ public class SpawnItemOrEnemy : MonoBehaviour {
         tileManage = GameObject.Find("tileManager").GetComponent<tileManager>();    
 
         //Random Case "Coin" or "MonterOne" or "MonsterTwo" Spawn in platform
-        int randomSpawn = Random.Range(1, 5);
+
+        if(tileManager.amountSpawnedPlatform % 2 == 0)
+        {
+            randomSpawn = Random.Range(2, 4);    
+        }
+
+        else
+        {
+            randomSpawn = Random.Range(1, 7);
+        }
+            
+
+
         switch (randomSpawn)
         {
-            //Coin
+            // Spawn Coin//
             case 1:
                 SpawnCoin();
             break;
+            //Monster Spawn//
             //Monster One
             case 2:
                 int randomPointerSpawnOne = Random.Range(0, 9);
@@ -40,9 +57,20 @@ public class SpawnItemOrEnemy : MonoBehaviour {
                 int randomPointerSpawnTwo = Random.Range(0, 9);
                 SpawnMonsterTypeTwo(randomPointerSpawnTwo);
                 break;
+            //Item Spawn//
+            //Map
             case 4:
                 int randomPointerSpawnMapTreasure = Random.Range(0, 9);
                 SpawnItem(randomPointerSpawnMapTreasure);
+                break;
+            //Shield
+            case 5:
+                int randomPointerSpawnItemAttack = Random.Range(0, 9);
+                SpawnAttackItem(randomPointerSpawnItemAttack);
+                break;
+            case 6:
+                int randomPointerSpawnDefenceAttack = Random.Range(0, 9);
+                SpawnAttackItem(randomPointerSpawnDefenceAttack);
                 break;
         }
     }
@@ -71,6 +99,18 @@ public class SpawnItemOrEnemy : MonoBehaviour {
     {
         enemyObj = Instantiate(ItemChestPiece,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemChestPiece.transform.rotation) as GameObject;
         enemyObj.name = "mapTreasure";
+    }
+
+    //Spawn Item
+    void SpawnAttackItem(int randomPointer)
+    {
+        itemSpawn = Instantiate(ItemAttack,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemChestPiece.transform.rotation) as GameObject;
+        itemSpawn.name = "ItemAttack";
+    }
+    void SpawnDeffenceItem(int randomPointer)
+    {
+        itemSpawn = Instantiate(ItemDefence,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemChestPiece.transform.rotation) as GameObject;
+        itemSpawn.name = "ItemDefence";
     }
     #endregion
 }

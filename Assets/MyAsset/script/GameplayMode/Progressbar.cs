@@ -30,6 +30,9 @@ public class Progressbar : MonoBehaviour {
 
     public GameObject effectSpeed;
 
+    Image imagetimeAttack;
+    float timeAttackCooldown = 1;
+
     void Start()
     {
         loadHealthbar = GameObject.Find("ProgressHealthBar/loadHealthBar").GetComponent<Image>();
@@ -45,6 +48,8 @@ public class Progressbar : MonoBehaviour {
         pc = GameObject.Find("player").GetComponent<playerController>();
 
         cc = GameObject.Find("Main Camera").transform.GetComponent<CameraController>();
+
+        imagetimeAttack = this.transform.Find("powerStatus/attack/clockAttack/time").GetComponent<Image>();
     }
 
     void Update()
@@ -55,13 +60,14 @@ public class Progressbar : MonoBehaviour {
         LowHealhEffectCheck();
         TreasureText();
         PowerStatusUpdate();
+        TimerAttackIncreasing();
     }
 
     #region DetailPlayer
     public void GetDamage(int damage)
     {
         health -= damage;
-        if (health == 0)
+        if (health <= 0)
         {
             ScoreManagerAndEvent.isDead = true;
             Application.LoadLevel("gameover");
@@ -123,6 +129,24 @@ public class Progressbar : MonoBehaviour {
             energy += 0.5f * Time.deltaTime;
         }
     }
+    #endregion
+
+    #region timeAttackIncreasing
+    public void TimerAttackIncreasing()
+    {
+        timeAttackCooldown -= 0.05f *Time.deltaTime ;
+        imagetimeAttack.fillAmount = timeAttackCooldown;
+        if (imagetimeAttack.fillAmount <= 0)
+        {
+            playerController.powerAttack++;
+            timeAttackCooldown = 1;
+        }
+        else if (playerController.EndStage == true)
+        {
+            timeAttackCooldown = 1;
+        }
+    }
+
     #endregion
 
     #region LowHealhEffectCheck

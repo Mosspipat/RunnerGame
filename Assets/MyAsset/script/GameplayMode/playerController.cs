@@ -47,9 +47,14 @@ public class playerController : MonoBehaviour {
 
     CameraController CC;
 
-    public static int powerAttack = 1;
-    public static int powerDefence = 1;
+    public static int maxPowerAttack = 2;
+    public static int maxPowerDefence = 2;
+    public static int powerAttack = 0;
+    public static int powerDefence = 0;
+    bool kill;
     public GameObject effectImpact;
+
+    public static bool EndStage;
 
 	void Start () {
         RBPlayer = this.transform.GetComponent<Rigidbody>();
@@ -265,16 +270,28 @@ public class playerController : MonoBehaviour {
         else if (obj.tag == "enemy")
         {
             Debug.Log("Challenge Fight");
-            if (powerAttack > obj.GetComponent<EnemyBehavior>().power)
+            if (powerAttack >= obj.GetComponent<EnemyBehavior>().power)
             {
-                Debug.Log("Kill Monster!!");
-                GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
-                UIPlayer.amountMonsterKilled++;
-                Destroy(smoke, 4f);
-                Destroy(obj.gameObject);
                 AnimPlayer.SetTrigger("isAttack");
             }
-            else 
+            else if (powerAttack < obj.GetComponent<EnemyBehavior>().power)
+            {
+                int blockDamageInt =  obj.GetComponent<EnemyBehavior>().power - powerAttack;
+                powerAttack = 0;
+                if ((powerDefence - blockDamageInt) < 0)
+                {
+                    int weakDamage = powerDefence - blockDamageInt;
+                    UIBarPlayer.GetDamage(Mathf.Abs(weakDamage));
+                    powerDefence = 0;
+                    AnimPlayer.SetTrigger("isLegHit");
+                }
+                else
+                {
+                    powerDefence -= blockDamageInt;
+                    AnimPlayer.SetTrigger("isBlock");
+                }
+            }
+            else
             {
                 UIBarPlayer.GetDamage(1);
                 AnimPlayer.SetTrigger("isLegHit");
@@ -320,6 +337,25 @@ public class playerController : MonoBehaviour {
         {
             Debug.Log("Def+");
             powerDefence++;
+        }
+    }
+    #endregion
+
+    #region OnTriggerStay
+    void OnTriggerStay(Collider obj) {
+        if (obj.tag == "enemy")
+        {
+            if (kill == true)
+            {
+                UIPlayer.amountMonsterKilled++;
+                if (powerAttack > 0)
+                {
+                    powerAttack--;
+                }
+                GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
+                Destroy(smoke, 4f);
+                Destroy(obj.gameObject);
+            }
         }
     }
     #endregion
@@ -420,6 +456,16 @@ public class playerController : MonoBehaviour {
         CameraView.transform.position = GameObject.Find("victoryPlatform/chest/viewPointRotation").transform.position;
 
         animChest.SetTrigger("isOpen");
+    }
+
+    public void Kill()
+    {
+        Debug.Log("kill");
+        kill = true;
+    }
+    public void EndKill()
+    {
+        kill = false;   
     }
     #endregion
 }

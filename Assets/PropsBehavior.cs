@@ -49,6 +49,7 @@ public class PropsBehavior : MonoBehaviour {
     void AnimationProp()
     {
         TotalScoreUI.gameObject.SetActive(true);
+        playerController.EndStage = true;
     }
     #endregion
 }

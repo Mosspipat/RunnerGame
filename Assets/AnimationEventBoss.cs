@@ -96,7 +96,6 @@ public class AnimationEventBoss : MonoBehaviour {
         BossBehavior.energy -= 1;
     }
 
-
     public void DestroyDeadBoss()
     {
         Destroy(GameObject.Find("Boss"));

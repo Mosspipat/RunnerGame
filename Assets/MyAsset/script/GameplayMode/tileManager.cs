@@ -158,6 +158,8 @@ public class tileManager : MonoBehaviour {
                 dungeonStage = false;
             }
         }
+
+        // special platform Secret Chest
         else if( typePlatform == 3)
         {
             GameObject specialFloor = Instantiate(platform[8], new Vector3(
@@ -170,6 +172,7 @@ public class tileManager : MonoBehaviour {
             /*spawnPlatformPoint += sizePlatform;*/                 //was finish don't use
             allPlatformGame.Add(specialFloor);
         }
+        // special platform Castle
         else if( typePlatform == 4)
         {
             GameObject specialFloor = Instantiate(platform[9], new Vector3(

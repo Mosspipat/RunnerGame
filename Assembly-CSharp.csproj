@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\AnimationEventBoss.cs" />
+     <Compile Include="Assets\AnimationEventMonster.cs" />
      <Compile Include="Assets\BossBehavior.cs" />
      <Compile Include="Assets\Chest.cs" />
      <Compile Include="Assets\EndDistanceQuest.cs" />
@@ -125,6 +126,7 @@
      <Compile Include="Assets\TotalScoreResult.cs" />
      <Compile Include="Assets\TrapBehavior.cs" />
      <Compile Include="Assets\TrapPlatform.cs" />
+     <Compile Include="Assets\amusedART\StoneMonster\Script\Animation_Test.cs" />
      <Compile Include="Assets\slerpTest.cs" />
      <Compile Include="Assets\testTrigger.cs" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Readme.txt" />
