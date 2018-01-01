@@ -47,10 +47,10 @@ public class playerController : MonoBehaviour {
 
     CameraController CC;
 
-    public static int maxPowerAttack = 2;
-    public static int maxPowerDefence = 2;
-    public static int powerAttack = 0;
-    public static int powerDefence = 0;
+    public static int maxPowerAttack = 5;
+    public static int maxPowerDefence = 5;
+    public static int powerAttack = 2;
+    public static int powerDefence = 3;
     bool kill;
     public GameObject effectImpact;
 
@@ -348,9 +348,13 @@ public class playerController : MonoBehaviour {
             if (kill == true)
             {
                 UIPlayer.amountMonsterKilled++;
-                if (powerAttack > 0)
+                if (powerAttack < obj.GetComponent<EnemyBehavior>().power)
                 {
-                    powerAttack--;
+                    powerAttack = 0;    
+                }
+                else
+                {
+                    powerAttack -= obj.GetComponent<EnemyBehavior>().power;
                 }
                 GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
                 Destroy(smoke, 4f);

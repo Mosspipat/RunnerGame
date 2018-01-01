@@ -7,7 +7,7 @@ public class ButtonFunction : MonoBehaviour {
 
     public void GoSceneGameplay()
     {
-        Application.LoadLevel("gameplay");
+        Application.LoadLevel("menuMap");
     }
 
     public void GoSceneOption()
@@ -15,9 +15,9 @@ public class ButtonFunction : MonoBehaviour {
         Application.LoadLevel("option");
     }
 
-    public void GoSceneCharacter()
+    public void GoEndlessGameplay()
     {
-        Application.LoadLevel("profile");
+        Application.LoadLevel("gameplay");
     }
 
 }

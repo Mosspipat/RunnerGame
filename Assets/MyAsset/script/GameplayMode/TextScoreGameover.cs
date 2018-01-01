@@ -13,7 +13,7 @@ public class TextScoreGameover : MonoBehaviour {
     }
 	
 	void Update () {
-        textShowScore.text = SGgetScore.score.ToString();
-        textshowBestScore.text = PlayerPrefs.GetInt(SGgetScore.keyBestScore).ToString();
+        textShowScore.text = SGgetScore.score.ToString() + " meter";
+        textshowBestScore.text = "best score : " + PlayerPrefs.GetInt(SGgetScore.keyBestScore).ToString() + " meter";
 	}
 }

@@ -5,8 +5,13 @@ using UnityEngine;
 public class SpawnItemOrEnemy : MonoBehaviour {
 
     public GameObject Coin;
-    public GameObject Enemy;
-    public GameObject EnemyShoot;
+
+    public GameObject rabbit;
+    public GameObject bat;
+    public GameObject slime;
+    public GameObject ghost;
+    public GameObject fireMonster;
+    public GameObject skeleton;
 
     public GameObject ItemChestPiece;
     public GameObject ItemAttack;
@@ -30,47 +35,55 @@ public class SpawnItemOrEnemy : MonoBehaviour {
 
         if(tileManager.amountSpawnedPlatform % 2 == 0)
         {
-            randomSpawn = Random.Range(2, 4);    
+            randomSpawn = Random.Range(1, 4);    
         }
 
-        else
+        /*else
         {
-            randomSpawn = Random.Range(1, 7);
-        }
+            randomSpawn = Random.Range(4, 6);
+        }*/
             
-
-
         switch (randomSpawn)
         {
-            // Spawn Coin//
-            case 1:
-                SpawnCoin();
-            break;
             //Monster Spawn//
             //Monster One
-            case 2:
-                int randomPointerSpawnOne = Random.Range(0, 9);
-                SpawnMonsterTypeOne(randomPointerSpawnOne);
+            case 1:
+                SpawnMonsterRabbit();
                 break;
             //Monster Two
+            case 2:
+                SpawnMonsterBat();
+                break;
             case 3:
-                int randomPointerSpawnTwo = Random.Range(0, 9);
-                SpawnMonsterTypeTwo(randomPointerSpawnTwo);
+                SpawnMonsterSlime();
+                break;
+            case 4:
+                SpawnMonsterGhost();
+                break;
+            case 5:
+                SpawnMonsterFireMonster();
+                break;
+            case 6:
+                SpawnMonsterSkeleton();
                 break;
             //Item Spawn//
             //Map
-            case 4:
+            case 7:
                 int randomPointerSpawnMapTreasure = Random.Range(0, 9);
                 SpawnItem(randomPointerSpawnMapTreasure);
                 break;
-            //Shield
-            case 5:
+            //attack&defence Spawn//
+            case 8:
                 int randomPointerSpawnItemAttack = Random.Range(0, 9);
                 SpawnAttackItem(randomPointerSpawnItemAttack);
                 break;
-            case 6:
+            case 9:
                 int randomPointerSpawnDefenceAttack = Random.Range(0, 9);
                 SpawnAttackItem(randomPointerSpawnDefenceAttack);
+                break;
+            //coin Spawn//
+            case 10:
+                SpawnCoin();
                 break;
         }
     }
@@ -84,24 +97,50 @@ public class SpawnItemOrEnemy : MonoBehaviour {
             coinObj.name = "coin";
         }
     }
-    void SpawnMonsterTypeOne(int randomPointer)
+    //Sapwn Level monster//
+    void SpawnMonsterRabbit()
     {
-        enemyObj = Instantiate(Enemy,spawnPointer.GetChild(randomPointer).position+Vector3.up*0.5f,spawnPointer.GetChild(randomPointer).transform.rotation) as GameObject;
-        enemyObj.name = "monsterOne";
+        int randomPointerSpawn = Random.Range(0, 9);
+        enemyObj = Instantiate(rabbit,spawnPointer.GetChild(randomPointerSpawn).position-Vector3.up*0.4f,spawnPointer.GetChild(randomPointerSpawn).transform.rotation) as GameObject;
+        enemyObj.name = "rabbit";
+    }
+    void SpawnMonsterBat()
+    {
+        int randomPointerSpawn = Random.Range(0, 9);
+        enemyObj = Instantiate(bat,spawnPointer.GetChild(randomPointerSpawn).position+Vector3.up*0.5f,spawnPointer.GetChild(randomPointerSpawn).transform.rotation) as GameObject;
+        enemyObj.name = "bat";
+    }
+    void SpawnMonsterSlime()
+    {
+        int randomPointerSpawn = Random.Range(0, 9);
+        enemyObj = Instantiate(slime,spawnPointer.GetChild(randomPointerSpawn).position,spawnPointer.GetChild(randomPointerSpawn).transform.rotation) as GameObject;
+        enemyObj.name = "slime";
+    }
+    void SpawnMonsterGhost()
+    {
+        int randomPointerSpawn = Random.Range(0, 9);
+        enemyObj = Instantiate(ghost,spawnPointer.GetChild(randomPointerSpawn).position,spawnPointer.GetChild(randomPointerSpawn).transform.rotation) as GameObject;
+        enemyObj.name = "ghost";
+    }
+    void SpawnMonsterFireMonster()
+    {
+        int randomPointerSpawn = Random.Range(0, 9);
+        enemyObj = Instantiate(fireMonster,spawnPointer.GetChild(randomPointerSpawn).position,spawnPointer.GetChild(randomPointerSpawn).transform.rotation) as GameObject;
+        enemyObj.name = "fireMonster";
+    }
+    void SpawnMonsterSkeleton()
+    {
+        int randomPointerSpawn = Random.Range(0, 9);
+        enemyObj = Instantiate(skeleton,spawnPointer.GetChild(randomPointerSpawn).position- Vector3.up*0.5f,spawnPointer.GetChild(randomPointerSpawn).transform.rotation) as GameObject;
+        enemyObj.name = "skeleton";
     }
 
-    void SpawnMonsterTypeTwo(int randomPointer)
-    {
-        enemyObj = Instantiate(EnemyShoot,spawnPointer.GetChild(randomPointer).position,spawnPointer.GetChild(randomPointer).transform.rotation) as GameObject;
-        enemyObj.name = "monsterShoot";
-    }
+    //Spawn Item //
     void SpawnItem(int randomPointer)
     {
         enemyObj = Instantiate(ItemChestPiece,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemChestPiece.transform.rotation) as GameObject;
         enemyObj.name = "mapTreasure";
     }
-
-    //Spawn Item
     void SpawnAttackItem(int randomPointer)
     {
         itemSpawn = Instantiate(ItemAttack,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemChestPiece.transform.rotation) as GameObject;

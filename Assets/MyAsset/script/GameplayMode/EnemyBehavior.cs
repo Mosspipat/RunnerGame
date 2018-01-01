@@ -12,6 +12,8 @@ public class EnemyBehavior : MonoBehaviour {
     float enemyCheckPlayerPoint;
     bool shoot;
 
+    Animator AnimEnemy;
+
     Text powerText;
     public int power;
 
@@ -21,39 +23,74 @@ public class EnemyBehavior : MonoBehaviour {
         enemyCheckPlayerPoint = this.transform.position.z - offset;
         powerText = transform.Find("power/powerAttack").GetComponent<Text>();
         powerText.text = power.ToString();
+
+        AnimEnemy = this.transform.Find(this.name + "Rig").GetComponent<Animator>();
     }
 
 	void Update () {
-        if (player.transform.position.z > enemyCheckPlayerPoint && this.gameObject.name == "monsterOne")
+        if (player.transform.position.z > enemyCheckPlayerPoint && this.gameObject.name == "rabbit")
         {
-            BehaviorTwo();
+            BehaviorRabbit();
         }
-        else if (player.transform.position.z > enemyCheckPlayerPoint&&this.gameObject.name =="monsterShoot")
+        else if (player.transform.position.z > enemyCheckPlayerPoint&&this.gameObject.name =="slime")
         {
-            BehaviorThree();
+            BehaviorSlime();
+        }
+        else if (player.transform.position.z > enemyCheckPlayerPoint&&this.gameObject.name =="bat")
+        {
+            BehaviorBat();
+        }
+        else if (player.transform.position.z > enemyCheckPlayerPoint&&this.gameObject.name =="ghost")
+        {
+            BehaviorGhost();
+        }
+        else if (player.transform.position.z > enemyCheckPlayerPoint&&this.gameObject.name =="fireMonster")
+        {
+            BehaviorFireMonster();
+        }
+        else if (player.transform.position.z > enemyCheckPlayerPoint&&this.gameObject.name =="skeleton")
+        {
+            BehaviorSkeleton();
         }
         DestroyitSelf();
     }
 
-    void BehaviorOne()
+    #region Monster Bedavior
+    void BehaviorRabbit()
     {
-        FindTarget(player);
-        this.transform.Translate(new Vector3(0, 0, 1f * Time.deltaTime));           //Transform to player;
-        powerText.text = "5"; 
+        FindTarget(player); 
     }
 
-    void BehaviorTwo()
+    void BehaviorSlime()
     {
-        this.transform.Find("BatRig").GetComponent<Animator>().SetTrigger("isAttack");
+        this.transform.Find("slimeRig").GetComponent<Animator>().SetTrigger("isShoot");
+        FindTarget(player);                                                         //spawn Bullet
+    }
+    void BehaviorBat()
+    {
+        this.transform.Find("batRig").GetComponent<Animator>().SetTrigger("isFly");
         this.transform.Translate(new Vector3(0, 0, -10f * Time.deltaTime));           //Move forward Only
         effectSpeed.active = true;
     }
-
-    void BehaviorThree()
+    void BehaviorGhost()
     {
-        this.transform.Find("slimeRig").GetComponent<Animator>().SetTrigger("isAttack");
-        FindTarget(player);                                                         //spawn Bullet
+        this.transform.Find("ghostRig").GetComponent<Animator>().SetTrigger("isShoot");
+        FindTarget(player); 
     }
+    void BehaviorFireMonster()
+    {
+        this.transform.Find("fireMonsterRig").GetComponent<Animator>().SetTrigger("isShoot");
+        this.transform.Translate(new Vector3(0, 0, 7f * Time.deltaTime));
+        FindTarget(player);
+
+    }
+    void BehaviorSkeleton()
+    {
+        this.transform.Find("skeletonRig").GetComponent<Animator>().SetTrigger("isWalk");
+        this.transform.Translate(new Vector3(0, 0, 7f * Time.deltaTime));           //Move forward Only
+        FindTarget(player);
+    }
+    #endregion
     
     void FindTarget(GameObject player)
     {
@@ -73,7 +110,11 @@ public class EnemyBehavior : MonoBehaviour {
     {
         if (obj.name == "player")
         {
+            AnimEnemy.SetTrigger("isAttack");
+            Debug.Log("asdasdasdasdasd "+this.name);
+            this.transform.Find(this.name + "Rig").GetComponent<Animator>().SetTrigger("isAttack");
             this.GetComponent<EnemyBehavior>().enabled = false;
         }
     }
+
 }

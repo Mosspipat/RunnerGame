@@ -53,6 +53,8 @@
      <Compile Include="Assets\EndDistanceQuest.cs" />
      <Compile Include="Assets\EndRewardQuest.cs" />
      <Compile Include="Assets\ItemSpawnBehavior.cs" />
+     <Compile Include="Assets\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
+     <Compile Include="Assets\MoveCloud.cs" />
      <Compile Include="Assets\MyAsset\script\GameplayMode\CameraController.cs" />
      <Compile Include="Assets\MyAsset\script\GameplayMode\EnemyBehavior.cs" />
      <Compile Include="Assets\MyAsset\script\GameplayMode\ObjBehavior.cs" />
@@ -123,6 +125,8 @@
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_OpenOtherScene.cs" />
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo Basic (CSharp)\Scripts\GUIAnimatorFREEDemo.cs" />
      <Compile Include="Assets\PropsBehavior.cs" />
+     <Compile Include="Assets\Randomcloud.cs" />
+     <Compile Include="Assets\TestInputField.cs" />
      <Compile Include="Assets\TotalScoreResult.cs" />
      <Compile Include="Assets\TrapBehavior.cs" />
      <Compile Include="Assets\TrapPlatform.cs" />
@@ -130,7 +134,9 @@
      <Compile Include="Assets\slerpTest.cs" />
      <Compile Include="Assets\testTrigger.cs" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Readme.txt" />
+     <None Include="Assets\Medieval_House\Info.txt" />
      <None Include="Assets\A_piece_of_nature\Readme.txt" />
+     <None Include="Assets\read me.txt" />
      <None Include="Assets\Fantasy nature\Double Sided Shaders\Double Sided Transparent Diffuse Bump Cutout.shader" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Fog and Ambient reference.txt" />
      <None Include="Assets\MyAsset\environment\environ3\README.txt" />
@@ -141,6 +147,7 @@
      <None Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\!How to.txt" />
      <None Include="Assets\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\RollerBall\RollerBallGuidelines.txt" />
+     <None Include="Assets\Julien Tonsuso\Modular Fantasy Bridges\README.txt" />
      <None Include="Assets\Tiny Fantasy Icons\README.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/UnityFolder/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

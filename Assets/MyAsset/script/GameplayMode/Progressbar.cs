@@ -134,16 +134,22 @@ public class Progressbar : MonoBehaviour {
     #region timeAttackIncreasing
     public void TimerAttackIncreasing()
     {
-        timeAttackCooldown -= 0.05f *Time.deltaTime ;
+        timeAttackCooldown -= 0.1f *Time.deltaTime ;
         imagetimeAttack.fillAmount = timeAttackCooldown;
-        if (imagetimeAttack.fillAmount <= 0)
+        //if powerAttack is not full 
+        if (imagetimeAttack.fillAmount <= 0 && playerController.powerAttack < playerController.maxPowerAttack)
         {
             playerController.powerAttack++;
             timeAttackCooldown = 1;
         }
+        //if powerAttack is full ,cooldown will not work
+        else if (playerController.powerAttack >= playerController.maxPowerAttack)
+        {
+            timeAttackCooldown = 1.01f;
+        }
         else if (playerController.EndStage == true)
         {
-            timeAttackCooldown = 1;
+            timeAttackCooldown = 1.01f;
         }
     }
 

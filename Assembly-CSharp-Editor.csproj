@@ -49,7 +49,9 @@
      <Compile Include="Assets\OtherAsset\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\Editor\CrossPlatformInputInitialize.cs" />
      <Compile Include="Assets\OtherAsset\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\Editor\InputAxisScrollbarCI.cs" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Readme.txt" />
+     <None Include="Assets\Medieval_House\Info.txt" />
      <None Include="Assets\A_piece_of_nature\Readme.txt" />
+     <None Include="Assets\read me.txt" />
      <None Include="Assets\Fantasy nature\Double Sided Shaders\Double Sided Transparent Diffuse Bump Cutout.shader" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Fog and Ambient reference.txt" />
      <None Include="Assets\MyAsset\environment\environ3\README.txt" />
@@ -60,6 +62,7 @@
      <None Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\!How to.txt" />
      <None Include="Assets\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
      <None Include="Assets\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\RollerBall\RollerBallGuidelines.txt" />
+     <None Include="Assets\Julien Tonsuso\Modular Fantasy Bridges\README.txt" />
      <None Include="Assets\Tiny Fantasy Icons\README.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>D:/UnityFolder/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
