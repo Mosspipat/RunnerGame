@@ -4,16 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TextScoreGameover : MonoBehaviour {
 
-    ScoreManagerAndEvent SGgetScore;
-    public Text textShowScore;
-    public Text textshowBestScore;
-	
-    void Start () {
-        SGgetScore = GameObject.Find("gameManager").GetComponent<ScoreManagerAndEvent>();
+    public static bool isShowScore;
+
+    Text textShowScore;
+    Text textshowBestScore;
+    
+    void Update () {
+        ShowScore();
     }
-	
-	void Update () {
-        textShowScore.text = SGgetScore.score.ToString() + " meter";
-        textshowBestScore.text = "best score : " + PlayerPrefs.GetInt(SGgetScore.keyBestScore).ToString() + " meter";
-	}
+
+    void ShowScore()
+    {
+        if (isShowScore)
+        {
+            textShowScore = transform.Find("panelTotalScore/scoreText").transform.GetComponent<Text>();
+            textshowBestScore = transform.Find("panelTotalScore/bestScoreText").transform.GetComponent<Text>();
+            textShowScore.text = ScoreManagerAndEvent.score.ToString() + " meter";
+            textshowBestScore.text = "best score : " + PlayerPrefs.GetInt(ScoreManagerAndEvent.keyBestScore).ToString() + " meter";
+            isShowScore = false;
+        }
+    }
 }

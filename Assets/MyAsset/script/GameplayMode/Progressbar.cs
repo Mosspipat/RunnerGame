@@ -14,7 +14,7 @@ public class Progressbar : MonoBehaviour {
     public Text amountTreasure;
     public Text fullAmountTreasure;
 
-    float health = 5f;
+    public static float health = 5f;
     float energy = 0f;
     float fullEnenrgy= 5f;
 
@@ -70,7 +70,10 @@ public class Progressbar : MonoBehaviour {
         if (health <= 0)
         {
             ScoreManagerAndEvent.isDead = true;
-            Application.LoadLevel("gameover");
+            TextScoreGameover.isShowScore = true;
+            playerController.move = "stop";
+            GameObject.Find("player").transform.GetComponent<Animator>().SetTrigger("isDead");
+
         }
     }
 

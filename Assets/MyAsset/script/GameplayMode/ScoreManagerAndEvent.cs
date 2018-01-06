@@ -5,9 +5,9 @@ using UnityEngine;
 public class ScoreManagerAndEvent : MonoBehaviour {
 
 
-    public string  keyBestScore = "bestScore";
-    public int score ;
-    public int bestScore; 
+    public static string  keyBestScore = "bestScore";
+    public static int score ;
+    public static int bestScore; 
     UIPlayer TSscoreGame;
     playerController PCstatusPlayer;
 

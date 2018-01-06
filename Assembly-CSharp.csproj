@@ -52,6 +52,7 @@
      <Compile Include="Assets\Chest.cs" />
      <Compile Include="Assets\EndDistanceQuest.cs" />
      <Compile Include="Assets\EndRewardQuest.cs" />
+     <Compile Include="Assets\GateBehavior.cs" />
      <Compile Include="Assets\ItemSpawnBehavior.cs" />
      <Compile Include="Assets\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
      <Compile Include="Assets\MoveCloud.cs" />
@@ -126,11 +127,16 @@
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo Basic (CSharp)\Scripts\GUIAnimatorFREEDemo.cs" />
      <Compile Include="Assets\PropsBehavior.cs" />
      <Compile Include="Assets\Randomcloud.cs" />
+     <Compile Include="Assets\SkythianCat\Glowing_Forest\Scripts\WaterGroup.cs" />
+     <Compile Include="Assets\SpawnItemOrEnemyBlackForest.cs" />
      <Compile Include="Assets\TestInputField.cs" />
+     <Compile Include="Assets\TileManagerBlackForest.cs" />
      <Compile Include="Assets\TotalScoreResult.cs" />
      <Compile Include="Assets\TrapBehavior.cs" />
      <Compile Include="Assets\TrapPlatform.cs" />
+     <Compile Include="Assets\TrapPlatformDarkForest.cs" />
      <Compile Include="Assets\amusedART\StoneMonster\Script\Animation_Test.cs" />
+     <Compile Include="Assets\propTrapDarkForest.cs" />
      <Compile Include="Assets\slerpTest.cs" />
      <Compile Include="Assets\testTrigger.cs" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Readme.txt" />
@@ -140,6 +146,7 @@
      <None Include="Assets\Fantasy nature\Double Sided Shaders\Double Sided Transparent Diffuse Bump Cutout.shader" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Fog and Ambient reference.txt" />
      <None Include="Assets\MyAsset\environment\environ3\README.txt" />
+     <None Include="Assets\Elven Weapons\Readme.txt" />
      <None Include="Assets\Fortress Gate_Free\ReadMe.txt" />
      <None Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Readme.txt" />
      <None Include="Assets\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

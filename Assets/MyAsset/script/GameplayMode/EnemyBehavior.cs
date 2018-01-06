@@ -111,7 +111,6 @@ public class EnemyBehavior : MonoBehaviour {
         if (obj.name == "player")
         {
             AnimEnemy.SetTrigger("isAttack");
-            Debug.Log("asdasdasdasdasd "+this.name);
             this.transform.Find(this.name + "Rig").GetComponent<Animator>().SetTrigger("isAttack");
             this.GetComponent<EnemyBehavior>().enabled = false;
         }

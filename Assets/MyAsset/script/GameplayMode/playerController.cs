@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerController : MonoBehaviour {
 
@@ -49,9 +50,10 @@ public class playerController : MonoBehaviour {
 
     public static int maxPowerAttack = 5;
     public static int maxPowerDefence = 5;
-    public static int powerAttack = 2;
-    public static int powerDefence = 3;
+    public static int powerAttack = 5;
+    public static int powerDefence = 5;
     bool kill;
+    bool block;
     public GameObject effectImpact;
 
     public static bool EndStage;
@@ -66,8 +68,8 @@ public class playerController : MonoBehaviour {
 
         offsetPlayerMin = this.transform.position.x - 2.5f;
         offsetPlayerMax = this.transform.position.x + 2.5f;
-        Debug.Log(offsetPlayerMin);
-        Debug.Log(offsetPlayerMax);
+        /*Debug.Log(offsetPlayerMin);
+        Debug.Log(offsetPlayerMax);*/
 
         move = "run";
 
@@ -100,16 +102,14 @@ public class playerController : MonoBehaviour {
         {
             presentWay = new Vector3(this.transform.position.x + leftWay,this.transform.position.y,this.transform.position.z);
             way = "left";
-            Debug.Log("goLeftWay");
-            Debug.Log(offsetPlayerMin);
+            //Debug.Log("goLeftWay");
             AnimPlayer.SetTrigger("isLeft");
         }
         if (Input.GetKeyDown(KeyCode.D)&& way == "middle")
         {
             presentWay = new Vector3(this.transform.position.x + rightWay,this.transform.position.y,this.transform.position.z);
             way = "right";
-            Debug.Log("goRightWay");
-            Debug.Log(offsetPlayerMax);
+            //Debug.Log("goRightWay");
             AnimPlayer.SetTrigger("isRight");
         }
         // Left Move
@@ -117,7 +117,7 @@ public class playerController : MonoBehaviour {
         {
             presentWay = new Vector3(this.transform.position.x + rightWay,this.transform.position.y,this.transform.position.z);
             way = "middle";
-            Debug.Log("goMiddleWay");
+            //Debug.Log("goMiddleWay");
             AnimPlayer.SetTrigger("isRight");
         }
 
@@ -126,7 +126,7 @@ public class playerController : MonoBehaviour {
         {
             presentWay = new Vector3(this.transform.position.x + leftWay,this.transform.position.y,this.transform.position.z);
             way = "middle";
-            Debug.Log("goMiddleWay");
+            //Debug.Log("goMiddleWay");
             AnimPlayer.SetTrigger("isLeft");
         }
 
@@ -206,6 +206,10 @@ public class playerController : MonoBehaviour {
                 GameObject.Find("castlePlatform/Fortress/stopPoint").transform.position.z), 0.01f);*/
             AnimPlayer.SetTrigger("isWalk");
         }
+        else if (move == "stop")
+        {
+            moveVector.z = 0; 
+        }
         // Check force Speed
         if (forceSpeed >= maxForceSpeed)                                            // make simple forceSpeed to move
         {
@@ -273,30 +277,40 @@ public class playerController : MonoBehaviour {
             if (powerAttack >= obj.GetComponent<EnemyBehavior>().power)
             {
                 AnimPlayer.SetTrigger("isAttack");
+                transform.Find("UIPlayer/statusIcon").transform.GetComponent<Image>().sprite = Resources.Load("UIPlayer/attackIcon",typeof(Sprite)) as Sprite; 
+                transform.Find("UIPlayer/statusIcon").transform.GetComponent<Animator>().SetTrigger("isAttack");
             }
             else if (powerAttack < obj.GetComponent<EnemyBehavior>().power)
             {
-                int blockDamageInt =  obj.GetComponent<EnemyBehavior>().power - powerAttack;
-                powerAttack = 0;
-                if ((powerDefence - blockDamageInt) < 0)
+                int damageRemain = obj.GetComponent<EnemyBehavior>().power - powerAttack;
+                if (powerDefence >= damageRemain)
                 {
-                    int weakDamage = powerDefence - blockDamageInt;
-                    UIBarPlayer.GetDamage(Mathf.Abs(weakDamage));
-                    powerDefence = 0;
-                    AnimPlayer.SetTrigger("isLegHit");
+                    AnimPlayer.SetTrigger("isBlock");
+                    transform.Find("UIPlayer/statusIcon").transform.GetComponent<Image>().sprite = Resources.Load("UIPlayer/defenceIcon",typeof(Sprite)) as Sprite; 
+                    transform.Find("UIPlayer/statusIcon").transform.GetComponent<Animator>().SetTrigger("isDefence");
                 }
                 else
                 {
-                    powerDefence -= blockDamageInt;
-                    AnimPlayer.SetTrigger("isBlock");
+                    powerAttack = 0;
+                    int damageToPlayer = powerDefence - damageRemain;
+                    UIBarPlayer.GetDamage(Mathf.Abs(damageToPlayer));
+                    powerDefence = 0;
+                    AnimPlayer.SetTrigger("isLegHit");
+                    transform.Find("UIPlayer/statusIcon").transform.GetComponent<Image>().sprite = Resources.Load("UIPlayer/damageIcon",typeof(Sprite)) as Sprite; 
+                    transform.Find("UIPlayer/statusIcon").transform.GetComponent<Animator>().SetTrigger("isDamage");
+
+                    GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
+                    Destroy(smoke, 4f);
+                    Destroy(obj.gameObject);
                 }
             }
-            else
+            /* else
             {
                 UIBarPlayer.GetDamage(1);
                 AnimPlayer.SetTrigger("isLegHit");
                 BangAnimation();
-            }
+
+            }*/
         }
 
         else if (obj.tag == "trap")
@@ -308,10 +322,16 @@ public class playerController : MonoBehaviour {
         }
         else if (obj.name == "bullet")
         {
-            Debug.Log("bullet hit Player");
-            UIBarPlayer.GetDamage(1);
-            AnimPlayer.SetTrigger("isLegHit");
-            BangAnimation();
+            if (Progressbar.health <= 0)
+            {
+                AnimPlayer.SetTrigger("isDead");
+            }
+            else
+            {
+                UIBarPlayer.GetDamage(1);
+                AnimPlayer.SetTrigger("isLegHit");
+                BangAnimation();
+            }
         }
         else if( obj.name == "searchRewardPoint")
         {
@@ -345,17 +365,28 @@ public class playerController : MonoBehaviour {
     void OnTriggerStay(Collider obj) {
         if (obj.tag == "enemy")
         {
-            if (kill == true)
+            if (kill)
             {
                 UIPlayer.amountMonsterKilled++;
                 if (powerAttack < obj.GetComponent<EnemyBehavior>().power)
                 {
-                    powerAttack = 0;    
+                    powerAttack = 0;
                 }
                 else
                 {
                     powerAttack -= obj.GetComponent<EnemyBehavior>().power;
                 }
+                GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
+                Destroy(smoke, 4f);
+                Destroy(obj.gameObject);
+            }
+
+            else if(block)
+            {
+                int damageRemain = obj.GetComponent<EnemyBehavior>().power - powerAttack;
+                powerAttack = 0;
+                powerDefence -= damageRemain;
+                UIPlayer.amountMonsterKilled++;
                 GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
                 Destroy(smoke, 4f);
                 Destroy(obj.gameObject);
@@ -464,12 +495,26 @@ public class playerController : MonoBehaviour {
 
     public void Kill()
     {
-        Debug.Log("kill");
         kill = true;
     }
     public void EndKill()
     {
         kill = false;   
+    }
+
+    public void Block()
+    {
+        block = true;
+    }
+
+    public void EndBlock()
+    {
+        block = false;
+    }
+
+    public void Dead()
+    {
+        Application.LoadLevel("gameover");
     }
     #endregion
 }

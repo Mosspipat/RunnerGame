@@ -28,7 +28,7 @@ public class UIPlayer : MonoBehaviour {
     float distantStartAndEnd;
     public Transform startPosMinimap;
     public Transform endPosMinimap;
-    float mapLengthMax = 600f;                //Max Range Map
+    float mapLengthMax = 200f;                //Max Range Map
     public static float distancePlayermake;
 
     public enum Stages
@@ -39,7 +39,6 @@ public class UIPlayer : MonoBehaviour {
 
     void Start () {
         distantStartAndEnd = Vector2.Distance(startPosMinimap.position, endPosMinimap.position);
-        Debug.Log("distand between start and end Point :" + distantStartAndEnd);
 
         sizeCoinImage = new Vector2(10f, 10f);
         score = 0;
@@ -85,7 +84,7 @@ public class UIPlayer : MonoBehaviour {
     void EventGameplay()
     {
         //Event DungeonApprea
-        if (tileManager.amountSpawnedPlatform % 20 == 0 && tileManager.bossStage == false)       //Bonus Stage and will not start gameplay's starter
+        if (tileManager.amountSpawnedPlatform % 20 == 0 && tileManager.bossStage == false && tileManager.isGreenField == true)       //Bonus Stage and will not start gameplay's starter
         {                                                                                       // check it boss stage will not spawn Dungeon Stage
             Debug.Log("open Dungeon");
 
@@ -97,7 +96,7 @@ public class UIPlayer : MonoBehaviour {
             tileManager.amountDungeonCanSpawn = 5; // set amount stage Can Spawn dungeon
         }
         //Event BossApprea
-        if (tileManager.amountSpawnedPlatform == 300 && tileManager.dungeonStage == false)       //Bonus Stage and will not start gameplay's starter
+        if (tileManager.amountSpawnedPlatform == 300 && tileManager.dungeonStage == false &&tileManager.isGreenField == true)       //Bonus Stage and will not start gameplay's starter
         {
             Debug.Log("open boss stage");
             // close Dungeon stage
@@ -110,6 +109,21 @@ public class UIPlayer : MonoBehaviour {
             }*/
         }
         //Speed up with more Score
+        else if  (TileManagerBlackForest.amountSpawnedPlatform % 10 == 0 && tileManager.bossStage == false &&TileManagerBlackForest.isBackForest == true)       //Bonus Stage and will not start gameplay's starter
+        {                                                                                       // check it boss stage will not spawn Dungeon Stage
+            Debug.Log("open Dungeon");
+
+            //spawn " Gate " at firstDungeon
+            TrapPlatformDarkForest.canGateSpawn = true;  
+
+            //stage " Dungeon is true"
+            TileManagerBlackForest.dungeonStage = true;
+            TileManagerBlackForest.amountDungeonCanSpawn = 5; // set amount stage Can Spawn dungeon
+        }
+
+
+
+
         if (intergerScore % 100 == 0 && intergerScore !=0)
         {
             Time.timeScale += 0.02f;
@@ -134,7 +148,8 @@ public class UIPlayer : MonoBehaviour {
             intergerScore = (int)mapLengthMax;
 
             //Check QuestComplete
-            tileManager.questDistance = true;  
+            tileManager.questDistance = true;
+            TileManagerBlackForest.questDistance = true;
         }
         Vector3 distanceMinimap = new Vector3( calDistanceMinimap,0,0);
         playerImage.transform.position = startPosMinimap.transform.position + distanceMinimap;            //player distance in Minimap

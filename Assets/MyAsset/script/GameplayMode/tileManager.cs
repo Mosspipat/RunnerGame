@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class tileManager : MonoBehaviour {
 
+    public static bool isGreenField;
+
     public GameObject[] platform;
     public Transform starterplatform;
 
@@ -33,6 +35,10 @@ public class tileManager : MonoBehaviour {
     public static int amountSpawnedPlatform; 
 
 	void Start () {                                                         //Spawn StarterPlatform when start Game
+        if (this.isActiveAndEnabled == true)
+        {
+            isGreenField = true;
+        }
         playerPos = GameObject.Find("player").transform;
         allPlatformGame = new List<GameObject>();
 
