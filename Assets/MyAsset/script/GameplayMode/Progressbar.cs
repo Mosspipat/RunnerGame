@@ -15,6 +15,7 @@ public class Progressbar : MonoBehaviour {
     public Text fullAmountTreasure;
 
     public static float health = 5f;
+    public static float maxHealth;
     float energy = 0f;
     float fullEnenrgy= 5f;
 
@@ -55,6 +56,7 @@ public class Progressbar : MonoBehaviour {
     void Update()
     {
         healthBar();
+        MaxCheckHealth();
         EnergyBar();
         skillTime();
         LowHealhEffectCheck();
@@ -93,10 +95,16 @@ public class Progressbar : MonoBehaviour {
         {
             energy = 5;
         }
+    }
+    #endregion
+
+    #region MaxHealthCheck
+    void MaxCheckHealth()
+    {
         if (energy <= 0f)
         {
             energy = 0;
-        }
+        } 
     }
     #endregion
 

@@ -56,6 +56,17 @@ public class playerController : MonoBehaviour {
     bool block;
     public GameObject effectImpact;
 
+    public bool isShield;
+    public static float timeShield = 5f;
+    public bool isQuickRun;
+    public static float timeQuick = 3f;
+    public static bool isMagnetEffect;
+    public static float timeMagnet = 10f;
+
+    public GameObject particleShield;
+    public GameObject particleQuickRun;
+
+
     public static bool EndStage;
 
 	void Start () {
@@ -79,6 +90,7 @@ public class playerController : MonoBehaviour {
         AnimUILowHealth = GameObject.Find("Main Camera/ProgressPlayer/lowHealthImage").transform.GetComponent<Animator>();
 
         CC = GameObject.Find("Main Camera").GetComponent<CameraController>();
+        isShield = false;
 	}
 	
 	void Update () {
@@ -88,7 +100,8 @@ public class playerController : MonoBehaviour {
         ChangeTargetReleasePower();
 
         LerpChangeWay(presentWay);
-      
+
+        ShiledProtectAnimation();
         transform.position = new Vector3(Mathf.Clamp(this.transform.position.x, offsetPlayerMin, offsetPlayerMax), this.transform.position.y, this.transform.position.z);       //Clamp posX;
 
     }
@@ -96,7 +109,6 @@ public class playerController : MonoBehaviour {
     void Controller()
     {
         /* moveSide = Input.GetAxis("Horizontal");*/
-
         // Middle Move 
         if (Input.GetKeyDown(KeyCode.A)&& way == "middle")
         {
@@ -188,6 +200,12 @@ public class playerController : MonoBehaviour {
             moveVector.z = forceSpeed;                                              //move vector.z 
             controlCha.Move(moveVector * Time.deltaTime);                           //addforce version playerController
         }
+        if (move == "fastRun")
+        {
+            moveVector.z = forceSpeed*1.3f;                                              //move vector.z 
+            controlCha.Move(moveVector * Time.deltaTime);                           //addforce version playerController
+        }
+
         else if (move == "walk")
         {
             moveVector.z = 0;                                              //move vector.z 
@@ -238,12 +256,44 @@ public class playerController : MonoBehaviour {
     #region Check hit Player
     void OnTriggerEnter(Collider obj)                               //Interact with item
     {
-        if (obj.name == "item")
+        if (obj.name == "bariaItem")
         {
+            isShield = true;
+            particleShield.SetActive(true);
+            Invoke("StopShield", timeShield);
             Destroy(obj.gameObject);
-            Time.timeScale = 2;
         }
-        else if (obj.name == "obstacle_tree")
+        else if ((obj.tag == "enemy" || obj.tag == "obstacle") && isShield == true||isQuickRun == true)
+        {
+            Debug.Log("shield protection");
+            particleShield.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);  
+            GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
+            Destroy(smoke, 4f);
+            Destroy(obj.gameObject);
+        }
+        else if (obj.name == "speedItem")
+        {
+            CC.isSpeed = true;
+            move = "fastRun";
+            particleQuickRun.SetActive(true);
+            Invoke("NormalMove", timeQuick);
+            Destroy(obj.gameObject);
+        }
+        else if (obj.name == "magnetItem")
+        {
+            Debug.Log("magnet Get!!");
+            Destroy(obj.gameObject);
+            isMagnetEffect = true;
+            Invoke("StopMagnet", timeMagnet);
+        }
+        else if (obj.name == "posionItem")
+        {
+            Progressbar.health++;
+            Destroy(obj.gameObject);
+        }
+        else if (!isShield)
+        {
+         if (obj.name == "obstacle_tree")
         {
             /*Application.LoadLevel("gameover");*/
             /*isDead = true;*/
@@ -358,6 +408,7 @@ public class playerController : MonoBehaviour {
             Debug.Log("Def+");
             powerDefence++;
         }
+        }
     }
     #endregion
 
@@ -461,9 +512,16 @@ public class playerController : MonoBehaviour {
     {
         controlCha.enabled = true;
     }
+
+    void NormalMove()
+    {
+        move = "run";
+        CC.isSpeed = false;
+        particleQuickRun.SetActive(false);
+    }
     #endregion
 
-    #region UIAnimation
+    #region UIAnimation && ParticleAnimation
     void BangAnimation()
     {
         AnimUIHit.SetTrigger("isHit");
@@ -478,6 +536,21 @@ public class playerController : MonoBehaviour {
         AnimUILowHealth.SetBool("isLowHealth", false);
     }
 
+    public void ShiledProtectAnimation()
+    {
+        particleShield.transform.localScale = Vector3.Lerp(particleShield.transform.localScale, new Vector3(1f, 1f, 1f),2f*Time.deltaTime); 
+    }
+
+    void StopShield()
+    {
+        isShield = false;
+        particleShield.SetActive(false);
+    }
+
+    void StopMagnet()
+    {
+        isMagnetEffect = false;
+    }
     #endregion
 
     #region PlayerAnimationEvents
@@ -492,7 +565,6 @@ public class playerController : MonoBehaviour {
 
         animChest.SetTrigger("isOpen");
     }
-
     public void Kill()
     {
         kill = true;
@@ -511,7 +583,6 @@ public class playerController : MonoBehaviour {
     {
         block = false;
     }
-
     public void Dead()
     {
         Application.LoadLevel("gameover");

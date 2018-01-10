@@ -48,12 +48,19 @@
   <ItemGroup>
      <Compile Include="Assets\AnimationEventBoss.cs" />
      <Compile Include="Assets\AnimationEventMonster.cs" />
+     <Compile Include="Assets\Bank.cs" />
      <Compile Include="Assets\BossBehavior.cs" />
+     <Compile Include="Assets\ButtonPrevious.cs" />
+     <Compile Include="Assets\ButtonPurchase.cs" />
+     <Compile Include="Assets\ButtonUpgrade.cs" />
+     <Compile Include="Assets\CharacterStatus.cs" />
      <Compile Include="Assets\Chest.cs" />
+     <Compile Include="Assets\CoinStaticSpawn.cs" />
      <Compile Include="Assets\EndDistanceQuest.cs" />
      <Compile Include="Assets\EndRewardQuest.cs" />
      <Compile Include="Assets\GateBehavior.cs" />
      <Compile Include="Assets\ItemSpawnBehavior.cs" />
+     <Compile Include="Assets\MagnetEffect.cs" />
      <Compile Include="Assets\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
      <Compile Include="Assets\MoveCloud.cs" />
      <Compile Include="Assets\MyAsset\script\GameplayMode\CameraController.cs" />
@@ -127,6 +134,7 @@
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo Basic (CSharp)\Scripts\GUIAnimatorFREEDemo.cs" />
      <Compile Include="Assets\PropsBehavior.cs" />
      <Compile Include="Assets\Randomcloud.cs" />
+     <Compile Include="Assets\SelectionScene.cs" />
      <Compile Include="Assets\SkythianCat\Glowing_Forest\Scripts\WaterGroup.cs" />
      <Compile Include="Assets\SpawnItemOrEnemyBlackForest.cs" />
      <Compile Include="Assets\TestInputField.cs" />

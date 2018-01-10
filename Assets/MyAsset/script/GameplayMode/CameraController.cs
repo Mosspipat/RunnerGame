@@ -40,7 +40,6 @@ public class CameraController : MonoBehaviour {
             transform.position = Vector3.Lerp(this.transform.position, moveVector, Time.deltaTime * 5);
             this.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(10, 0, 0), Time.deltaTime);    //return To SamePoint form hit action
         }
-
          #region Camera SpeedEffect
         else if ( isSpeed == true)
         {
@@ -49,7 +48,6 @@ public class CameraController : MonoBehaviour {
             Invoke("SpeedEffect", 5f);
         }
         #endregion
-
         #region Camera LookatBoss
         else if (BossBehavior.isLookatBoss == true)
         {
@@ -58,7 +56,6 @@ public class CameraController : MonoBehaviour {
             Invoke("lookatBoss", 10f);
         }
         #endregion
-
         #region Camera Lookat QuestComplete
         else if (EndRewardQuest.isCameraViewToplayer == true && EndRewardQuest.isCameraViewToViewOpenedBox == false)
         {
@@ -125,10 +122,6 @@ public class CameraController : MonoBehaviour {
         isPosion = true;
     }*/
 
-    public void SpeedEffect()                 //Later test Effect Camera Invoke
-    {
-        isSpeed = false;
-    }
     public void lookatBoss()
     {
         BossBehavior.isLookatBoss = false;

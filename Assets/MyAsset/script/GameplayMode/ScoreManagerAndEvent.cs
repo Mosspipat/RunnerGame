@@ -17,13 +17,13 @@ public class ScoreManagerAndEvent : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
         PCstatusPlayer = GameObject.Find("player").GetComponent<playerController>();
         TSscoreGame = GameObject.Find("player").transform.GetChild(3).GetChild(0).transform.GetComponent<UIPlayer>();   // or Use getComponentInChildren
-        Debug.Log("bestScore: " +PlayerPrefs.GetInt(keyBestScore));
+       // Debug.Log("bestScore: " +PlayerPrefs.GetInt(keyBestScore));
     }
 
 
 	void Update()
     {
-        if (isDead = true)
+        if (isDead == true)
         {
             score = UIPlayer.intergerScore;
         }

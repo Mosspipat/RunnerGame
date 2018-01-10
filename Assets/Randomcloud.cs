@@ -52,15 +52,15 @@ public class Randomcloud : MonoBehaviour {
             if (randomSideX == 1)
             {
                 GameObject cloudClone = Instantiate(cloud);
-                cloudClone.transform.SetParent(GameObject.Find("Canvas").transform);
+                    cloudClone.transform.SetParent(GameObject.Find("Canvas/CloudSpawnPoint").transform);
                 cloudClone.GetComponent<RectTransform>().localPosition = new Vector3(randomPosX, randomPosY, 0);
                 cloudClone.GetComponent<MoveCloud>().moveDirectionTo = "moveToRight";
                 lastSideSpawnCloud = "left";
             }
             else if (randomSideX == 2)
             {
-                    GameObject cloudClone = Instantiate(cloud);
-                cloudClone.transform.SetParent(GameObject.Find("Canvas").transform);
+                GameObject cloudClone = Instantiate(cloud);
+                    cloudClone.transform.SetParent(GameObject.Find("Canvas/CloudSpawnPoint").transform);
                 cloudClone.GetComponent<RectTransform>().localPosition = new Vector3(randomPosX, randomPosY, 0);
                 cloudClone.GetComponent<MoveCloud>().moveDirectionTo = "moveToLeft";
                 lastSideSpawnCloud = "right";
@@ -70,7 +70,7 @@ public class Randomcloud : MonoBehaviour {
         {
                 int randomNewPosY = Random.Range(-300, 301);
                 GameObject cloudClone = Instantiate(cloud);
-            cloudClone.transform.SetParent(GameObject.Find("Canvas").transform);
+                cloudClone.transform.SetParent(GameObject.Find("Canvas/CloudSpawnPoint").transform);
                 //new cloud should be right
                 cloudClone.GetComponent<RectTransform>().localPosition = new Vector3(700 + randomOffsetX, randomNewPosY, 0);
             cloudClone.GetComponent<MoveCloud>().moveDirectionTo = "moveToLeft";
@@ -81,7 +81,7 @@ public class Randomcloud : MonoBehaviour {
         {
                 int randomNewPosY = Random.Range(-300, 301);
             GameObject cloudClone = Instantiate(cloud);
-            cloudClone.transform.SetParent(GameObject.Find("Canvas").transform);
+                cloudClone.transform.SetParent(GameObject.Find("Canvas/CloudSpawnPoint").transform);
                 //new cloud should be left
                 cloudClone.GetComponent<RectTransform>().localPosition = new Vector3(-700 - randomOffsetX, randomNewPosY, 0);
                 cloudClone.GetComponent<MoveCloud>().moveDirectionTo = "moveToRight";

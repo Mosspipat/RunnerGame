@@ -6,9 +6,13 @@ public class testTrigger : MonoBehaviour {
 	
     void OnTriggerEnter(Collider obj)
     {
-        if (obj.name == "Cuba")
+        if (obj.name == "player")
         {
             Debug.Log("hit Cube!");
         }
+    }
+
+    void OnDestroy() {
+        print("Script was destroyed");
     }
 }

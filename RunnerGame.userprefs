@@ -1,11 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MyAsset\script\GameplayMode\playerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MyAsset\script\GameplayMode\Progressbar.cs">
     <Files>
-      <File FileName="Assets\AnimationEventMonster.cs" Line="1" Column="1" />
-      <File FileName="Assets\MyAsset\script\GameplayMode\playerController.cs" Line="325" Column="37" />
-      <File FileName="Assets\MyAsset\script\GameplayMode\Progressbar.cs" Line="17" Column="18" />
-      <File FileName="Assets\SpawnItemOrEnemyBlackForest.cs" Line="35" Column="41" />
+      <File FileName="Assets\MyAsset\script\GameplayMode\CameraController.cs" Line="1" Column="1" />
+      <File FileName="Assets\MyAsset\script\GameplayMode\playerController.cs" Line="292" Column="37" />
+      <File FileName="Assets\MyAsset\script\HouseMode\CharacterSelection.cs" Line="32" Column="5" />
+      <File FileName="Assets\MyAsset\script\GameplayMode\Progressbar.cs" Line="80" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

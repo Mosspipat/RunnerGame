@@ -52,7 +52,7 @@ public class tileManager : MonoBehaviour {
             {
                 Spawnplatform(1);                           
             }
-            Debug.Log("start platform");
+            //Debug.Log("start platform");
         }
 	}
 	
