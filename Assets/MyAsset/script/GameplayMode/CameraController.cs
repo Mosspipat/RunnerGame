@@ -26,13 +26,16 @@ public class CameraController : MonoBehaviour {
         positionLerp.Add(Quaternion.Euler(20,0,0));
         positionLerp.Add(Quaternion.Euler(0,-20,0));
         positionLerp.Add(Quaternion.Euler(-20,0,0));
+
+        EndRewardQuest.isCameraViewToplayer = false;
+        EndDistanceQuest.isCameraViewToplayer = false;
     }
 
 
 	void Update () {
         moveVector = playerPosition.position + startOffsset;
         moveVector.y = Mathf.Clamp(moveVector.y, 3, 5);                     //fix camera not out allow between the Y;
-        if (transition>1 &&isSpeed == false && BossBehavior.isLookatBoss == false &&EndRewardQuest.isCameraViewToplayer == false && EndDistanceQuest.isCameraViewToplayer == false)
+        if (transition>1 &&isSpeed == false && BossBehavior.isLookatBoss == false && EndRewardQuest.isCameraViewToplayer == false && EndDistanceQuest.isCameraViewToplayer == false)
         {
             /*moveVector.x = -0.5f;*/                                               //Fix camera to zero not follow player move
             moveVector.y = 3f;
@@ -127,4 +130,11 @@ public class CameraController : MonoBehaviour {
         BossBehavior.isLookatBoss = false;
     }
     #endregion
+
+
+    public void ButtonPressbackToMenu()
+    {
+        Debug.Log("press Back");
+        Application.LoadLevel("menuMap");
+    }
 }

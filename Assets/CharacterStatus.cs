@@ -5,7 +5,6 @@ using UnityEngine;
 public class CharacterStatus : MonoBehaviour {
 
 
-    public static int coinsWallet = 5000;
     public static bool isPurchaseOrUpgrade;
     public static string itemPurchaseOrUpgrade;
 
@@ -20,10 +19,10 @@ public class CharacterStatus : MonoBehaviour {
     public static int levelImmortal;
     public static int levelCoin;
 
-    void Awake()
+    /* void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-    }
+    }*/
 	
 	void Update () {
         UpdateStock();
@@ -36,44 +35,35 @@ public class CharacterStatus : MonoBehaviour {
             switch (itemPurchaseOrUpgrade)
             {
                 #region Item
-                case "amountHeadStartInt":
+                case "amountHeadStart":
                     amountHeadStartInt++;
-                    Debug.Log("headStart +1");
                     break;
-                case "amountBariaInt":
+                case "amountBaria":
                     amountBariaInt++;
-                    Debug.Log("Baria+1");
                     break;
                 case "amountPosionHeal":
                     amountPosionHeal++;
-                    Debug.Log("posionHeal+1");
                     break;
                 case "amountLifeReborn":
                     amountLifeReborn++;
-                    Debug.Log("reborn+1");
                     break;
                 #endregion
 
                 #region Upgrade
                 case"levelAttack":
                     levelAttack++;
-                    Debug.Log("upAtt");
                     break;
                 case "levelDefence":
                     levelDefence++;
-                    Debug.Log("upDef");
                     break;
                 case"levelMagnet":
                     levelMagnet++;
-                    Debug.Log("UpMagnet");
                     break;
                 case"levelImmortal":
                     levelImmortal++;
-                    Debug.Log("UpImmortal");
                     break;
                 case "levelCoin":
                     levelCoin++;
-                    Debug.Log("UpCoin");
                     break;
                 #endregion
             }

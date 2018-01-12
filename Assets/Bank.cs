@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class Bank : MonoBehaviour {
 
 	void Update () {
-        if (CharacterStatus.coinsWallet <= 0)
+        if (PlayerPrefs.GetInt("money") <= 0)
         {
-            CharacterStatus.coinsWallet = 0;
+            PlayerPrefs.SetInt("money",0);
         }
-        transform.Find("panelBank/textBank").GetComponent<Text>().text = "Yours coins : \n" + CharacterStatus.coinsWallet;
+        transform.Find("panelBank/textBank").GetComponent<Text>().text = "Yours coins : \n" + PlayerPrefs.GetInt("money").ToString();
 	}
 }

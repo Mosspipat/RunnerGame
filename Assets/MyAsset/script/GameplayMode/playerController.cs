@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class playerController : MonoBehaviour {
 
+    public int LevelPlayer;
+
     public Terrain TerrianPlayerFirst;
     public Terrain TerrianPlayerSecond;
     float PosbeforeTerrianPlayerFirst= 400;
@@ -48,28 +50,35 @@ public class playerController : MonoBehaviour {
 
     CameraController CC;
 
-    public static int maxPowerAttack = 5;
-    public static int maxPowerDefence = 5;
-    public static int powerAttack = 5;
-    public static int powerDefence = 5;
+    public static int maxPowerAttack;
+    public static int maxPowerDefence;
+    public static int powerAttack;
+    public static int powerDefence;
     bool kill;
     bool block;
     public GameObject effectImpact;
 
     public bool isShield;
-    public static float timeShield = 5f;
     public bool isQuickRun;
-    public static float timeQuick = 3f;
     public static bool isMagnetEffect;
-    public static float timeMagnet = 10f;
+
+    public static float timeShield ;
+    public static float timeQuick ;
+    public static float timeMagnet ;
 
     public GameObject particleShield;
     public GameObject particleQuickRun;
 
-
     public static bool EndStage;
 
+    public Vector2 startPos;
+    public Vector2 direction;
+    public bool directionChosen;
+
 	void Start () {
+        StarterStatus();
+        EndStage = false;
+
         RBPlayer = this.transform.GetComponent<Rigidbody>();
         controlCha = this.transform.GetComponent<CharacterController>();
         UIBarPlayer = GameObject.Find("Main Camera/ProgressPlayer").GetComponent<Progressbar>();
@@ -91,10 +100,14 @@ public class playerController : MonoBehaviour {
 
         CC = GameObject.Find("Main Camera").GetComponent<CameraController>();
         isShield = false;
+
 	}
 	
 	void Update () {
+        LevelUP();
+        TestTouch();
         Controller();
+        MobileControl();
         Move();
         MoveTerrianFollowPlayer();
         ChangeTargetReleasePower();
@@ -278,6 +291,7 @@ public class playerController : MonoBehaviour {
             particleQuickRun.SetActive(true);
             Invoke("NormalMove", timeQuick);
             Destroy(obj.gameObject);
+            Debug.Log("speedGet");
         }
         else if (obj.name == "magnetItem")
         {
@@ -301,11 +315,6 @@ public class playerController : MonoBehaviour {
             UIBarPlayer.GetDamage(1);
             AnimPlayer.SetTrigger("isLegHit");
             BangAnimation();
-        }
-        else if (obj.name == "coin")
-        {
-            Debug.Log("get coin");
-            Destroy(obj);
         }
         else if (obj.name == "log")
         {
@@ -372,7 +381,7 @@ public class playerController : MonoBehaviour {
         }
         else if (obj.name == "bullet")
         {
-            if (Progressbar.health <= 0)
+                if (Progressbar.health <= 0)
             {
                 AnimPlayer.SetTrigger("isDead");
             }
@@ -427,6 +436,7 @@ public class playerController : MonoBehaviour {
                 {
                     powerAttack -= obj.GetComponent<EnemyBehavior>().power;
                 }
+                obj.GetComponent<EnemyBehavior>().isKilled = true;
                 GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
                 Destroy(smoke, 4f);
                 Destroy(obj.gameObject);
@@ -438,6 +448,7 @@ public class playerController : MonoBehaviour {
                 powerAttack = 0;
                 powerDefence -= damageRemain;
                 UIPlayer.amountMonsterKilled++;
+                obj.GetComponent<EnemyBehavior>().isKilled = true;
                 GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
                 Destroy(smoke, 4f);
                 Destroy(obj.gameObject);
@@ -588,4 +599,94 @@ public class playerController : MonoBehaviour {
         Application.LoadLevel("gameover");
     }
     #endregion
-}
+
+    #region Mobile Control
+
+    void TestTouch()
+    {
+        if (Input.touchCount > 0)
+        {
+            Debug.Log("touch");
+        }
+    }
+
+    void MobileControl()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            // Handle finger movements based on touch phase.
+            switch (touch.phase)
+            {
+                // Record initial touch position.
+                case TouchPhase.Began:
+                    startPos = touch.position;
+                    directionChosen = false;
+                    Debug.Log("begin Drag");
+                    break;
+
+                    // Determine direction by comparing the current touch position with the initial one.
+                case TouchPhase.Moved:
+                    direction = touch.position - startPos;
+                    break;
+
+                    // Report that a direction has been chosen when the finger is lifted.
+                case TouchPhase.Ended:
+                    directionChosen = true;
+                    break;
+            }
+        }
+        if (directionChosen)
+        {
+            Debug.Log("jump with swip");
+            StartSlide();
+            Invoke("StopSlide", 1);
+        }
+    }
+    #endregion
+
+    #region CheckStarterStatus
+    void StarterStatus()
+    {
+       // PlayerPrefs.SetInt("levelPlayer",LevelPlayer);
+
+
+        //LevelAttack And LevelDefence
+        int levelAttack = PlayerPrefs.GetInt("levelAttackLevel");
+        maxPowerAttack = levelAttack + 1;
+        powerAttack = maxPowerAttack;
+        int levelDefence = PlayerPrefs.GetInt("levelDefenceLevel");
+        maxPowerDefence = 5 + ((levelDefence-1)*2);
+        powerDefence = maxPowerDefence;
+        //Debug.Log("levelDefence : "+ levelDefence +"\n (levelDefence-1) *2 :" + (levelDefence-1)*2);
+
+        //LevelMagnet LevelImmortal LevelCoin
+        int levelMagnet = PlayerPrefs.GetInt("levelMagnetLevel");
+        timeMagnet = 10 + (levelMagnet - 1)*5; 
+        int levelshield = PlayerPrefs.GetInt("levelShieldLevel");
+        timeShield = 10 + (levelshield - 1)*5;
+        int levelImmortal = PlayerPrefs.GetInt("levelImmortalLevel");
+        timeQuick = 10 + (levelImmortal - 1)*5;
+
+    }
+    #endregion
+
+    void LevelUP()
+    {
+        int expPlayer = PlayerPrefs.GetInt("expPlayer");
+        int maxExpPlayer = 10 * (int)(Mathf.Pow(2, PlayerPrefs.GetInt("levelPlayer") - 1)); 
+        if (expPlayer >= maxExpPlayer)
+        {
+            LevelPlayer = PlayerPrefs.GetInt("levelPlayer");
+            LevelPlayer++;
+            PlayerPrefs.SetInt("levelPlayer",LevelPlayer);
+            PlayerPrefs.SetInt("expPlayer", 0);
+        }
+    }
+
+    void OnDestroy()
+    {
+        Time.timeScale = 1;
+    }
+    }

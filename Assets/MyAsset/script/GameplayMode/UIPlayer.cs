@@ -38,6 +38,8 @@ public class UIPlayer : MonoBehaviour {
     };
 
     void Start () {
+        
+        intergerScoreCoin = 0;
         distantStartAndEnd = Vector2.Distance(startPosMinimap.position, endPosMinimap.position);
 
         sizeCoinImage = new Vector2(10f, 10f);

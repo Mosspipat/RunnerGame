@@ -64,3 +64,5 @@ C:\Users\User\Documents\RunnerProject\RunnerGame\Temp\bin\Debug\UnityEngine.Anal
 C:\Users\User\Documents\RunnerProject\RunnerGame\Temp\bin\Debug\UnityEngine.HoloLens.xml
 C:\Users\User\Documents\RunnerProject\RunnerGame\Temp\bin\Debug\UnityEngine.VR.xml
 C:\Users\User\Documents\RunnerProject\RunnerGame\obj\Debug\Assembly-CSharp.pdb
+C:\Users\User\Documents\RunnerProject\RunnerGame\Temp\bin\Debug\UnityEditor.iOS.Extensions.Common.dll
+C:\Users\User\Documents\RunnerProject\RunnerGame\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.dll

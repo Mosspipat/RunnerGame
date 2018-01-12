@@ -8,31 +8,64 @@ public class ButtonUpgrade : MonoBehaviour {
     public string sendTo;
     public Button purchaseButton;  
     public GameObject point;
-    public int price;
 
-    int levelItem = 1;
+    public int price;
+    int levelMaxItem = 5;
+    int LevelItemPlayer;
 
 	void Start () {
+        //PlayerPrefs.DeleteAll();
+        LevelItemStart();
+        Debug.Log("LevelItemStart :" + LevelItemPlayer.ToString());
         purchaseButton.onClick.AddListener(UpgradeItem);
-        transform.Find("buttonPurchaseItem/Text").transform.GetComponent<Text>().text = price + "coins";
+        transform.Find("buttonPurchaseItem/Text").transform.GetComponent<Text>().text = PriceLevelItem(LevelItemPlayer) + " coins";
+        CheckLevelItem();
 	}
 
     #region UpgradeItem
     void UpgradeItem ()
     {
-        if (levelItem < 5 && (CharacterStatus.coinsWallet >= price))
+        if (LevelItemPlayer < levelMaxItem && (PlayerPrefs.GetInt("money") >= PriceLevelItem(LevelItemPlayer)))
         {
-            CharacterStatus.isPurchaseOrUpgrade = true;
-            CharacterStatus.itemPurchaseOrUpgrade = sendTo;
-            CharacterStatus.coinsWallet -= price;
-            price += price * 2;
-            levelItem++;
+            int moneyToUse = PlayerPrefs.GetInt("money");
+            moneyToUse -= PriceLevelItem(LevelItemPlayer);
+            PlayerPrefs.SetInt("money", moneyToUse);
+            LevelItemPlayer++;
+            PlayerPrefs.SetInt(sendTo + "Level",LevelItemPlayer);
+            /*CharacterStatus.itemPurchaseOrUpgrade = sendTo;
+            CharacterStatus.coinsWallet -= price;*/
             GameObject pointUpgrade = Instantiate(point);
             pointUpgrade.transform.SetParent(transform.Find("upgradeBar").transform);
             pointUpgrade.GetComponent<RectTransform>().localScale = new Vector3 (1f,1f,1f);
-            transform.Find("buttonPurchaseItem/Text").transform.GetComponent<Text>().text = price + "coins";
+            transform.Find("buttonPurchaseItem/Text").transform.GetComponent<Text>().text = PriceLevelItem(LevelItemPlayer) + "coins";
+            Debug.Log(PlayerPrefs.GetInt(sendTo +"Level"));
         }
     }
 
+    void CheckLevelItem()
+    {
+        for (int i = 0; i < LevelItemPlayer; i++)
+        {
+            GameObject pointUpgrade = Instantiate(point);
+            pointUpgrade.transform.SetParent(transform.Find("upgradeBar").transform);
+            pointUpgrade.GetComponent<RectTransform>().localScale = new Vector3 (1f,1f,1f);
+        }
+    }
+
+    int PriceLevelItem(int level)
+    {
+        int Price = price * (int)Mathf.Pow(2, level);
+        return Price;
+    }
+
+    void LevelItemStart()
+    {
+        LevelItemPlayer = PlayerPrefs.GetInt(sendTo + "Level");
+        if (LevelItemPlayer <= 0)
+        {
+            LevelItemPlayer = 1;
+        }
+    }
     #endregion
+
 }

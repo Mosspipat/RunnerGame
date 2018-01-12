@@ -58,6 +58,7 @@
      <Compile Include="Assets\CoinStaticSpawn.cs" />
      <Compile Include="Assets\EndDistanceQuest.cs" />
      <Compile Include="Assets\EndRewardQuest.cs" />
+     <Compile Include="Assets\ExpPoint.cs" />
      <Compile Include="Assets\GateBehavior.cs" />
      <Compile Include="Assets\ItemSpawnBehavior.cs" />
      <Compile Include="Assets\MagnetEffect.cs" />
@@ -88,6 +89,7 @@
      <Compile Include="Assets\MyAsset\script\MenuMode\ButtonFunction.cs" />
      <Compile Include="Assets\MyAsset\script\Object\Bullet.cs" />
      <Compile Include="Assets\MyAsset\script\Object\coin.cs" />
+     <Compile Include="Assets\MyAsset\script\cc\FastCommand.cs" />
      <Compile Include="Assets\OtherAsset\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_Demo.cs" />
      <Compile Include="Assets\OtherAsset\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_UIs.cs" />
      <Compile Include="Assets\OtherAsset\GE Common Assets\GE Orbit Camera\Scripts\GE_OrbitCamera.cs" />
@@ -132,6 +134,7 @@
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_DemoPlaySound.cs" />
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_OpenOtherScene.cs" />
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo Basic (CSharp)\Scripts\GUIAnimatorFREEDemo.cs" />
+     <Compile Include="Assets\ProfilePlayerMap.cs" />
      <Compile Include="Assets\PropsBehavior.cs" />
      <Compile Include="Assets\Randomcloud.cs" />
      <Compile Include="Assets\SelectionScene.cs" />
@@ -146,6 +149,7 @@
      <Compile Include="Assets\amusedART\StoneMonster\Script\Animation_Test.cs" />
      <Compile Include="Assets\propTrapDarkForest.cs" />
      <Compile Include="Assets\slerpTest.cs" />
+     <Compile Include="Assets\statusPlayer.cs" />
      <Compile Include="Assets\testTrigger.cs" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Readme.txt" />
      <None Include="Assets\Medieval_House\Info.txt" />
@@ -190,6 +194,12 @@
  </Reference>
  <Reference Include="GUIAnimatorFREE">
  <HintPath>C:/Users/User/Documents/RunnerProject/RunnerGame/Assets/OtherAsset/GUI Animator/GUI Animator FREE/Plugins/GUIAnimatorFREE.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+ <HintPath>D:/UnityFolder/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions.Common">
+ <HintPath>D:/UnityFolder/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -54,6 +54,7 @@ public class tileManager : MonoBehaviour {
             }
             //Debug.Log("start platform");
         }
+        ResetStatusTileManager();
 	}
 	
 	void Update () {
@@ -69,7 +70,7 @@ public class tileManager : MonoBehaviour {
             DeleteOldplatform();        // delete (Old platform)
         }
         //Trigger Spawn Dungeon Platform
-        else if (playerPos.position.z + arriveZone >= spawnPlatformPoint && dungeonStage == true) //allow front point player Check to The last edge platform
+        else if (playerPos.position.z + arriveZone >= spawnPlatformPoint && dungeonStage == true &&questDistance == false) //allow front point player Check to The last edge platform
         {
             Spawnplatform(2);           // spawn dungeon platform
             DeleteOldplatform();        // delete (Old platform)
@@ -202,4 +203,14 @@ public class tileManager : MonoBehaviour {
             allPlatformGame.RemoveAt(0);
         }
     }
+    #region reset
+    void ResetStatusTileManager()
+    {
+        EndRewardQuest.isCameraViewToplayer = false;
+        EndDistanceQuest.isCameraViewToplayer = false;
+        questDistance = false;
+        questCollect = false;
+        dungeonStage = false;
+    }
+    #endregion
 }

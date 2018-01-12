@@ -8,14 +8,20 @@ public class Progressbar : MonoBehaviour {
     playerController pc;
     CameraController cc;
 
+    Text LevelPlayerText;
+    Text ExpText;
+    Image ExpImage;
+
     public Image loadHealthbar;
+    public Text healthText;
     public Image loadEnergybar;
 
     public Text amountTreasure;
     public Text fullAmountTreasure;
 
-    public static float health = 5f;
-    public static float maxHealth;
+
+    public float maxHealth;
+    public static float health ;
     float energy = 0f;
     float fullEnenrgy= 5f;
 
@@ -36,6 +42,15 @@ public class Progressbar : MonoBehaviour {
 
     void Start()
     {
+        LevelPlayerText = GameObject.Find("ProgressLevelPlayer/levelText").GetComponent<Text>();
+        ExpText = GameObject.Find("ProgressExpPlayer/expText").GetComponent<Text>();
+        ExpImage = GameObject.Find("ProgressExpPlayer/imageExp").GetComponent<Image>();
+
+        maxHealth  = 5f + (PlayerPrefs.GetInt("levelPlayer")*1);
+        health = maxHealth;
+
+        healthText.GetComponent<Text>();
+
         loadHealthbar = GameObject.Find("ProgressHealthBar/loadHealthBar").GetComponent<Image>();
         loadEnergybar = GameObject.Find("ProgressEnergyBar/loadEnergyBar").GetComponent<Image>();
 
@@ -55,8 +70,9 @@ public class Progressbar : MonoBehaviour {
 
     void Update()
     {
+        LevelBar();
         healthBar();
-        MaxCheckHealth();
+        MaxHealthCheck();
         EnergyBar();
         skillTime();
         LowHealhEffectCheck();
@@ -75,7 +91,6 @@ public class Progressbar : MonoBehaviour {
             TextScoreGameover.isShowScore = true;
             playerController.move = "stop";
             GameObject.Find("player").transform.GetComponent<Animator>().SetTrigger("isDead");
-
         }
     }
 
@@ -84,7 +99,9 @@ public class Progressbar : MonoBehaviour {
     #region HealthAndEnergyBarUpdate
     void healthBar()
     {
-        loadHealthbar.fillAmount = health/5f;
+        maxHealth  = 5f + (PlayerPrefs.GetInt("levelPlayer")*1);
+        loadHealthbar.fillAmount = health/maxHealth;
+        healthText.text = health + " / " + maxHealth;
     }
 
     void EnergyBar()
@@ -96,16 +113,30 @@ public class Progressbar : MonoBehaviour {
             energy = 5;
         }
     }
+
+    void LevelBar()
+    {
+        LevelPlayerText.text =  "Level : " + PlayerPrefs.GetInt("levelPlayer").ToString();
+        ExpText.text = "Exp : " + PlayerPrefs.GetInt("expPlayer") + " / " + (10 * (Mathf.Pow(2, PlayerPrefs.GetInt("levelPlayer") - 1)));
+        ExpImage.fillAmount = PlayerPrefs.GetInt("expPlayer") / (10 * (Mathf.Pow(2, PlayerPrefs.GetInt("levelPlayer") - 1)));
+    }
     #endregion
 
     #region MaxHealthCheck
-    void MaxCheckHealth()
+    void MaxHealthCheck()
+    {
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+    }
+    /*void MaxCheckHealth()
     {
         if (energy <= 0f)
         {
             energy = 0;
         } 
-    }
+    }*/
     #endregion
 
     #region SkillUpdate
@@ -205,6 +236,4 @@ public class Progressbar : MonoBehaviour {
         powerDefenceText.text = (playerController.powerDefence).ToString(); 
     }
     #endregion
-
-
 }

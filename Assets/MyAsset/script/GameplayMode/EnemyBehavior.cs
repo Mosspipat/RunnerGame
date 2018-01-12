@@ -17,6 +17,10 @@ public class EnemyBehavior : MonoBehaviour {
     Text powerText;
     public int power;
 
+    public bool isKilled{ get; set;}
+    public int PointExp;
+    public GameObject StartPointExp;
+
     void Start()
     {
         player = GameObject.Find("player");
@@ -97,7 +101,6 @@ public class EnemyBehavior : MonoBehaviour {
         this.transform.LookAt(player.transform.position);
     }
 
-
     void DestroyitSelf()
     {
         if (this.transform.position.z < player.transform.position.z - offset)
@@ -114,6 +117,23 @@ public class EnemyBehavior : MonoBehaviour {
             this.transform.Find(this.name + "Rig").GetComponent<Animator>().SetTrigger("isAttack");
             this.GetComponent<EnemyBehavior>().enabled = false;
         }
+    }
+
+    void OnDestroy()
+    {
+        if (isKilled)
+        {
+            for(int i = 0;i<PointExp;i++)
+            {
+                float randomSide = Random.Range(-1f , 2f); 
+                GameObject starExp = Instantiate(StartPointExp,this.transform.position+Vector3.up * 0.5f+Vector3.forward*2f+Vector3.right * randomSide,this.transform.rotation);
+            }
+        }
+    }
+
+    void ReleaseExp()
+    {
+        Instantiate(StartPointExp,this.transform.position,this.transform.rotation);
     }
 
 }

@@ -24,4 +24,11 @@ public class TextScoreGameover : MonoBehaviour {
             isShowScore = false;
         }
     }
+
+    #region PressToMenu
+    public void BacktoMenu()
+    {
+        Application.LoadLevel("menuMap");
+    }
+    #endregion
 }
