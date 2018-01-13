@@ -63,6 +63,7 @@
      <Compile Include="Assets\ItemSpawnBehavior.cs" />
      <Compile Include="Assets\MagnetEffect.cs" />
      <Compile Include="Assets\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
+     <Compile Include="Assets\Mission.cs" />
      <Compile Include="Assets\MoveCloud.cs" />
      <Compile Include="Assets\MyAsset\script\GameplayMode\CameraController.cs" />
      <Compile Include="Assets\MyAsset\script\GameplayMode\EnemyBehavior.cs" />
@@ -140,6 +141,7 @@
      <Compile Include="Assets\SelectionScene.cs" />
      <Compile Include="Assets\SkythianCat\Glowing_Forest\Scripts\WaterGroup.cs" />
      <Compile Include="Assets\SpawnItemOrEnemyBlackForest.cs" />
+     <Compile Include="Assets\SubMission.cs" />
      <Compile Include="Assets\TestInputField.cs" />
      <Compile Include="Assets\TileManagerBlackForest.cs" />
      <Compile Include="Assets\TotalScoreResult.cs" />
