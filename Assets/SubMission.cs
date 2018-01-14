@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 public class SubMission : MonoBehaviour {
 
+    int serialMission = 1;
+
     Text TextQuest;
     public GameObject trueSymbol;
-
-    public int NumQuest;
-    bool isComplete = true;
 
     string monsterName;
     int amountMonster;
@@ -23,18 +22,25 @@ public class SubMission : MonoBehaviour {
     public int b;
 
 	void Start () {
-        RandomMission();
+        //SerialMission();
         TextQuest = GameObject.Find("textQuest").GetComponent<Text>();
+        Debug.Log("serialMission :" + PlayerPrefs.GetInt(serialMission + "Quest"));
+        if (PlayerPrefs.GetInt(serialMission + "Quest") == 0)
+        {
+            RandomMission();
+            ShowOriginMission();
+            Debug.Log("random mission");
+            PlayerPrefs.SetInt(serialMission + "Quest", 1);
+        }
+        else if (PlayerPrefs.GetInt(serialMission + "Quest") == 1)
+        {
+            Debug.Log("have Quest");
+            ShowOriginMission();
+        }
 
-        orderMonsterHunt = PlayerPrefs.GetString("Quest" + NumQuest + monsterName);
-        orderAmountHunt = PlayerPrefs.GetInt("Quest"+NumQuest+"haveToHunt"+amountMonster);
-        PlayerPrefs.SetInt(monsterName + "Hunted", b);
-       
-        originalMision = PlayerPrefs.GetInt("Quest" + NumQuest + orderMonsterHunt + "haveToHunt" + orderAmountHunt);
-        Debug.Log("Quest have is :" + originalMision);
-
-        TextQuest.text = "Quest hunt : " + orderMonsterHunt + "\n amount : " + orderAmountHunt; 
         HuntedMonster = PlayerPrefs.GetInt(monsterName + "Hunted");
+
+        PlayerPrefs.SetInt(monsterName + "Hunted", b);
 
         if (HuntedMonster >= originalMision)
         {
@@ -61,12 +67,10 @@ public class SubMission : MonoBehaviour {
     void RandomMission()
     {
         monsterName = RandomMonsterToHunt(1, 6);
-        PlayerPrefs.SetString("Quest" + NumQuest + monsterName,monsterName);
+        PlayerPrefs.SetString("Quest" + serialMission + "MonsterName", monsterName);
         amountMonster = RandomMonsterAmountToHunt(1, 3);
-        PlayerPrefs.SetInt("Quest"+NumQuest+"haveToHunt"+amountMonster,amountMonster);
-        Debug.Log(PlayerPrefs.GetInt("Quest"+NumQuest+"haveToHunt"+amountMonster,amountMonster));
-
-        PlayerPrefs.SetInt("Quest" + NumQuest + monsterName + "haveToHunt" + amountMonster,amountMonster);
+        PlayerPrefs.SetInt("Quest" + serialMission + "AmountMonster", amountMonster);
+        Debug.Log( "random is :" +monsterName + "\n amount :" + amountMonster);
     }
 
     string RandomMonsterToHunt(int monsterStart,int monsterEnd)
@@ -119,4 +123,19 @@ public class SubMission : MonoBehaviour {
         return amountMonster;
     }
          
+    #region CheckMission()
+    void ShowOriginMission()
+    {
+        TextQuest.text = "Quest hunt : " + PlayerPrefs.GetString("Quest" + serialMission + "MonsterName") + "\n amount : " + PlayerPrefs.GetInt("Quest" + serialMission + "AmountMonster"); 
+    }
+    #endregion
+    #region makeSerialMission
+    void SerialMission()
+    {
+        serialMission = PlayerPrefs.GetInt("serialMission");
+        int nextSeiralMission =  serialMission+1;
+        PlayerPrefs.SetInt("serialMission", nextSeiralMission);
+        Debug.Log(PlayerPrefs.GetInt("serialMission"));
+    }
+    #endregion
 }
