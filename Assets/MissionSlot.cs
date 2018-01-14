@@ -17,4 +17,9 @@ public class MissionSlot : MonoBehaviour {
 		
 	}
 
+    void FindBoxMission()
+    {
+        
+    }
+
 }

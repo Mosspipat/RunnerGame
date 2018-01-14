@@ -21,7 +21,7 @@ public class SubMission : MonoBehaviour {
 
     public int b;
 
-	void Start () {
+    void Start () {
         //SerialMission();
         TextQuest = GameObject.Find("textQuest").GetComponent<Text>();
         Debug.Log("serialMission :" + PlayerPrefs.GetInt(serialMission + "Quest"));
@@ -38,30 +38,32 @@ public class SubMission : MonoBehaviour {
             ShowOriginMission();
         }
 
-        HuntedMonster = PlayerPrefs.GetInt(monsterName + "Hunted");
+        //Check form last Mission Save
+        string nameCommand = PlayerPrefs.GetString("Quest" + serialMission + "MonsterName");
+        int amountCommand = PlayerPrefs.GetInt("Quest" + serialMission + "AmountMonster");
+        PlayerPrefs.SetInt(nameCommand+"Hunted",b);
+        HuntedMonster = PlayerPrefs.GetInt(nameCommand+"Hunted");
 
-        PlayerPrefs.SetInt(monsterName + "Hunted", b);
 
-        if (HuntedMonster >= originalMision)
+        if (HuntedMonster >= amountCommand)
         {
+            Debug.Log(amountCommand + "\n" + HuntedMonster);
             trueSymbol.SetActive(true);
             Debug.Log("Can Complete");
         }
     }
-    
+
     public void PressToCompleteMission()
     {
         if (HuntedMonster >= originalMision)
-            {
-                Debug.Log(originalMision + "\n" + PlayerPrefs.GetInt(monsterName + "Hunted"));
-                Debug.Log("doneQuest");
-                RandomMission();
-            }
-            else
-            {
-            Debug.Log("must have" + originalMision + "\n you have :" +HuntedMonster);
-                Debug.Log("QuestNotComplete");
-            }
+        {
+            Debug.Log("doneQuest");
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Debug.Log("QuestNotComplete");
+        }
     }
 
     void RandomMission()
@@ -81,7 +83,7 @@ public class SubMission : MonoBehaviour {
             case 1:
                 monsterName = "rabbit";
                 PlayerPrefs.SetInt("expRabbit", 2);
-            break;
+                break;
             case 2:
                 monsterName = "slime";
                 PlayerPrefs.SetInt("expSlime", 3);
@@ -122,7 +124,7 @@ public class SubMission : MonoBehaviour {
         }
         return amountMonster;
     }
-         
+
     #region CheckMission()
     void ShowOriginMission()
     {
