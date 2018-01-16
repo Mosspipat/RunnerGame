@@ -19,41 +19,44 @@ public class SubMission : MonoBehaviour {
     int originalMision;
     int HuntedMonster;
 
+
+    string nameCommand;
+    int amountCommand;
+    public Image UIAmount;
+    public Text textAmount;
+
     public int b;
+
+
 
     //buttonPress
     void Start () {
         //SerialMission();
+       
         TextQuest = GameObject.Find("textQuest").GetComponent<Text>();
-        Debug.Log("serialMission :" + PlayerPrefs.GetInt(serialMission + "Quest"));
         if (PlayerPrefs.GetInt(serialMission + "Quest") == 0)
         {
             RandomMission();
+            ReCheckMissionAgain();
             ShowOriginMission();
-            Debug.Log("random mission");
             PlayerPrefs.SetInt(serialMission + "Quest", 1);
         }
         else if (PlayerPrefs.GetInt(serialMission + "Quest") == 1)
         {
             Debug.Log("have Quest");
+            ReCheckMissionAgain();
             ShowOriginMission();
         }
 
         //Check form last Mission Save
-        string nameCommand = PlayerPrefs.GetString("Quest" + serialMission + "MonsterName");
-        int amountCommand = PlayerPrefs.GetInt("Quest" + serialMission + "AmountMonster");
-        PlayerPrefs.SetInt(nameCommand+"Hunted",b);
-        HuntedMonster = PlayerPrefs.GetInt(nameCommand+"Hunted");
-
         if (HuntedMonster >= amountCommand)
         {
-            Debug.Log(amountCommand + "\n" + HuntedMonster);
             trueSymbol.SetActive(true);
             Debug.Log("Can Complete");
         }
     }
 
-    public void PressToCompleteMission()
+    public void ClaimReward()
     {
         if (HuntedMonster >= originalMision)
         {
@@ -129,6 +132,8 @@ public class SubMission : MonoBehaviour {
     void ShowOriginMission()
     {
         TextQuest.text = "Quest hunt : " + PlayerPrefs.GetString("Quest" + serialMission + "MonsterName") + "\n amount : " + PlayerPrefs.GetInt("Quest" + serialMission + "AmountMonster"); 
+        UIAmount.fillAmount = (float)HuntedMonster / amountCommand;
+        textAmount.text = HuntedMonster + "/" + amountCommand;
     }
     #endregion
     #region makeSerialMission
@@ -137,8 +142,17 @@ public class SubMission : MonoBehaviour {
         serialMission = PlayerPrefs.GetInt("serialMission");
         int nextSeiralMission =  serialMission+1;
         PlayerPrefs.SetInt("serialMission", nextSeiralMission);
-        Debug.Log(PlayerPrefs.GetInt("serialMission"));
+        Debug.Log("SerialMission : " + PlayerPrefs.GetInt("serialMission"));
+    }
+
+    void ReCheckMissionAgain()
+    {
+        nameCommand = PlayerPrefs.GetString("Quest" + serialMission + "MonsterName");
+        amountCommand = PlayerPrefs.GetInt("Quest" + serialMission + "AmountMonster");
+        PlayerPrefs.SetInt(nameCommand+"Hunted",b);
+        HuntedMonster = PlayerPrefs.GetInt(nameCommand+"Hunted");
     }
     #endregion
+
 
 }
