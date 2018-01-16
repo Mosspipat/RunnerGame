@@ -32,9 +32,36 @@ public class tileManager : MonoBehaviour {
 
     bool EndStage = false;
 
+    GameObject starterTerrian;
+    public List<GameObject> terrainType = new List<GameObject>();
+    public Transform starterTerrianPoint;
+    float PosbeforeTerrianPlayerFirst= 400;
+    float PosbeforeTerrianPlayerSecond = 200;
+    float nextMoveTerrianZ = 400f;
+
+
     public static int amountSpawnedPlatform; 
 
+    public List<GameObject> typePlatformObstacleGreen = new List<GameObject>(); //1-5
+    public List<GameObject> typePlatformDungeonGreen = new List<GameObject>();
+
+    public List<GameObject> typePlatformObstacleBlack = new List<GameObject>();//1-6
+    public List<GameObject> typePlatformDungeonBlack = new List<GameObject>();
+
+    public List<GameObject> typeSpawnGreen = new List<GameObject>();//1
+    public List<GameObject> typeSpawnBlack = new List<GameObject>();//1
+    public List<GameObject> typePlatformCastle = new List<GameObject>();//1-2
+    public List<GameObject> typePlatformOrigin = new List<GameObject>();
+    GameObject starterPlatformGameObj;
+    public int stage;
+
 	void Start () {                                                         //Spawn StarterPlatform when start Game
+        startTerrian();
+        amountSpawnedPlatform = 0;
+
+        //make StarterPlatform
+        SpawnStarterPlatform(stage);
+
         if (this.isActiveAndEnabled == true)
         {
             isGreenField = true;
@@ -58,6 +85,7 @@ public class tileManager : MonoBehaviour {
 	}
 	
 	void Update () {
+        MoveTerrianFollowPlayer();
         DistanceSpawnPlatform();
 	}
 
@@ -66,12 +94,14 @@ public class tileManager : MonoBehaviour {
     {
         if (playerPos.position.z + arriveZone >= spawnPlatformPoint && dungeonStage == false && bossStage == false && questCollect == false && questDistance == false) //allow front point player Check to The last edge platform
         {
+            Debug.Log("originSpawn");
             Spawnplatform(1);           // spawn normal platform
             DeleteOldplatform();        // delete (Old platform)
         }
         //Trigger Spawn Dungeon Platform
         else if (playerPos.position.z + arriveZone >= spawnPlatformPoint && dungeonStage == true &&questDistance == false) //allow front point player Check to The last edge platform
         {
+            Debug.Log("dungeonSpawn");
             Spawnplatform(2);           // spawn dungeon platform
             DeleteOldplatform();        // delete (Old platform)
         }
@@ -104,7 +134,7 @@ public class tileManager : MonoBehaviour {
         {
             Spawnplatform(0);
             Spawnplatform(0);
-            Spawnplatform(4);
+            Spawnplatform(3);
             DeleteOldplatform();        // delete (Old platform)
             EndStage = true;
         }
@@ -112,51 +142,81 @@ public class tileManager : MonoBehaviour {
     }
     #endregion
         //Distance Event
+    void SpawnStarterPlatform(int inputStage)
+    {
+        starterPlatformGameObj = typePlatformOrigin[inputStage-1];
+        Instantiate(starterPlatformGameObj,starterplatform.transform.position,starterPlatformGameObj.transform.rotation);
+    }
+
+
     #region TypePlatform Function
     void Spawnplatform(int typePlatform)
     {
-        amountSpawnedPlatform ++;
+        amountSpawnedPlatform ++; //this length is distance.z platform
 
-        //0 is empty platform
-        //1 is normal platform
-        //2 is dungeon platform
-        //3 is winner platform
-        //4 is castle platform
-        if (typePlatform == 0)                       
+        #region originPlatform
+        if (typePlatform == 0 && stage == 1)                       
         {
-            GameObject floor = Instantiate(platform[0], new Vector3(
+            GameObject originPlatform = Instantiate(typePlatformOrigin[0], new Vector3(
                 starterplatform.position.x,
                 starterplatform.position.y,                                                                         //Starter Platform
                 spawnPlatformPoint),                                                                            //Continue with z pos
                 starterplatform.rotation) as GameObject;
-            floor.transform.SetParent(this.transform);
+            originPlatform.transform.SetParent(this.transform);
             spawnPlatformPoint += sizePlatform;
-            allPlatformGame.Add(floor);
+            allPlatformGame.Add(originPlatform);
         }
-        else if( typePlatform == 1)
+        else if (typePlatform == 0 && stage == 2)                       
         {
-            int randomNormalplatform = Random.Range(1, 7);
-            GameObject floor = Instantiate(platform[randomNormalplatform], new Vector3(
+            GameObject originPlatform = Instantiate(typePlatformOrigin[1], new Vector3(
+                starterplatform.position.x,
+                starterplatform.position.y,                                                                         //Starter Platform
+                spawnPlatformPoint),                                                                            //Continue with z pos
+                starterplatform.rotation) as GameObject;
+            originPlatform.transform.SetParent(this.transform);
+            spawnPlatformPoint += sizePlatform;
+            allPlatformGame.Add(originPlatform);
+        }
+        #endregion
+
+        #region obstaclePlatform
+        else if( typePlatform == 1 && stage == 1)
+        {
+            int randomtype = Random.Range(0, 5);
+            GameObject obstaclePlatform = Instantiate(typePlatformObstacleGreen[randomtype], new Vector3(
                                        starterplatform.position.x,
                                        starterplatform.position.y,                                                     //Random Normal platform
                                        spawnPlatformPoint),
                                    starterplatform.rotation) as GameObject;
-                floor.transform.SetParent(this.transform);
+            obstaclePlatform.transform.SetParent(this.transform);
                 spawnPlatformPoint += sizePlatform;
-                allPlatformGame.Add(floor);
+            allPlatformGame.Add(obstaclePlatform);
         }
-        else if( typePlatform == 2)
+
+        else if(typePlatform == 1 && stage == 2)
         {
-            /*int randomTrapPlatform = Random.Range(7, 8);*/                        //if want more TrapPlatform Check this
-            GameObject trapFloor = Instantiate(platform[7], new Vector3(
+            int randomtype = Random.Range(0, 6);
+            GameObject obstaclePlatform = Instantiate(typePlatformObstacleBlack[randomtype], new Vector3(
                 starterplatform.position.x,
-                starterplatform.position.y,                                                                          //Random Trap platform
+                starterplatform.position.y,                                                     //Random Normal platform
                 spawnPlatformPoint),
                 starterplatform.rotation) as GameObject;
-            trapFloor.transform.SetParent(this.transform);
+            obstaclePlatform.transform.SetParent(this.transform);
             spawnPlatformPoint += sizePlatform;
-            allPlatformGame.Add(trapFloor);
-
+            allPlatformGame.Add(obstaclePlatform);
+        }
+        #endregion
+        #region dungeonPlatform
+        else if( typePlatform == 2 && stage == 1)
+        {
+            GameObject dungeonPlatform = Instantiate(typePlatformDungeonGreen[0], new Vector3(
+                starterplatform.position.x,
+                starterplatform.position.y,                                                                         
+                spawnPlatformPoint),
+                starterplatform.rotation) as GameObject;
+            dungeonPlatform.transform.SetParent(this.transform);
+            spawnPlatformPoint += sizePlatform;
+            allPlatformGame.Add(dungeonPlatform);
 
             //Check if Amount of dungeon stage is zero  make stage to "normal stage"
             amountDungeonCanSpawn--;
@@ -166,19 +226,56 @@ public class tileManager : MonoBehaviour {
             }
         }
 
-        // special platform Secret Chest
-        else if( typePlatform == 3)
+        else if( typePlatform == 2 && stage == 2)
         {
-            GameObject specialFloor = Instantiate(platform[8], new Vector3(
+            int randomDungeon = Random.Range(0,1);
+            GameObject dungeonPlatform = Instantiate(typePlatformDungeonBlack[randomDungeon], new Vector3(
+                starterplatform.position.x,
+                starterplatform.position.y,                                                                         
+                spawnPlatformPoint),
+                starterplatform.rotation) as GameObject;
+            dungeonPlatform.transform.SetParent(this.transform);
+            spawnPlatformPoint += sizePlatform;
+            allPlatformGame.Add(dungeonPlatform);
+
+            //Check if Amount of dungeon stage is zero  make stage to "normal stage"
+            amountDungeonCanSpawn--;
+            if (amountDungeonCanSpawn <= 0)
+            {
+                dungeonStage = false;
+            }
+        }
+        #endregion
+        #region specialPlatform
+        // special platform Secret Chest
+        else if( typePlatform == 3&&stage ==1)
+        {
+            GameObject specialFloor = Instantiate(typePlatformCastle[0], new Vector3(
                 starterplatform.position.x,
                 starterplatform.position.y,                                                                          //Random Trap platform
                 spawnPlatformPoint),
                 starterplatform.rotation) as GameObject;
-            specialFloor.name = "victoryPlatform";
+            specialFloor.name = "castlePlatform";
             specialFloor.transform.SetParent(this.transform);
             /*spawnPlatformPoint += sizePlatform;*/                 //was finish don't use
             allPlatformGame.Add(specialFloor);
         }
+
+        else if( typePlatform == 3&&stage ==2)
+        {
+            GameObject specialFloor = Instantiate(typePlatformCastle[1], new Vector3(
+                starterplatform.position.x,
+                starterplatform.position.y,                                                                          //Random Trap platform
+                spawnPlatformPoint),
+                starterplatform.rotation) as GameObject;
+            specialFloor.name = "castlePlatform";
+            specialFloor.transform.SetParent(this.transform);
+            /*spawnPlatformPoint += sizePlatform;*/                 //was finish don't use
+            allPlatformGame.Add(specialFloor);
+        }
+
+
+
         // special platform Castle
         else if( typePlatform == 4)
         {
@@ -213,4 +310,48 @@ public class tileManager : MonoBehaviour {
         dungeonStage = false;
     }
     #endregion
+
+    #region TerrianControl
+    void startTerrian()
+    {
+        switch (stage)
+        {
+            case 1:
+                starterTerrian = terrainType[0];
+                break;
+            case 2:
+                starterTerrian = terrainType[1];
+                break;
+            case 3:
+                starterTerrian = terrainType[2];
+                break;
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            GameObject terrianInstance = Instantiate(starterTerrian,starterTerrianPoint.GetChild(i).transform.position,starterTerrian.transform.rotation);
+            terrianInstance.name = "terrian" + (i + 1); 
+        }
+    }
+
+    void MoveTerrianFollowPlayer()
+    {
+        if (playerPos.position.z >= PosbeforeTerrianPlayerSecond)
+        {
+            PosbeforeTerrianPlayerSecond += nextMoveTerrianZ;
+            Transform terrianInstance = GameObject.Find("terrian1").transform;
+            terrianInstance.position = new Vector3(terrianInstance.position.x,
+                terrianInstance.position.y,PosbeforeTerrianPlayerFirst);
+
+        }
+        if (playerPos.position.z >= PosbeforeTerrianPlayerFirst)
+        {
+            PosbeforeTerrianPlayerFirst += nextMoveTerrianZ;
+            Transform terrianInstance = GameObject.Find("terrian2").transform;
+            terrianInstance.position = new Vector3(terrianInstance.position.x,
+                terrianInstance.position.y,PosbeforeTerrianPlayerFirst);
+        }
+    }
+    #endregion
+ #endregion
 }

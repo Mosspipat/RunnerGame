@@ -28,7 +28,7 @@ public class UIPlayer : MonoBehaviour {
     float distantStartAndEnd;
     public Transform startPosMinimap;
     public Transform endPosMinimap;
-    float mapLengthMax = 200f;                //Max Range Map
+    float mapLengthMax = 100;                //Max Range Map
     public static float distancePlayermake;
 
     public enum Stages
@@ -122,9 +122,6 @@ public class UIPlayer : MonoBehaviour {
             TileManagerBlackForest.dungeonStage = true;
             TileManagerBlackForest.amountDungeonCanSpawn = 5; // set amount stage Can Spawn dungeon
         }
-
-
-
 
         if (intergerScore % 100 == 0 && intergerScore !=0)
         {

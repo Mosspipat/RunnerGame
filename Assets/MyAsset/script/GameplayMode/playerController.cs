@@ -7,13 +7,6 @@ public class playerController : MonoBehaviour {
 
     public int LevelPlayer;
 
-    public Terrain TerrianPlayerFirst;
-    public Terrain TerrianPlayerSecond;
-    float PosbeforeTerrianPlayerFirst= 400;
-    float PosbeforeTerrianPlayerSecond = 200;
-    float nextMoveTerrianZ = 400f;
-
-
     Rigidbody RBPlayer;
 
     [HideInInspector]
@@ -81,7 +74,7 @@ public class playerController : MonoBehaviour {
 
         RBPlayer = this.transform.GetComponent<Rigidbody>();
         controlCha = this.transform.GetComponent<CharacterController>();
-        UIBarPlayer = GameObject.Find("Main Camera/ProgressPlayer").GetComponent<Progressbar>();
+        UIBarPlayer = GameObject.Find("MainCamera/ProgressPlayer").GetComponent<Progressbar>();
         BCPlayer = this.transform.GetComponent<BoxCollider>();
         this.transform.position = new Vector3(0f,this.transform.position.y,this.transform.position.z);
         way = "middle";
@@ -95,21 +88,18 @@ public class playerController : MonoBehaviour {
 
         AnimPlayer = GetComponent<Animator>();
 
-        AnimUIHit = GameObject.Find("Main Camera/ProgressPlayer/damageImage").transform.GetComponent<Animator>();
-        AnimUILowHealth = GameObject.Find("Main Camera/ProgressPlayer/lowHealthImage").transform.GetComponent<Animator>();
+        AnimUIHit = GameObject.Find("MainCamera/ProgressPlayer/damageImage").transform.GetComponent<Animator>();
+        AnimUILowHealth = GameObject.Find("MainCamera/ProgressPlayer/lowHealthImage").transform.GetComponent<Animator>();
 
-        CC = GameObject.Find("Main Camera").GetComponent<CameraController>();
+        CC = GameObject.Find("MainCamera").GetComponent<CameraController>();
         isShield = false;
 
 	}
 	
 	void Update () {
         LevelUP();
-        TestTouch();
         Controller();
-        MobileControl();
         Move();
-        MoveTerrianFollowPlayer();
         ChangeTargetReleasePower();
 
         LerpChangeWay(presentWay);
@@ -335,6 +325,7 @@ public class playerController : MonoBehaviour {
             Debug.Log("Challenge Fight");
             if (powerAttack >= obj.GetComponent<EnemyBehavior>().power)
             {
+                    Debug.Log("attack");
                 AnimPlayer.SetTrigger("isAttack");
                 transform.Find("UIPlayer/statusIcon").transform.GetComponent<Image>().sprite = Resources.Load("UIPlayer/attackIcon",typeof(Sprite)) as Sprite; 
                 transform.Find("UIPlayer/statusIcon").transform.GetComponent<Animator>().SetTrigger("isAttack");
@@ -344,6 +335,7 @@ public class playerController : MonoBehaviour {
                 int damageRemain = obj.GetComponent<EnemyBehavior>().power - powerAttack;
                 if (powerDefence >= damageRemain)
                 {
+                        Debug.Log("defence");
                     AnimPlayer.SetTrigger("isBlock");
                     transform.Find("UIPlayer/statusIcon").transform.GetComponent<Image>().sprite = Resources.Load("UIPlayer/defenceIcon",typeof(Sprite)) as Sprite; 
                     transform.Find("UIPlayer/statusIcon").transform.GetComponent<Animator>().SetTrigger("isDefence");
@@ -457,26 +449,6 @@ public class playerController : MonoBehaviour {
     }
     #endregion
 
-    #region main Terrian Follow with player
-    void MoveTerrianFollowPlayer()
-    {
-        if (this.transform.position.z >= PosbeforeTerrianPlayerSecond)
-        {
-            PosbeforeTerrianPlayerSecond += nextMoveTerrianZ;
-            TerrianPlayerFirst.transform.position = new Vector3(TerrianPlayerFirst.transform.position.x,
-                TerrianPlayerFirst.transform.position.y,
-                PosbeforeTerrianPlayerFirst);
-            
-        }
-        if (this.transform.position.z >= PosbeforeTerrianPlayerFirst)
-        {
-            PosbeforeTerrianPlayerFirst += nextMoveTerrianZ;
-            TerrianPlayerSecond.transform.position = new Vector3(TerrianPlayerSecond.transform.position.x,
-                TerrianPlayerSecond.transform.position.y,
-                PosbeforeTerrianPlayerSecond);
-        }
-    }
-
     void ChangeTargetReleasePower()
     {
         if (BossBehavior.isBossApprea == true)
@@ -488,7 +460,6 @@ public class playerController : MonoBehaviour {
             spawnPowerPoint.transform.rotation = new Quaternion(0,0,0,0);             
         }
     }
-    #endregion
 
     #region actionControl
     void StartSlide()
@@ -600,57 +571,10 @@ public class playerController : MonoBehaviour {
     }
     #endregion
 
-    #region Mobile Control
-
-    void TestTouch()
-    {
-        if (Input.touchCount > 0)
-        {
-            Debug.Log("touch");
-        }
-    }
-
-    void MobileControl()
-    {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            // Handle finger movements based on touch phase.
-            switch (touch.phase)
-            {
-                // Record initial touch position.
-                case TouchPhase.Began:
-                    startPos = touch.position;
-                    directionChosen = false;
-                    Debug.Log("begin Drag");
-                    break;
-
-                    // Determine direction by comparing the current touch position with the initial one.
-                case TouchPhase.Moved:
-                    direction = touch.position - startPos;
-                    break;
-
-                    // Report that a direction has been chosen when the finger is lifted.
-                case TouchPhase.Ended:
-                    directionChosen = true;
-                    break;
-            }
-        }
-        if (directionChosen)
-        {
-            Debug.Log("jump with swip");
-            StartSlide();
-            Invoke("StopSlide", 1);
-        }
-    }
-    #endregion
-
     #region CheckStarterStatus
     void StarterStatus()
     {
        // PlayerPrefs.SetInt("levelPlayer",LevelPlayer);
-
 
         //LevelAttack And LevelDefence
         int levelAttack = PlayerPrefs.GetInt("levelAttackLevel");

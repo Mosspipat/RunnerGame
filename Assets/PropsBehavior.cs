@@ -11,7 +11,7 @@ public class PropsBehavior : MonoBehaviour {
     Transform TotalScoreUI;
 
 	void Start () {
-        TotalScoreUI = GameObject.Find("Main Camera/ProgressPlayer/totalScore").transform;
+        TotalScoreUI = GameObject.Find("MainCamera/ProgressPlayer/totalScore").transform;
         pc = GameObject.Find("player").GetComponent<playerController>();
         player = GameObject.Find("player").transform;
         AnimProp  = GetComponent<Animator>();
@@ -27,7 +27,7 @@ public class PropsBehavior : MonoBehaviour {
         //if player pos is throw the castle's trigger
          if (player.transform.position.z > this.transform.position.z - 20f && player.transform.position.z < this.transform.position.z && this.name == "Fortress")
         {
-           player.position = new Vector3(GameObject.Find("castlePlatform/Fortress/stopPoint").transform.position.x,player.transform.position.y,player.transform.position.z);
+            player.position = new Vector3(GameObject.Find("castlePlatform/Fortress/stopPoint").transform.position.x,player.transform.position.y,player.transform.position.z);
             AnimProp.SetTrigger("isOpen");
         }
         else if (player.transform.position.z > this.transform.position.z  && this.name == "Fortress")
@@ -38,7 +38,7 @@ public class PropsBehavior : MonoBehaviour {
 
         //anyObject
         // if player pos is infront of the gate
-        if (player.transform.position.z > this.transform.position.z - 20f && player.transform.position.z < this.transform.position.z)
+        else if (player.transform.position.z > this.transform.position.z - 20f && player.transform.position.z < this.transform.position.z)
         {
             AnimProp.SetTrigger("isOpen");
         }

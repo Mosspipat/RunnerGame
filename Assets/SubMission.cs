@@ -21,6 +21,7 @@ public class SubMission : MonoBehaviour {
 
     public int b;
 
+    //buttonPress
     void Start () {
         //SerialMission();
         TextQuest = GameObject.Find("textQuest").GetComponent<Text>();
@@ -43,7 +44,6 @@ public class SubMission : MonoBehaviour {
         int amountCommand = PlayerPrefs.GetInt("Quest" + serialMission + "AmountMonster");
         PlayerPrefs.SetInt(nameCommand+"Hunted",b);
         HuntedMonster = PlayerPrefs.GetInt(nameCommand+"Hunted");
-
 
         if (HuntedMonster >= amountCommand)
         {
@@ -140,4 +140,5 @@ public class SubMission : MonoBehaviour {
         Debug.Log(PlayerPrefs.GetInt("serialMission"));
     }
     #endregion
+
 }

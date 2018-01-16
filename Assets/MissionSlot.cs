@@ -7,6 +7,8 @@ public class MissionSlot : MonoBehaviour {
     public Transform allSlot;
     public GameObject subMission;
 
+    bool isOpen;
+
 	void Start () {
         GameObject submissionClone = Instantiate(subMission,allSlot.GetChild(0).transform.position,subMission.transform.rotation);
         submissionClone.transform.SetParent(allSlot.GetChild(0));
@@ -17,9 +19,18 @@ public class MissionSlot : MonoBehaviour {
 		
 	}
 
-    void FindBoxMission()
+    #region ControlButton
+    public void OpenAndCloseMissionBoard()
     {
-        
+        isOpen = !isOpen;
+        if (isOpen)
+        {
+            this.GetComponent<Animator>().SetTrigger("isOpen");
+        }
+        else
+        {
+            this.GetComponent<Animator>().SetTrigger("isClose");
+        }
     }
-
+    #endregion
 }

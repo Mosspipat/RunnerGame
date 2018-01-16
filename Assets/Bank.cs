@@ -9,6 +9,6 @@ public class Bank : MonoBehaviour {
         {
             PlayerPrefs.SetInt("money",0);
         }
-        transform.Find("panelBank/textBank").GetComponent<Text>().text = "Yours coins : \n" + PlayerPrefs.GetInt("money").ToString();
+        transform.Find("panelBank/textBank").GetComponent<Text>().text = "Your coins: \n" + PlayerPrefs.GetInt("money").ToString();
 	}
 }

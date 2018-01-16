@@ -63,7 +63,7 @@ public class Progressbar : MonoBehaviour {
         canIncreaseEnergy = true;
         pc = GameObject.Find("player").GetComponent<playerController>();
 
-        cc = GameObject.Find("Main Camera").transform.GetComponent<CameraController>();
+        cc = GameObject.Find("MainCamera").transform.GetComponent<CameraController>();
 
         imagetimeAttack = this.transform.Find("powerStatus/attack/clockAttack/time").GetComponent<Image>();
     }

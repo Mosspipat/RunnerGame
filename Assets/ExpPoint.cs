@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class ExpPoint : MonoBehaviour {
 
-    Transform UIExpBar; 
+    Transform UIExpBar;
+    Animator animexpBar;
     bool setAction = true;
     float actionTime = 0.5f;
     bool action;
 
 	void Start () {
-        UIExpBar = GameObject.Find("Main Camera/ProgressPlayer/ProgressExpPlayer/getExpPoint").transform.GetComponent<Transform>();
+        UIExpBar = GameObject.Find("MainCamera/ProgressPlayer/ProgressExpPlayer/getExpPoint").transform.GetComponent<Transform>();
+        animexpBar = GameObject.Find("MainCamera/ProgressPlayer/ProgressExpPlayer").transform.GetComponent<Animator>();
         Destroy(this.gameObject, 1f);
     }
 	
@@ -41,6 +43,8 @@ public class ExpPoint : MonoBehaviour {
     {
         int newExp = PlayerPrefs.GetInt("expPlayer");
         newExp++;
+        animexpBar.SetTrigger("isActive");
+        Debug.Log("animation Exp");
         PlayerPrefs.SetInt("expPlayer", newExp);
     }
 
