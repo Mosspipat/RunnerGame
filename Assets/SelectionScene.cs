@@ -28,10 +28,15 @@ public class SelectionScene : MonoBehaviour {
         //LoadAsynchronously("");
     }
 
-    public void GoToShop()
+    public void GoToItemShop()
     {
         LoadLevel("ShopUpgrade");
         //Application.LoadLevel("ShopUpgrade");
+    }
+
+    public void GoToWeaponShop()
+    {
+        LoadLevel("shopWeapon");
     }
 
     public void LoadLevel(string nameLevel)

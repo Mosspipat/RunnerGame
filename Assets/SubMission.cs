@@ -31,7 +31,7 @@ public class SubMission : MonoBehaviour {
 
     //buttonPress
     void Start () {
-        //SerialMission();
+        SerialMission();
        
         TextQuest = GameObject.Find("textQuest").GetComponent<Text>();
         if (PlayerPrefs.GetInt(serialMission + "Quest") == 0)
@@ -58,7 +58,7 @@ public class SubMission : MonoBehaviour {
 
     public void ClaimReward()
     {
-        if (HuntedMonster >= originalMision)
+        if (HuntedMonster >= amountCommand)  //originalMision
         {
             Debug.Log("doneQuest");
             Destroy(this.gameObject);
