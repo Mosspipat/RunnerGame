@@ -11,6 +11,24 @@ public class SelectionScene : MonoBehaviour {
     public Text percentLoaded;
 
 
+    int levelPlayer;
+    public List<GameObject> UIUnlock;
+    public List<Text> textStage;
+
+    int expPlayer;
+
+
+    void Start()
+    {
+        levelPlayer = PlayerPrefs.GetInt("levelPlayer");
+    }
+
+    void Update()
+    {   //control ExpPlayer
+        LevelUP();
+        UnlockStage();
+    }
+
     public void GoToLevelGreenField()
     {
         LoadLevel("GameplayGreenField");
@@ -44,6 +62,46 @@ public class SelectionScene : MonoBehaviour {
         StartCoroutine(LoadAsynchronously(nameLevel));
     }
 
+    void LevelUP()
+    {
+        expPlayer = PlayerPrefs.GetInt("expPlayer");
+        int maxExpPlayer = 10 * (int)(Mathf.Pow(2, PlayerPrefs.GetInt("levelPlayer") - 1)); 
+
+        if (levelPlayer >= 5 && expPlayer >= maxExpPlayer)
+        {
+            expPlayer = maxExpPlayer;
+            PlayerPrefs.SetInt("levelPlayer",levelPlayer);
+            PlayerPrefs.SetInt("expPlayer", expPlayer);
+        }
+        else if (expPlayer >= maxExpPlayer)
+        {
+            levelPlayer++;
+            PlayerPrefs.SetInt("levelPlayer",levelPlayer);
+            PlayerPrefs.SetInt("expPlayer", 0);
+        }
+    }
+
+    void UnlockStage()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if (levelPlayer >= i)
+            {
+                UIUnlock[i].SetActive(false); 
+                continue;
+            }
+            else
+            {
+                UIUnlock[i].SetActive(true); 
+            }
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            textStage[i].text = "need Level " + i; 
+        }
+    }
+
     IEnumerator LoadAsynchronously(string nameLevel)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(nameLevel);
@@ -59,4 +117,8 @@ public class SelectionScene : MonoBehaviour {
             yield return null;
         }
     }
+
+
+    //playerPrefs.int(levelPlayer)
+    //playerPrefs.int(expPlayer)
 }

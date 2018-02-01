@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class playerController : MonoBehaviour {
 
-    public int LevelPlayer;
+    int LevelPlayer;
 
     Rigidbody RBPlayer;
 
@@ -68,8 +68,16 @@ public class playerController : MonoBehaviour {
     public Vector2 direction;
     public bool directionChosen;
 
+    public List<GameObject> swordType;
+    public List<GameObject> shieldType;
+    public List<Transform> posEquip;
+    int equipSet;
 	void Start () {
+
+        LevelPlayer = PlayerPrefs.GetInt("levelPlayer");
+
         StarterStatus();
+        equipWeapon();
         EndStage = false;
 
         RBPlayer = this.transform.GetComponent<Rigidbody>();
@@ -600,17 +608,40 @@ public class playerController : MonoBehaviour {
     {
         int expPlayer = PlayerPrefs.GetInt("expPlayer");
         int maxExpPlayer = 10 * (int)(Mathf.Pow(2, PlayerPrefs.GetInt("levelPlayer") - 1)); 
-        if (expPlayer >= maxExpPlayer)
+
+        if (LevelPlayer >= 5 && expPlayer >= maxExpPlayer)
         {
-            LevelPlayer = PlayerPrefs.GetInt("levelPlayer");
+            LevelPlayer = 5;
+            expPlayer = maxExpPlayer;
+            PlayerPrefs.SetInt("levelPlayer",LevelPlayer);
+            PlayerPrefs.SetInt("expPlayer", expPlayer);
+        }
+
+        else if (expPlayer >= maxExpPlayer)
+        {
             LevelPlayer++;
             PlayerPrefs.SetInt("levelPlayer",LevelPlayer);
             PlayerPrefs.SetInt("expPlayer", 0);
         }
     }
 
+    #region StartEquip
+    void equipWeapon()
+    {
+        equipSet = PlayerPrefs.GetInt("weaponEquiped");
+        GameObject sword = Instantiate(swordType[equipSet], posEquip[1].transform.position, posEquip[1].transform.rotation);
+        sword.transform.SetParent(posEquip[1].transform);
+        sword.GetComponent<Transform>().localPosition = new Vector3(0, 0, 0);
+       
+        GameObject shield = Instantiate(shieldType[equipSet], posEquip[0].transform.position, posEquip[0].transform.rotation);
+        shield.transform.SetParent(posEquip[0].transform);
+        shield.GetComponent<Transform>().localPosition = new Vector3(0, 0, 0);
+    }
+    #endregion
+
     void OnDestroy()
     {
         Time.timeScale = 1;
     }
     }
+//PlayerPrefs.GetInt("levelPlayer");

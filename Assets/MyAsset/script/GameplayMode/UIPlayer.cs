@@ -28,7 +28,7 @@ public class UIPlayer : MonoBehaviour {
     float distantStartAndEnd;
     public Transform startPosMinimap;
     public Transform endPosMinimap;
-    float mapLengthMax = 100;                //Max Range Map
+    float mapLengthMax = 1000;                //Max Range Map
     public static float distancePlayermake;
 
     public enum Stages
@@ -86,7 +86,7 @@ public class UIPlayer : MonoBehaviour {
     void EventGameplay()
     {
         //Event DungeonApprea
-        if (tileManager.amountSpawnedPlatform % 20 == 0 && tileManager.bossStage == false && tileManager.isGreenField == true)       //Bonus Stage and will not start gameplay's starter
+        if (tileManager.amountSpawnedPlatform % 10 == 0 && tileManager.bossStage == false && tileManager.isGreenField == true)       //Bonus Stage and will not start gameplay's starter
         {                                                                                       // check it boss stage will not spawn Dungeon Stage
             Debug.Log("open Dungeon");
 

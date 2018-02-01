@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class ShowcaseSystem : MonoBehaviour {
 
+    public int levelPlayer;
     public List<Transform> showcasePoint;
     int  amountAllSword = 6;
 
-    public int choseWeapon;
+    public int chosenWeapon;
+    int equipType;
     public List<GameObject> levelSword; 
 
     public List <Transform> showingPoint;
@@ -21,7 +23,7 @@ public class ShowcaseSystem : MonoBehaviour {
 
 
     public Text dialogPurchase;
-    int price = 500;
+    List<int> price = new List<int>();
     int attackPower=1;
     int defencePower=2;
 
@@ -29,38 +31,50 @@ public class ShowcaseSystem : MonoBehaviour {
     public List<Image> lockImage;
     public List<Image> unlockImage;
 
+    public Text bankText;
+
     void Start () {
-        EquipWeapon();
+        PlayerPrefs.SetInt("weapon0Purchased", 1);
+        equipType = PlayerPrefs.GetInt("weaponEquiped");    //clone weapon from last "weaponEquip"
+        chosenWeapon = equipType;
         LevelToUnlock();
+        PriceWeapon();
+        StartEquipWeapon();
     }
     
     void Update () {
+        Bank();
         ChangePositionSword();
         DialogWeaponPurchase();
     }
 
+    void StartEquipWeapon()
+    {
+        EquipWeaponToHandCharacter();
+        dialogLevelToUnlock[chosenWeapon].text = "equip";       
+    }
+        
 
     public void ChangePositionSword()
     {
         for(int i = 0 ;i<amountAllSword;i++)
         {
-            levelSword[choseWeapon].transform.position = Vector3.Lerp(levelSword[choseWeapon].transform.position,showcasePoint[i].transform.position,5f*Time.deltaTime);
-            choseWeapon++;
-            if (choseWeapon > 5)
+            levelSword[chosenWeapon].transform.position = Vector3.Lerp(levelSword[chosenWeapon].transform.position,showcasePoint[i].transform.position,5f*Time.deltaTime);
+            chosenWeapon++;
+            if (chosenWeapon > 5)
             {
-                choseWeapon = 0;
+                chosenWeapon = 0;
             }
         }
     }
 
-    public void EquipWeapon()
+    public void EquipWeaponToHandCharacter()
     {
-        shield = Instantiate(shieldType[choseWeapon].gameObject,showingPoint[0].transform.position,showingPoint[0].transform.rotation);
+        shield = Instantiate(shieldType[chosenWeapon].gameObject,showingPoint[0].transform.position,showingPoint[0].transform.rotation);
         shield.transform.SetParent(showingPoint[0].transform);
         shield.GetComponent<Transform>().localPosition = new Vector3(0, 0, 0);
 
-
-        sword = Instantiate(swordType[choseWeapon].gameObject,showingPoint[1].transform.position,showingPoint[1].transform.rotation);
+        sword = Instantiate(swordType[chosenWeapon].gameObject,showingPoint[1].transform.position,showingPoint[1].transform.rotation);
         sword.transform.SetParent(showingPoint[1].transform);
         sword.GetComponent<Transform>().localPosition = new Vector3(0, 0, 0);
     }
@@ -75,83 +89,156 @@ public class ShowcaseSystem : MonoBehaviour {
     public void NextSword()
     {
         DeleteEquip();
-        choseWeapon++;
-        if (choseWeapon > 5)
+        chosenWeapon++;
+        if (chosenWeapon > 5)
         {
-            choseWeapon = 0;
+            chosenWeapon = 0;
         }
-        EquipWeapon();
+        EquipWeaponToHandCharacter();
     }
 
     public void PreviousSword()
     {
         DeleteEquip();
-        choseWeapon--;
-        if (choseWeapon < 0)
+        chosenWeapon--;
+        if (chosenWeapon < 0)
         {
-            choseWeapon = 5;
+            chosenWeapon = 5;
         }
-        EquipWeapon();
+        EquipWeaponToHandCharacter();
+    }
+
+    public void Buy()
+    {
+        if (PlayerPrefs.GetInt("weapon" + chosenWeapon + "Purchased") == 1)
+        {
+            Debug.Log("last equip "+ equipType + "changeTo Purchase");
+            dialogLevelToUnlock[equipType].text = "purchased";    
+            equipType = chosenWeapon;
+            //equip weapon
+            PlayerPrefs.SetInt("weaponEquiped", chosenWeapon);
+            dialogLevelToUnlock[chosenWeapon].text = "equip";    // change that seleted to "equip"
+            Debug.Log("equip type:" + chosenWeapon);
+        }
+        else if (PlayerPrefs.GetInt("money") >= price[chosenWeapon]&& levelPlayer >= chosenWeapon)
+        {
+            unlockImage[chosenWeapon].gameObject.SetActive(false);
+            PlayerPrefs.SetInt("weapon" + chosenWeapon + "Purchased", 1);
+            dialogLevelToUnlock[chosenWeapon].text = "Purchased";
+
+            int moneyPurchase = PlayerPrefs.GetInt("money");
+            moneyPurchase -= price[chosenWeapon];
+            PlayerPrefs.SetInt("money", moneyPurchase);
+
+            Debug.Log("buy" + chosenWeapon);
+        }
+        else
+        {
+            Debug.Log("not enough level or money");
+        }
+    }
+
+    public void BackToMenu()
+    {
+        Application.LoadLevel("menuMap");
     }
     #endregion
 
     #region dialogPurchase
     void DialogWeaponPurchase()
     {
-        switch (choseWeapon)
+        switch (chosenWeapon)
         {
             case 0:
-                price = 100;
                 attackPower = 1;
                 defencePower = 1;
                 break;
             case 1:
-                price = 200;
                 attackPower = 2;
                 defencePower = 1;
                 break;
             case 2:
-                price = 500;
                 attackPower = 1;
                 defencePower = 2;
                 break;
             case 3:
-                price = 1000;
                 attackPower = 2;
                 defencePower = 2;
                 break;
             case 4:
-                price = 2000;
                 attackPower = 3;
                 defencePower = 2;
                 break;
             case 5:
-                price = 4000;
                 attackPower = 3;
                 defencePower = 3;
                 break;
         }
 
-        dialogPurchase.text = "Price " + price + "\n AT: +" + attackPower + " Def: +" + defencePower;
+        if(PlayerPrefs.GetInt("weapon" + chosenWeapon + "Purchased") == 1)
+        {
+            dialogPurchase.text ="AT: +" + attackPower + "Def: +" + defencePower;
+        }
+
+        else
+        {
+            dialogPurchase.text = "Price " + price[chosenWeapon] + "\n AT: +" + attackPower + " Def: +" + defencePower;
+        }
     }
 
     void LevelToUnlock()
     {
-        int levelPlayer = 2;
-        int isPurchase = 1;
+        int maxPlayer = 5;
         for (int i = 0; i < levelPlayer; i++)
         {
-            /*if()  //playerPref weapon3Purchase,1
-            {s
-                dialogLevelToUnlock[i].text = "Purchased";
-                continue;
-            }*/
             lockImage[i+1].gameObject.SetActive(false);
             unlockImage[i+1].gameObject.SetActive(true);
             dialogLevelToUnlock[i+1].text = "can Unlock";
         }
+
+        // starter Check what's type purchase
+        for(int i = 0; i< dialogLevelToUnlock.Count ;i++)
+        {
+            if (PlayerPrefs.GetInt("weapon" + (i) + "Purchased") == 1)
+            {
+                dialogLevelToUnlock[i].text = "Purchased";
+                unlockImage[i].gameObject.SetActive(false);
+            }
+            else
+            {
+                dialogLevelToUnlock[i].text = "can Unlock";
+            }
+        }
+        // can't unlock untill levelPlayer was complete
+        for (int i = levelPlayer; i < maxPlayer; i++)
+        {
+            lockImage[i+1].gameObject.SetActive(true);
+            unlockImage[i+1].gameObject.SetActive(false);
+            dialogLevelToUnlock[i+1].text = "can Unlock with level "+ (i+1);
+        }
+
+    }
+
+
+    void PriceWeapon()
+    {
+        price.Add(0); 
+        price.Add(100);
+        price.Add(500);
+        price.Add(1000);
+        price.Add(1500);
+        price.Add(3000);
     }
     #endregion
 
 
+    #region money
+    void Bank()
+    {
+        bankText.text = PlayerPrefs.GetInt("money").ToString() + " coins";
+    }
+    #endregion
+    //PlayerPrefs.int(weapon" + (i) + "Purchased");
+    //PlayerPrefs.int("weaponEquiped");
+        
 }

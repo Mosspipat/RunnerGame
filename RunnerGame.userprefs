@@ -1,8 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ShowcaseSystem.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\MyAsset\script\GameplayMode\playerController.cs">
     <Files>
-      <File FileName="Assets\ShowcaseSystem.cs" Line="5" Column="46" />
+      <File FileName="Assets\ShowcaseSystem.cs" Line="134" Column="10" />
+      <File FileName="Assets\MyAsset\script\GameplayMode\playerController.cs" Line="636" Column="70" />
+      <File FileName="Assets\ButtonUpgrade.cs" Line="17" Column="35" />
+      <File FileName="Assets\MyAsset\script\GameplayMode\Progressbar.cs" Line="235" Column="61" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

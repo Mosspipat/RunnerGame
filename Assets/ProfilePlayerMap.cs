@@ -8,7 +8,7 @@ public class ProfilePlayerMap : MonoBehaviour {
     public Text levelPlayer;
     public Image imageEXP;
     public Text expText;
-    public int maxExpInt;
+    int maxExpInt;
 
     public Text coinPlayer;
 	
