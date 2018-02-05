@@ -53,6 +53,7 @@
      <Compile Include="Assets\ButtonPrevious.cs" />
      <Compile Include="Assets\ButtonPurchase.cs" />
      <Compile Include="Assets\ButtonUpgrade.cs" />
+     <Compile Include="Assets\CanvasDontDestroy.cs" />
      <Compile Include="Assets\CharacterStatus.cs" />
      <Compile Include="Assets\Chest.cs" />
      <Compile Include="Assets\CoinStaticSpawn.cs" />
@@ -135,6 +136,7 @@
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_DemoPlaySound.cs" />
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_OpenOtherScene.cs" />
      <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo Basic (CSharp)\Scripts\GUIAnimatorFREEDemo.cs" />
+     <Compile Include="Assets\PressStageSelect.cs" />
      <Compile Include="Assets\ProfilePlayerMap.cs" />
      <Compile Include="Assets\PropsBehavior.cs" />
      <Compile Include="Assets\Randomcloud.cs" />
@@ -147,8 +149,9 @@
      <Compile Include="Assets\TileManagerBlackForest.cs" />
      <Compile Include="Assets\TotalScoreResult.cs" />
      <Compile Include="Assets\TrapBehavior.cs" />
-     <Compile Include="Assets\TrapPlatform.cs" />
      <Compile Include="Assets\TrapPlatformDarkForest.cs" />
+     <Compile Include="Assets\TrapPlatformOne.cs" />
+     <Compile Include="Assets\TrapPlatformTwo.cs" />
      <Compile Include="Assets\amusedART\StoneMonster\Script\Animation_Test.cs" />
      <Compile Include="Assets\propTrapDarkForest.cs" />
      <Compile Include="Assets\slerpTest.cs" />
@@ -157,7 +160,9 @@
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Readme.txt" />
      <None Include="Assets\Medieval_House\Info.txt" />
      <None Include="Assets\A_piece_of_nature\Readme.txt" />
+     <None Include="Assets\Free Low Poly Desert Pack\Materials\Shaders\Vertex_Color_Unlit.shader" />
      <None Include="Assets\read me.txt" />
+     <None Include="Assets\Free Low Poly Desert Pack\Materials\Shaders\Vertex_Color_Basic.shader" />
      <None Include="Assets\Fantasy nature\Double Sided Shaders\Double Sided Transparent Diffuse Bump Cutout.shader" />
      <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Fog and Ambient reference.txt" />
      <None Include="Assets\MyAsset\environment\environ3\README.txt" />

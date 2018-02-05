@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapPlatform : MonoBehaviour {
+public class TrapPlatformOne : MonoBehaviour {
 
     public GameObject[] traps;
     public GameObject[] props;

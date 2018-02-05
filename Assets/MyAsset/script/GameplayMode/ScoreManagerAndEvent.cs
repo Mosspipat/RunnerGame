@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScoreManagerAndEvent : MonoBehaviour {
 
-
+    private static ScoreManagerAndEvent scoreManager_Instance;
     public static string  keyBestScore = "bestScore";
     public static int score ;
     public static int bestScore; 
@@ -12,7 +12,20 @@ public class ScoreManagerAndEvent : MonoBehaviour {
     playerController PCstatusPlayer;
 
     public static bool isDead = false;
+
     void Awake()
+    {
+        if (!scoreManager_Instance)
+        {
+            scoreManager_Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
+    void Start()
     {
         DontDestroyOnLoad(this.gameObject);
         PCstatusPlayer = GameObject.Find("player").GetComponent<playerController>();

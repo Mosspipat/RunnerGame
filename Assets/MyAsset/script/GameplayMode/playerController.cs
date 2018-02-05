@@ -71,11 +71,16 @@ public class playerController : MonoBehaviour {
     public List<GameObject> swordType;
     public List<GameObject> shieldType;
     public List<Transform> posEquip;
+
     int equipSet;
-	void Start () {
+    int attackWeapon;
+    int defenceWeapon;
+
+    void Start () {
 
         LevelPlayer = PlayerPrefs.GetInt("levelPlayer");
 
+        CheckStatusWeaponEquip();
         StarterStatus();
         equipWeapon();
         EndStage = false;
@@ -584,16 +589,18 @@ public class playerController : MonoBehaviour {
     {
        // PlayerPrefs.SetInt("levelPlayer",LevelPlayer);
 
-        //LevelAttack And LevelDefence
+        //------LevelAttack And LevelDefence---------
         int levelAttack = PlayerPrefs.GetInt("levelAttackLevel");
-        maxPowerAttack = levelAttack + 1;
+        //all Attack get     "upgrade"       "levelPlayer"  "levelWeapon(attack)"
+        maxPowerAttack = (levelAttack + 1)+ (LevelPlayer+1)+(attackWeapon);
         powerAttack = maxPowerAttack;
         int levelDefence = PlayerPrefs.GetInt("levelDefenceLevel");
-        maxPowerDefence = 5 + ((levelDefence-1)*2);
+        //all Attack get            "upgrade"               "levelPlayer"          "levelWeapon(defence)"
+        maxPowerDefence = (5 + ((levelDefence - 1) * 2)) + ( 5 +(LevelPlayer-1)*2) + (defenceWeapon);
         powerDefence = maxPowerDefence;
         //Debug.Log("levelDefence : "+ levelDefence +"\n (levelDefence-1) *2 :" + (levelDefence-1)*2);
 
-        //LevelMagnet LevelImmortal LevelCoin
+        //-------LevelMagnet LevelImmortal LevelCoin---------
         int levelMagnet = PlayerPrefs.GetInt("levelMagnetLevel");
         timeMagnet = 10 + (levelMagnet - 1)*5; 
         int levelshield = PlayerPrefs.GetInt("levelShieldLevel");
@@ -636,6 +643,40 @@ public class playerController : MonoBehaviour {
         GameObject shield = Instantiate(shieldType[equipSet], posEquip[0].transform.position, posEquip[0].transform.rotation);
         shield.transform.SetParent(posEquip[0].transform);
         shield.GetComponent<Transform>().localPosition = new Vector3(0, 0, 0);
+    }
+
+    void CheckStatusWeaponEquip()
+    {
+        int weaponSetEquiped = PlayerPrefs.GetInt("weaponEquiped"); 
+
+        switch (weaponSetEquiped)
+        {
+            case 0:
+                attackWeapon = 1;
+                defenceWeapon = 1;
+                break;
+            case 1:
+                attackWeapon = 2;
+                defenceWeapon = 1;
+                break;
+            case 2:
+                attackWeapon = 1;
+                defenceWeapon = 2;
+                break;
+            case 3:
+                attackWeapon = 2;
+                defenceWeapon = 2;
+                break;
+            case 4:
+                attackWeapon = 3;
+                defenceWeapon = 2;
+                break;
+            case 5:
+                attackWeapon = 3;
+                defenceWeapon = 3;
+                break;
+        }
+
     }
     #endregion
 

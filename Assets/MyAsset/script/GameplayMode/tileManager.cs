@@ -10,6 +10,7 @@ public class tileManager : MonoBehaviour {
     public Transform starterplatform;
 
     public GameObject[] trap;
+    public GameObject[] trapTwo;
 
     float spawnPlatformPoint = 8.696283f;                       // point for Spawn first platform  
     float sizePlatform = 8.696283f;
@@ -35,23 +36,28 @@ public class tileManager : MonoBehaviour {
     GameObject starterTerrian;
     public List<GameObject> terrainType = new List<GameObject>();
     public Transform starterTerrianPoint;
-    float PosbeforeTerrianPlayerFirst= 400;
-    float PosbeforeTerrianPlayerSecond = 200;
+    float PosTerrianPlayerFirst= 0;
+    float PosTerrianPlayerSecond = 200;
     float nextMoveTerrianZ = 400f;
 
 
     public static int amountSpawnedPlatform; 
 
-    public List<GameObject> typePlatformObstacleGreen = new List<GameObject>(); //1-5
+    public List<GameObject> typePlatformObstacleGreen = new List<GameObject>(); //1-2
     public List<GameObject> typePlatformDungeonGreen = new List<GameObject>();
 
-    public List<GameObject> typePlatformObstacleBlack = new List<GameObject>();//1-6
+    public List<GameObject> typePlatformObstacleBlack = new List<GameObject>();//3-4
     public List<GameObject> typePlatformDungeonBlack = new List<GameObject>();
 
-    public List<GameObject> typeSpawnGreen = new List<GameObject>();//1
-    public List<GameObject> typeSpawnBlack = new List<GameObject>();//1
-    public List<GameObject> typePlatformCastle = new List<GameObject>();//1-2
-    public List<GameObject> typePlatformOrigin = new List<GameObject>();
+    public List<GameObject> typePlatformObstacleRed = new List<GameObject>();//5-6
+    public List<GameObject> typePlatformDungeonRed = new List<GameObject>();
+
+    public List<GameObject> typeSpawnGreen = new List<GameObject>();//1-2
+    public List<GameObject> typeSpawnBlack = new List<GameObject>();//3-4
+    public List<GameObject> typeSpawnRed = new List<GameObject>();//5-6
+
+    public List<GameObject> typePlatformCastle = new List<GameObject>();//1-6
+    public List<GameObject> typePlatformOrigin = new List<GameObject>();//1-6
     GameObject starterPlatformGameObj;
     public int stage;
 
@@ -60,7 +66,7 @@ public class tileManager : MonoBehaviour {
         amountSpawnedPlatform = 0;
 
         //make StarterPlatform
-        SpawnStarterPlatform(stage);
+        SpawnStarterPlatform();
 
         if (this.isActiveAndEnabled == true)
         {
@@ -142,20 +148,30 @@ public class tileManager : MonoBehaviour {
     }
     #endregion
         //Distance Event
-    void SpawnStarterPlatform(int inputStage)
+    void SpawnStarterPlatform()
     {
-        starterPlatformGameObj = typePlatformOrigin[inputStage-1];
-        Instantiate(starterPlatformGameObj,starterplatform.transform.position,starterPlatformGameObj.transform.rotation);
+        switch (stage)
+        {
+        case 1: case 2:
+                Instantiate(typePlatformOrigin[0],starterplatform.transform.position,starterplatform.transform.rotation);
+        break;
+        case 3: case 4:
+                Instantiate(typePlatformOrigin[1],starterplatform.transform.position,starterplatform.transform.rotation);
+        break;
+        case 5: case 6:
+                Instantiate(typePlatformOrigin[2],starterplatform.transform.position,starterplatform.transform.rotation);
+        break;
+        }
     }
 
 
-    #region TypePlatform Function
+    #region  Origin / Obstacle / Dungeon TypePlatform
     void Spawnplatform(int typePlatform)
     {
         amountSpawnedPlatform ++; //this length is distance.z platform
 
         #region originPlatform
-        if (typePlatform == 0 && stage == 1)                       
+        if (typePlatform == 0 && (stage == 1||stage == 2))                       
         {
             GameObject originPlatform = Instantiate(typePlatformOrigin[0], new Vector3(
                 starterplatform.position.x,
@@ -166,9 +182,20 @@ public class tileManager : MonoBehaviour {
             spawnPlatformPoint += sizePlatform;
             allPlatformGame.Add(originPlatform);
         }
-        else if (typePlatform == 0 && stage == 2)                       
+        else if (typePlatform == 0 && (stage == 3 || stage == 4))                       
         {
             GameObject originPlatform = Instantiate(typePlatformOrigin[1], new Vector3(
+                starterplatform.position.x,
+                starterplatform.position.y,                                                                         //Starter Platform
+                spawnPlatformPoint),                                                                            //Continue with z pos
+                starterplatform.rotation) as GameObject;
+            originPlatform.transform.SetParent(this.transform);
+            spawnPlatformPoint += sizePlatform;
+            allPlatformGame.Add(originPlatform);
+        }
+        else if (typePlatform == 0 && (stage == 5 || stage == 6))                       
+        {
+            GameObject originPlatform = Instantiate(typePlatformOrigin[2], new Vector3(
                 starterplatform.position.x,
                 starterplatform.position.y,                                                                         //Starter Platform
                 spawnPlatformPoint),                                                                            //Continue with z pos
@@ -180,34 +207,25 @@ public class tileManager : MonoBehaviour {
         #endregion
 
         #region obstaclePlatform
-        else if( typePlatform == 1 && stage == 1)
+        else if( typePlatform == 1 && (stage == 1||stage == 2))
         {
-            int randomtype = Random.Range(0, 5);
-            GameObject obstaclePlatform = Instantiate(typePlatformObstacleGreen[randomtype], new Vector3(
-                                       starterplatform.position.x,
-                                       starterplatform.position.y,                                                     //Random Normal platform
-                                       spawnPlatformPoint),
-                                   starterplatform.rotation) as GameObject;
-            obstaclePlatform.transform.SetParent(this.transform);
-                spawnPlatformPoint += sizePlatform;
-            allPlatformGame.Add(obstaclePlatform);
+            int randomTypeSpawnOrOrigin = Random.Range(1,3);
+            RandomPlatformObstacleOrSpawnGreenField(randomTypeSpawnOrOrigin);
         }
 
-        else if(typePlatform == 1 && stage == 2)
+        else if(typePlatform == 1 && (stage == 3 || stage == 4))
         {
-            int randomtype = Random.Range(0, 6);
-            GameObject obstaclePlatform = Instantiate(typePlatformObstacleBlack[randomtype], new Vector3(
-                starterplatform.position.x,
-                starterplatform.position.y,                                                     //Random Normal platform
-                spawnPlatformPoint),
-                starterplatform.rotation) as GameObject;
-            obstaclePlatform.transform.SetParent(this.transform);
-            spawnPlatformPoint += sizePlatform;
-            allPlatformGame.Add(obstaclePlatform);
+            int randomTypeSpawnOrOrigin = Random.Range(1,3);
+            RandomPlatformObstacleOrSpawnBlackForest(randomTypeSpawnOrOrigin);
+        }
+        else if(typePlatform == 1 && (stage == 5 || stage == 6))
+        {
+            int randomTypeSpawnOrOrigin = Random.Range(1,3);
+            RandomPlatformObstacleOrSpawnRedVolcano(randomTypeSpawnOrOrigin);
         }
         #endregion
         #region dungeonPlatform
-        else if( typePlatform == 2 && stage == 1)
+        else if( typePlatform == 2 && (stage == 1||stage == 2))
         {
             GameObject dungeonPlatform = Instantiate(typePlatformDungeonGreen[0], new Vector3(
                 starterplatform.position.x,
@@ -226,10 +244,29 @@ public class tileManager : MonoBehaviour {
             }
         }
 
-        else if( typePlatform == 2 && stage == 2)
+        else if( typePlatform == 2 && (stage == 3 || stage == 4))
         {
-            int randomDungeon = Random.Range(0,1);
+            int randomDungeon = Random.Range(0,1);  //for new platform "future asset"
             GameObject dungeonPlatform = Instantiate(typePlatformDungeonBlack[randomDungeon], new Vector3(
+                starterplatform.position.x,
+                starterplatform.position.y,                                                                         
+                spawnPlatformPoint),
+                starterplatform.rotation) as GameObject;
+            dungeonPlatform.transform.SetParent(this.transform);
+            spawnPlatformPoint += sizePlatform;
+            allPlatformGame.Add(dungeonPlatform);
+
+            //Check if Amount of dungeon stage is zero  make stage to "normal stage"
+            amountDungeonCanSpawn--;
+            if (amountDungeonCanSpawn <= 0)
+            {
+                dungeonStage = false;
+            }
+        }
+
+        else if( typePlatform == 2 && (stage == 5 || stage == 6))
+        {
+            GameObject dungeonPlatform = Instantiate(typePlatformDungeonRed[0], new Vector3(
                 starterplatform.position.x,
                 starterplatform.position.y,                                                                         
                 spawnPlatformPoint),
@@ -248,7 +285,7 @@ public class tileManager : MonoBehaviour {
         #endregion
         #region specialPlatform
         // special platform Secret Chest
-        else if( typePlatform == 3&&stage ==1)
+        else if( typePlatform == 3&&(stage == 1 || stage == 2))
         {
             GameObject specialFloor = Instantiate(typePlatformCastle[0], new Vector3(
                 starterplatform.position.x,
@@ -261,7 +298,7 @@ public class tileManager : MonoBehaviour {
             allPlatformGame.Add(specialFloor);
         }
 
-        else if( typePlatform == 3&&stage ==2)
+        else if( typePlatform == 3&&(stage == 3 || stage == 4))
         {
             GameObject specialFloor = Instantiate(typePlatformCastle[1], new Vector3(
                 starterplatform.position.x,
@@ -274,7 +311,18 @@ public class tileManager : MonoBehaviour {
             allPlatformGame.Add(specialFloor);
         }
 
-
+        else if( typePlatform == 3&&(stage == 5 || stage == 6))
+        {
+            GameObject specialFloor = Instantiate(typePlatformCastle[2], new Vector3(
+                starterplatform.position.x,
+                starterplatform.position.y,                                                                          //Random Trap platform
+                spawnPlatformPoint),
+                starterplatform.rotation) as GameObject;
+            specialFloor.name = "castlePlatform";
+            specialFloor.transform.SetParent(this.transform);
+            /*spawnPlatformPoint += sizePlatform;*/                 //was finish don't use
+            allPlatformGame.Add(specialFloor);
+        }
 
         // special platform Castle
         else if( typePlatform == 4)
@@ -291,6 +339,7 @@ public class tileManager : MonoBehaviour {
         }
     }
     #endregion
+    #region deletePlatform
     void DeleteOldplatform()
     {
         if (playerPos.position.z > allPlatformGame[0].transform.position.z + sizePlatform*1)
@@ -300,7 +349,9 @@ public class tileManager : MonoBehaviour {
             allPlatformGame.RemoveAt(0);
         }
     }
-    #region reset
+    #endregion
+
+    #region reset Platform status when Start Gameplay
     void ResetStatusTileManager()
     {
         EndRewardQuest.isCameraViewToplayer = false;
@@ -314,15 +365,16 @@ public class tileManager : MonoBehaviour {
     #region TerrianControl
     void startTerrian()
     {
+        PosTerrianPlayerFirst += 400;
         switch (stage)
         {
-            case 1:
+            case 1: case 2:
                 starterTerrian = terrainType[0];
                 break;
-            case 2:
+            case 3: case 4:
                 starterTerrian = terrainType[1];
                 break;
-            case 3:
+            case 5: case 6:
                 starterTerrian = terrainType[2];
                 break;
         }
@@ -336,22 +388,107 @@ public class tileManager : MonoBehaviour {
 
     void MoveTerrianFollowPlayer()
     {
-        if (playerPos.position.z >= PosbeforeTerrianPlayerSecond)
+        if (playerPos.position.z >= PosTerrianPlayerSecond)
         {
-            PosbeforeTerrianPlayerSecond += nextMoveTerrianZ;
-            Transform terrianInstance = GameObject.Find("terrian1").transform;
-            terrianInstance.position = new Vector3(terrianInstance.position.x,
-                terrianInstance.position.y,PosbeforeTerrianPlayerFirst);
+            PosTerrianPlayerSecond += nextMoveTerrianZ;
+            Transform terrianInstance1 = GameObject.Find("terrian1").transform;
+            terrianInstance1.position = new Vector3(terrianInstance1.position.x,
+                terrianInstance1.position.y,PosTerrianPlayerFirst);
 
         }
-        if (playerPos.position.z >= PosbeforeTerrianPlayerFirst)
+        if (playerPos.position.z >= PosTerrianPlayerFirst)
         {
-            PosbeforeTerrianPlayerFirst += nextMoveTerrianZ;
-            Transform terrianInstance = GameObject.Find("terrian2").transform;
-            terrianInstance.position = new Vector3(terrianInstance.position.x,
-                terrianInstance.position.y,PosbeforeTerrianPlayerFirst);
+            PosTerrianPlayerFirst += nextMoveTerrianZ;
+            Transform terrianInstance2 = GameObject.Find("terrian2").transform;
+            terrianInstance2.position = new Vector3(terrianInstance2.position.x,
+                terrianInstance2.position.y,PosTerrianPlayerSecond);
         }
     }
     #endregion
  #endregion
+
+    #region randomPlatformObstacleOrSpawn
+    void RandomPlatformObstacleOrSpawnGreenField(int resultRandom)
+    {
+            switch (resultRandom)
+            {
+            case 1:
+                int randomtype = Random.Range(0, 5);
+                GameObject obstaclePlatform = Instantiate(typePlatformObstacleGreen[randomtype], new Vector3(
+                                              starterplatform.position.x,
+                                              starterplatform.position.y,                                                     //Random Normal platform
+                                              spawnPlatformPoint),
+                                          starterplatform.rotation) as GameObject;
+                obstaclePlatform.transform.SetParent(this.transform);
+                spawnPlatformPoint += sizePlatform;
+                allPlatformGame.Add(obstaclePlatform);
+                break;
+            case 2:
+                GameObject spawnPlatform = Instantiate(typeSpawnGreen[0], new Vector3(
+                                                   starterplatform.position.x,
+                                                   starterplatform.position.y,                                                     //Random Normal platform
+                                                   spawnPlatformPoint),
+                                               starterplatform.rotation) as GameObject;
+                spawnPlatform.transform.SetParent(this.transform);
+                spawnPlatformPoint += sizePlatform;
+                allPlatformGame.Add(spawnPlatform);
+                break;
+            }
+    }
+
+    void RandomPlatformObstacleOrSpawnBlackForest(int resultRandom)
+    {
+        switch (resultRandom)
+        {
+            case 1:
+                int randomtype = Random.Range(0, 6);
+                GameObject obstaclePlatform = Instantiate(typePlatformObstacleBlack[randomtype], new Vector3(
+                    starterplatform.position.x,
+                    starterplatform.position.y,                                                     //Random Normal platform
+                    spawnPlatformPoint),
+                    starterplatform.rotation) as GameObject;
+                obstaclePlatform.transform.SetParent(this.transform);
+                spawnPlatformPoint += sizePlatform;
+                allPlatformGame.Add(obstaclePlatform);
+                break;
+            case 2:
+                GameObject spawnPlatform = Instantiate(typeSpawnBlack[0], new Vector3(
+                    starterplatform.position.x,
+                    starterplatform.position.y,                                                     //Random Normal platform
+                    spawnPlatformPoint),
+                    starterplatform.rotation) as GameObject;
+                spawnPlatform.transform.SetParent(this.transform);
+                spawnPlatformPoint += sizePlatform;
+                allPlatformGame.Add(spawnPlatform);
+                break;
+        }
+    }
+    void RandomPlatformObstacleOrSpawnRedVolcano(int resultRandom)
+    {
+        switch (resultRandom)
+        {
+            case 1:
+                int randomtype = Random.Range(0, 5);
+                GameObject obstaclePlatform = Instantiate(typePlatformObstacleRed[randomtype], new Vector3(
+                    starterplatform.position.x,
+                    starterplatform.position.y,                                                     //Random Normal platform
+                    spawnPlatformPoint),
+                    starterplatform.rotation) as GameObject;
+                obstaclePlatform.transform.SetParent(this.transform);
+                spawnPlatformPoint += sizePlatform;
+                allPlatformGame.Add(obstaclePlatform);
+                break;
+            case 2:
+                GameObject spawnPlatform = Instantiate(typeSpawnRed[0], new Vector3(
+                    starterplatform.position.x,
+                    starterplatform.position.y,                                                     //Random Normal platform
+                    spawnPlatformPoint),
+                    starterplatform.rotation) as GameObject;
+                spawnPlatform.transform.SetParent(this.transform);
+                spawnPlatformPoint += sizePlatform;
+                allPlatformGame.Add(spawnPlatform);
+                break;
+        }
+    }
+    #endregion
 }

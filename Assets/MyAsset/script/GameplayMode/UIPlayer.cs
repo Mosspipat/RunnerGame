@@ -91,7 +91,7 @@ public class UIPlayer : MonoBehaviour {
             Debug.Log("open Dungeon");
 
             //spawn " Gate " at firstDungeon
-            TrapPlatform.canGateSpawn = true;  
+            TrapPlatformOne.canGateSpawn = true;  
 
             //stage " Dungeon is true"
             tileManager.dungeonStage = true;
@@ -132,7 +132,7 @@ public class UIPlayer : MonoBehaviour {
     void CloseBoss()
     {
         tileManager.dungeonStage = false;
-        TrapPlatform.gateSpawn = false;
+        TrapPlatformOne.gateSpawn = false;
     }
     #endregion
 

@@ -6,6 +6,8 @@ public class SpawnItemOrEnemy : MonoBehaviour {
 
     public GameObject Coin;
 
+    public int stage{ get; set;}
+
     public GameObject rabbit;
     public GameObject bat;
     public GameObject slime;
@@ -16,6 +18,11 @@ public class SpawnItemOrEnemy : MonoBehaviour {
     public GameObject ItemChestPiece;
     public GameObject ItemAttack;
     public GameObject ItemDefence;
+
+    public GameObject ItemShield;
+    public GameObject ItemSpeed;
+    public GameObject ItemMagnet;
+    public GameObject ItemHealth;
 
     public Transform spawnPointer;
 
@@ -28,15 +35,72 @@ public class SpawnItemOrEnemy : MonoBehaviour {
     tileManager tileManage;
 
 	void Start () {
+        //get "Stage Selected"
+        stage = GameObject.Find("SceneSelectManager").GetComponent<SelectionScene>().stageSeleted;
         //when start Find tileManager and get TileManagerScript
         tileManage = GameObject.Find("tileManager").GetComponent<tileManager>();    
 
         //Random Case "Coin" or "MonterOne" or "MonsterTwo" Spawn in platform
 
-        if(tileManager.amountSpawnedPlatform % 2 == 0)
+        if (tileManager.amountSpawnedPlatform % 2 == 0 && stage == 1)
         {
-            randomSpawn = Random.Range(1, 4);    
+            randomSpawn = Random.Range(1, 3);    
         }
+        else if (tileManager.amountSpawnedPlatform % 2 == 0 && stage == 2)
+        {
+            randomSpawn = Random.Range(1, 4);   
+        }
+        else if (tileManager.amountSpawnedPlatform % 2 == 0 && stage == 3)
+        {
+            randomSpawn = Random.Range(3, 5);   
+        }
+        else if (tileManager.amountSpawnedPlatform % 2 == 0 && stage == 4)
+        {
+            int randomHighMonster = Random.Range(1, 3);
+            switch (randomHighMonster)
+            {
+                case 1:
+                    randomSpawn = Random.Range(3, 5);
+                    break;
+                case 2:
+                    randomSpawn = 6;
+                    break;
+            }
+        }
+        else if (tileManager.amountSpawnedPlatform % 2 == 0 && stage == 5)
+        {
+            int randomHighMonster = Random.Range(1, 3);
+            switch (randomHighMonster)
+            {
+                case 1:
+                    randomSpawn = 3;
+                    break;
+                case 2:
+                    randomSpawn = 5;
+                    break;
+            }
+        }
+        else if (tileManager.amountSpawnedPlatform % 2 == 0 && stage == 6)
+        {
+            int randomHighMonster = Random.Range(1, 4);
+            switch (randomHighMonster)
+            {
+                case 1:
+                    randomSpawn = 3;
+                    break;
+                case 2:
+                    randomSpawn = 5;
+                    break;
+                case 3:
+                    randomSpawn = 6;
+                    break;
+            }
+        }
+        else
+        {
+            randomSpawn = Random.Range(10, 15); 
+        }
+            
 
         /*else
         {
@@ -79,11 +143,27 @@ public class SpawnItemOrEnemy : MonoBehaviour {
                 break;
             case 9:
                 int randomPointerSpawnDefenceAttack = Random.Range(0, 9);
-                SpawnAttackItem(randomPointerSpawnDefenceAttack);
+                SpawnDeffenceItem(randomPointerSpawnDefenceAttack);
                 break;
             //coin Spawn//
             case 10:
                 SpawnCoin();
+                break;
+            case 11:
+                int randomPointerSpawnShield = Random.Range(0, 9);
+                SpawnShieldItem(randomPointerSpawnShield);
+                break;
+            case 12:
+                int randomPointerSpawnMagnet = Random.Range(0, 9);
+                SpawnMagnetItem(randomPointerSpawnMagnet);
+                break;
+            case 13:
+                int randomPointerSpawnSpeed = Random.Range(0, 9);
+                SpawnSpeedItem(randomPointerSpawnSpeed);
+                break;
+            case 14:
+                int randomPointerSpawnHealth = Random.Range(0, 9);
+                SpawnHealthItem(randomPointerSpawnHealth);
                 break;
         }
     }
@@ -135,21 +215,43 @@ public class SpawnItemOrEnemy : MonoBehaviour {
         enemyObj.name = "skeleton";
     }
 
-    //Spawn Item //
+    //----------Spawn Item----------- //
     void SpawnItem(int randomPointer)
     {
         enemyObj = Instantiate(ItemChestPiece,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemChestPiece.transform.rotation) as GameObject;
         enemyObj.name = "mapTreasure";
     }
+    //Item Power
     void SpawnAttackItem(int randomPointer)
     {
-        itemSpawn = Instantiate(ItemAttack,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemChestPiece.transform.rotation) as GameObject;
-        itemSpawn.name = "ItemAttack";
+        itemSpawn = Instantiate(ItemAttack,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemAttack.transform.rotation) as GameObject;
+        itemSpawn.name = "itemAttack";
     }
     void SpawnDeffenceItem(int randomPointer)
     {
-        itemSpawn = Instantiate(ItemDefence,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemChestPiece.transform.rotation) as GameObject;
-        itemSpawn.name = "ItemDefence";
+        itemSpawn = Instantiate(ItemDefence,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemDefence.transform.rotation) as GameObject;
+        itemSpawn.name = "itemDefence";
+    }
+    // Items Support
+    void SpawnShieldItem(int randomPointer)
+    {
+        itemSpawn = Instantiate(ItemShield,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemShield.transform.rotation) as GameObject;
+        itemSpawn.name = "bariaItem";
+    }
+    void SpawnSpeedItem(int randomPointer)
+    {
+        itemSpawn = Instantiate(ItemSpeed,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemSpeed.transform.rotation) as GameObject;
+        itemSpawn.name = "speedItem";
+    }
+    void SpawnMagnetItem(int randomPointer)
+    {
+        itemSpawn = Instantiate(ItemMagnet,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemSpeed.transform.rotation) as GameObject;
+        itemSpawn.name = "magnetItem";
+    }
+    void SpawnHealthItem(int randomPointer)
+    {
+        itemSpawn = Instantiate(ItemHealth,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemHealth.transform.rotation) as GameObject;
+        itemSpawn.name = "posionItem";
     }
     #endregion
 }

@@ -4,11 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TextScoreGameover : MonoBehaviour {
 
+    SelectionScene SelectScene;
     public static bool isShowScore;
 
     Text textShowScore;
     Text textshowBestScore;
-    
+
+    void Start()
+    {
+        SelectScene = GameObject.Find("SceneSelectManager").GetComponent<SelectionScene>();
+    }
+
     void Update () {
         ShowScore();
     }

@@ -17,9 +17,29 @@ public class SelectionScene : MonoBehaviour {
 
     int expPlayer;
 
+    public bool checkOnSelectionStage{ get; set;}
+    public GameObject canvasSelectionScene;
+
+    public int stageSeleted{ get; set;}
+    private static SelectionScene sectionScene_Instance;
+
+    void Awake()
+    {
+        if (!sectionScene_Instance)
+        {
+            sectionScene_Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
 
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
+        checkOnSelectionStage = true;
         levelPlayer = PlayerPrefs.GetInt("levelPlayer");
     }
 
@@ -34,12 +54,13 @@ public class SelectionScene : MonoBehaviour {
         LoadLevel("GameplayGreenField");
     }
 
+    /*
     public void GoToLevelBlackForest()
     {
 
         LoadLevel("GameplayBlackForest");
         //Application.LoadLevel("GameplayBlackForest");
-    }
+    }*/
 
     public void GoToLevelRedVolcano()
     {
@@ -83,6 +104,8 @@ public class SelectionScene : MonoBehaviour {
 
     void UnlockStage()
     {
+        if (checkOnSelectionStage)
+        {
         for (int i = 0; i < 6; i++)
         {
             if (levelPlayer >= i)
@@ -100,6 +123,7 @@ public class SelectionScene : MonoBehaviour {
         {
             textStage[i].text = "need Level " + i; 
         }
+        }
     }
 
     IEnumerator LoadAsynchronously(string nameLevel)
@@ -113,11 +137,33 @@ public class SelectionScene : MonoBehaviour {
             loadbar.value = progress;
             percentLoaded.text = (progress*100f).ToString() + " %";
             Debug.Log(progress);
-
             yield return null;
         }
     }
 
+
+    //On Scene was "Loaded"
+    void OnLevelWasLoaded(int level) {
+        if (level == 1)
+        {
+            checkOnSelectionStage = true;
+            canvasSelectionScene.SetActive(true);
+            Debug.Log("load Selection scene");
+
+            LoadBackgroud.SetActive(false); //invisible the "Loadbar"
+        }
+        else if(level== 4)
+        {
+            canvasSelectionScene.SetActive(false);
+            Debug.Log("send StageInt to TileManager");
+            GameObject.Find("tileManager").GetComponent<tileManager>().stage = stageSeleted;    //send stage selected
+        }
+        else
+        {
+            canvasSelectionScene.SetActive(false);
+            checkOnSelectionStage = false;
+        }
+    }
 
     //playerPrefs.int(levelPlayer)
     //playerPrefs.int(expPlayer)
