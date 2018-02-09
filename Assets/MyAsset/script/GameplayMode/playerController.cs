@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class playerController : MonoBehaviour {
 
+    AudioSource soundManagerPlayer;
+    public List<AudioClip> soundStore;
+
+    UIPlayer uiPlayer;
+
     int LevelPlayer;
 
     Rigidbody RBPlayer;
@@ -77,6 +82,10 @@ public class playerController : MonoBehaviour {
     int defenceWeapon;
 
     void Start () {
+
+        soundManagerPlayer = GetComponent<AudioSource>();
+
+        uiPlayer = GameObject.Find("player/UIPlayer").GetComponent<UIPlayer>();
 
         LevelPlayer = PlayerPrefs.GetInt("levelPlayer");
 
@@ -432,7 +441,8 @@ public class playerController : MonoBehaviour {
         {
             if (kill)
             {
-                UIPlayer.amountMonsterKilled++;
+                soundManagerPlayer.PlayOneShot(soundStore[0]);
+                uiPlayer.amountMonsterKilled++;
                 if (powerAttack < obj.GetComponent<EnemyBehavior>().power)
                 {
                     powerAttack = 0;
@@ -449,10 +459,11 @@ public class playerController : MonoBehaviour {
 
             else if(block)
             {
+                soundManagerPlayer.PlayOneShot(soundStore[1]);
                 int damageRemain = obj.GetComponent<EnemyBehavior>().power - powerAttack;
                 powerAttack = 0;
                 powerDefence -= damageRemain;
-                UIPlayer.amountMonsterKilled++;
+                uiPlayer.amountMonsterKilled++;
                 obj.GetComponent<EnemyBehavior>().isKilled = true;
                 GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
                 Destroy(smoke, 4f);

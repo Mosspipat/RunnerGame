@@ -46,43 +46,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Medieval_House\Scripts\OpenDoor.js" />
-     <Compile Include="Assets\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\CharacterMotor.js" />
-     <Compile Include="Assets\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\FPSInputController.js" />
-     <Compile Include="Assets\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\PlatformInputController.js" />
-     <Compile Include="Assets\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonCamera.js" />
-     <Compile Include="Assets\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonController.js" />
-     <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo00.js" />
-     <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo01.js" />
-     <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo02.js" />
-     <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo03.js" />
-     <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo04.js" />
-     <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo05.js" />
-     <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo06.js" />
-     <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo07.js" />
-     <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo08.js" />
-     <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_DemoPlaySound.js" />
-     <Compile Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_OpenOtherScene.js" />
-     <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Readme.txt" />
-     <None Include="Assets\Medieval_House\Info.txt" />
-     <None Include="Assets\A_piece_of_nature\Readme.txt" />
-     <None Include="Assets\Free Low Poly Desert Pack\Materials\Shaders\Vertex_Color_Unlit.shader" />
-     <None Include="Assets\read me.txt" />
-     <None Include="Assets\Free Low Poly Desert Pack\Materials\Shaders\Vertex_Color_Basic.shader" />
-     <None Include="Assets\Fantasy nature\Double Sided Shaders\Double Sided Transparent Diffuse Bump Cutout.shader" />
-     <None Include="Assets\OtherAsset\Fantasy Skybox FREE\Fog and Ambient reference.txt" />
+     <Compile Include="Assets\allOtherAsset\Medieval_House\Scripts\OpenDoor.js" />
+     <Compile Include="Assets\allOtherAsset\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\CharacterMotor.js" />
+     <Compile Include="Assets\allOtherAsset\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\FPSInputController.js" />
+     <Compile Include="Assets\allOtherAsset\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\PlatformInputController.js" />
+     <Compile Include="Assets\allOtherAsset\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonCamera.js" />
+     <Compile Include="Assets\allOtherAsset\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonController.js" />
+     <Compile Include="Assets\allOtherAsset\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo00.js" />
+     <Compile Include="Assets\allOtherAsset\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo01.js" />
+     <Compile Include="Assets\allOtherAsset\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo02.js" />
+     <Compile Include="Assets\allOtherAsset\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo03.js" />
+     <Compile Include="Assets\allOtherAsset\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo04.js" />
+     <Compile Include="Assets\allOtherAsset\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo05.js" />
+     <Compile Include="Assets\allOtherAsset\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo06.js" />
+     <Compile Include="Assets\allOtherAsset\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo07.js" />
+     <Compile Include="Assets\allOtherAsset\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_Demo08.js" />
+     <Compile Include="Assets\allOtherAsset\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_DemoPlaySound.js" />
+     <Compile Include="Assets\allOtherAsset\OtherAsset\GUI Animator\GUI Animator FREE\Demo (JavaScript)\Scripts\GA_FREE_JS_OpenOtherScene.js" />
+     <None Include="Assets\allOtherAsset\OtherAsset\Fantasy Skybox FREE\Readme.txt" />
+     <None Include="Assets\allOtherAsset\Medieval_House\Info.txt" />
+     <None Include="Assets\allOtherAsset\A_piece_of_nature\Readme.txt" />
+     <None Include="Assets\allOtherAsset\Free Low Poly Desert Pack\Materials\Shaders\Vertex_Color_Unlit.shader" />
+     <None Include="Assets\allOtherAsset\Free Low Poly Desert Pack\Materials\Shaders\Vertex_Color_Basic.shader" />
+     <None Include="Assets\allOtherAsset\Fantasy nature\Double Sided Shaders\Double Sided Transparent Diffuse Bump Cutout.shader" />
+     <None Include="Assets\allOtherAsset\OtherAsset\Fantasy Skybox FREE\Fog and Ambient reference.txt" />
      <None Include="Assets\MyAsset\environment\environ3\README.txt" />
-     <None Include="Assets\Elven Weapons\Readme.txt" />
-     <None Include="Assets\Shield Pack Free\ReadMe.txt" />
-     <None Include="Assets\Fortress Gate_Free\ReadMe.txt" />
-     <None Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\Readme.txt" />
-     <None Include="Assets\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
-     <None Include="Assets\OtherAsset\GE Common Assets\Readme.txt" />
-     <None Include="Assets\OtherAsset\GUI Animator\GUI Animator FREE\!How to.txt" />
-     <None Include="Assets\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
-     <None Include="Assets\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\RollerBall\RollerBallGuidelines.txt" />
-     <None Include="Assets\Julien Tonsuso\Modular Fantasy Bridges\README.txt" />
-     <None Include="Assets\Tiny Fantasy Icons\README.txt" />
+     <None Include="Assets\allOtherAsset\Elven Weapons\Readme.txt" />
+     <None Include="Assets\allOtherAsset\Shield Pack Free\ReadMe.txt" />
+     <None Include="Assets\allOtherAsset\Fortress Gate_Free\ReadMe.txt" />
+     <None Include="Assets\allOtherAsset\OtherAsset\GUI Animator\GUI Animator FREE\Readme.txt" />
+     <None Include="Assets\allOtherAsset\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
+     <None Include="Assets\allOtherAsset\OtherAsset\GE Common Assets\Readme.txt" />
+     <None Include="Assets\allOtherAsset\OtherAsset\GUI Animator\GUI Animator FREE\!How to.txt" />
+     <None Include="Assets\allOtherAsset\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
+     <None Include="Assets\allOtherAsset\OtherAsset\GE Common Assets\GE Touch Joystick\Characters\RollerBall\RollerBallGuidelines.txt" />
+     <None Include="Assets\allOtherAsset\Julien Tonsuso\Modular Fantasy Bridges\README.txt" />
+     <None Include="Assets\allOtherAsset\Tiny Fantasy Icons\README.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/UnityFolder/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -105,10 +104,10 @@
  <HintPath>D:/UnityFolder/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
  <Reference Include="GETween">
- <HintPath>C:/Users/User/Documents/RunnerProject/RunnerGame/Assets/OtherAsset/GUI Animator/Common/Plugins/GETween.dll</HintPath>
+ <HintPath>C:/Users/User/Documents/RunnerProject/RunnerGame/Assets/allOtherAsset/OtherAsset/GUI Animator/Common/Plugins/GETween.dll</HintPath>
  </Reference>
  <Reference Include="GUIAnimatorFREE">
- <HintPath>C:/Users/User/Documents/RunnerProject/RunnerGame/Assets/OtherAsset/GUI Animator/GUI Animator FREE/Plugins/GUIAnimatorFREE.dll</HintPath>
+ <HintPath>C:/Users/User/Documents/RunnerProject/RunnerGame/Assets/allOtherAsset/OtherAsset/GUI Animator/GUI Animator FREE/Plugins/GUIAnimatorFREE.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>D:/UnityFolder/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

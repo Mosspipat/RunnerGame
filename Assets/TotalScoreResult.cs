@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class TotalScoreResult : MonoBehaviour {
 
+    UIPlayer uiplayer;
+
     Text scoreDistance;
     Text scoreKill;
     Text scoreCoin;
@@ -18,6 +20,8 @@ public class TotalScoreResult : MonoBehaviour {
     float speedChecker;
 
 	void Start () {
+
+        uiplayer = GameObject.Find("player/UIPlayer").GetComponent<UIPlayer>();
 
         scoreDistance = GameObject.Find("ScorePanel/distanceText/score").GetComponent<Text>();
         scoreKill = GameObject.Find("ScorePanel/monsterKilledText/score").GetComponent<Text>();
@@ -42,13 +46,13 @@ public class TotalScoreResult : MonoBehaviour {
     {
         scoreDistance.text = scoreDistanceInt.ToString();
 
-        if (scoreDistanceInt <= UIPlayer.intergerScore/*UIPlayer.intergerScoreCoin*/)
+        if (scoreDistanceInt <= uiplayer.intergerScore/*UIPlayer.intergerScoreCoin*/)
         {
             scoreDistanceInt += (int)(Time.deltaTime * speedChecker);
         }
         else
         {
-            scoreDistance.text = UIPlayer.intergerScore.ToString();
+            scoreDistance.text = uiplayer.intergerScore.ToString();
             Invoke("ScoreRunKill", 1f);
         }
     }
@@ -56,13 +60,13 @@ public class TotalScoreResult : MonoBehaviour {
     {
         scoreKill.text = scoreKillInt.ToString();
 
-        if (scoreKillInt <= UIPlayer.amountMonsterKilled/*UIPlayer.intergerScoreCoin*/)
+        if (scoreKillInt <= uiplayer.amountMonsterKilled/*UIPlayer.intergerScoreCoin*/)
         {
             scoreKillInt += (int)(Time.deltaTime * speedChecker);
         }
         else
         {
-            scoreKill.text = UIPlayer.amountMonsterKilled.ToString();
+            scoreKill.text = uiplayer.amountMonsterKilled.ToString();
             Invoke("ScoreRunCoin", 1f);
         }
     }
@@ -70,20 +74,20 @@ public class TotalScoreResult : MonoBehaviour {
     {
         scoreCoin.text = scoreCoinInt.ToString();
 
-        if (scoreCoinInt <= UIPlayer.intergerScoreCoin)
+        if (scoreCoinInt <= uiplayer.intergerScoreCoin)
         {
             scoreCoinInt += (int)(Time.deltaTime * speedChecker);
         }
         else
         {
-            scoreCoin.text = UIPlayer.intergerScoreCoin.ToString();
+            scoreCoin.text = uiplayer.intergerScoreCoin.ToString();
             Invoke("ScoreResult", 1f);
         }
     }
 
     void ScoreResult()
     {
-        scoreResult.text = (UIPlayer.intergerScore+UIPlayer.amountMonsterKilled+UIPlayer.intergerScoreCoin).ToString();
+        scoreResult.text = (uiplayer.intergerScore+uiplayer.amountMonsterKilled+uiplayer.intergerScoreCoin).ToString();
     }
     #endregion
 }

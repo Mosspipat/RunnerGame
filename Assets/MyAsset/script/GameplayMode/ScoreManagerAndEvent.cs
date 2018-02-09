@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ScoreManagerAndEvent : MonoBehaviour {
 
+    UIPlayer uiPlayer;
+
     private static ScoreManagerAndEvent scoreManager_Instance;
     public static string  keyBestScore = "bestScore";
     public static int score ;
@@ -27,6 +29,8 @@ public class ScoreManagerAndEvent : MonoBehaviour {
 
     void Start()
     {
+        uiPlayer = GameObject.Find("player/UIPlayer").GetComponent<UIPlayer>();
+
         DontDestroyOnLoad(this.gameObject);
         PCstatusPlayer = GameObject.Find("player").GetComponent<playerController>();
         TSscoreGame = GameObject.Find("player").transform.GetChild(3).GetChild(0).transform.GetComponent<UIPlayer>();   // or Use getComponentInChildren
@@ -38,11 +42,11 @@ public class ScoreManagerAndEvent : MonoBehaviour {
     {
         if (isDead == true)
         {
-            score = UIPlayer.intergerScore;
+            score = uiPlayer.intergerScore;
         }
-        else if (UIPlayer.intergerScore >= PlayerPrefs.GetInt(keyBestScore))
+        else if (uiPlayer.intergerScore >= PlayerPrefs.GetInt(keyBestScore))
         {
-            bestScore = UIPlayer.intergerScore;
+            bestScore = uiPlayer.intergerScore;
             PlayerPrefs.SetInt(keyBestScore, bestScore);
             Debug.Log("winner");
         }

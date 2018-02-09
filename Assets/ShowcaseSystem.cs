@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class ShowcaseSystem : MonoBehaviour {
 
+    public List<AudioClip> soundStore;
+    AudioSource audioGameplay;
+
     public int levelPlayer;
     public List<Transform> showcasePoint;
     int  amountAllSword = 6;
@@ -34,6 +37,8 @@ public class ShowcaseSystem : MonoBehaviour {
     public Text bankText;
 
     void Start () {
+        audioGameplay =  transform.GetComponent<AudioSource>();
+
         PlayerPrefs.SetInt("weapon0Purchased", 1);
         equipType = PlayerPrefs.GetInt("weaponEquiped");    //clone weapon from last "weaponEquip"
         chosenWeapon = equipType;
@@ -43,7 +48,6 @@ public class ShowcaseSystem : MonoBehaviour {
     }
     
     void Update () {
-        Bank();
         ChangePositionSword();
         DialogWeaponPurchase();
     }
@@ -88,6 +92,7 @@ public class ShowcaseSystem : MonoBehaviour {
     #region buttonControl
     public void NextSword()
     {
+        audioGameplay.PlayOneShot(soundStore[0]);
         DeleteEquip();
         chosenWeapon++;
         if (chosenWeapon > 5)
@@ -99,6 +104,7 @@ public class ShowcaseSystem : MonoBehaviour {
 
     public void PreviousSword()
     {
+        audioGameplay.PlayOneShot(soundStore[0]);
         DeleteEquip();
         chosenWeapon--;
         if (chosenWeapon < 0)
@@ -112,6 +118,7 @@ public class ShowcaseSystem : MonoBehaviour {
     {
         if (PlayerPrefs.GetInt("weapon" + chosenWeapon + "Purchased") == 1)
         {
+            audioGameplay.PlayOneShot(soundStore[2]);
             Debug.Log("last equip "+ equipType + "changeTo Purchase");
             dialogLevelToUnlock[equipType].text = "purchased";    
             equipType = chosenWeapon;
@@ -122,6 +129,7 @@ public class ShowcaseSystem : MonoBehaviour {
         }
         else if (PlayerPrefs.GetInt("money") >= price[chosenWeapon]&& levelPlayer >= chosenWeapon)
         {
+            audioGameplay.PlayOneShot(soundStore[1]);
             unlockImage[chosenWeapon].gameObject.SetActive(false);
             PlayerPrefs.SetInt("weapon" + chosenWeapon + "Purchased", 1);
             dialogLevelToUnlock[chosenWeapon].text = "Purchased";
@@ -140,6 +148,7 @@ public class ShowcaseSystem : MonoBehaviour {
 
     public void BackToMenu()
     {
+        audioGameplay.PlayOneShot(soundStore[3]);
         Application.LoadLevel("menuMap");
     }
     #endregion
@@ -231,13 +240,6 @@ public class ShowcaseSystem : MonoBehaviour {
     }
     #endregion
 
-
-    #region money
-    void Bank()
-    {
-        bankText.text = PlayerPrefs.GetInt("money").ToString() + " coins";
-    }
-    #endregion
     //PlayerPrefs.int(weapon" + (i) + "Purchased");
     //PlayerPrefs.int("weaponEquiped");
         

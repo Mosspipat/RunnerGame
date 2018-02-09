@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Power : MonoBehaviour {
 
+    UIPlayer uiPlayer; 
+
     public GameObject effectImpact;
 
 	void Start () {
@@ -21,7 +23,7 @@ public class Power : MonoBehaviour {
         {
             GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
             Destroy(smoke, 4f);
-            UIPlayer.amountMonsterKilled++;
+            uiPlayer.amountMonsterKilled++;
             Destroy(obj.gameObject);
             Destroy(this.gameObject);
         }

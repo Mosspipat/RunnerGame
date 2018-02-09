@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class coin : MonoBehaviour {
 
+    UIPlayer uiPlayer;
+
     public static int numberCoinAllSpawn = 0;
     int numberThisCoin;
     GameObject player;
@@ -12,6 +14,9 @@ public class coin : MonoBehaviour {
     float offsetBackwardPlayer = 10f;
 
 	void Start () {
+
+        uiPlayer = GameObject.Find("player/UIPlayer").GetComponent<UIPlayer>();
+
         player = GameObject.Find("player");
         numberThisCoin = numberCoinAllSpawn;
         MagnetEffect.allCoins.Add(this.gameObject);
@@ -30,7 +35,7 @@ public class coin : MonoBehaviour {
         {
             MagnetEffect.allCoins.Remove(this.gameObject);
             UIPlayer.sizeCoinImage = new Vector2(15f, 15f);
-            UIPlayer.intergerScoreCoin +=1;
+            uiPlayer.intergerScoreCoin +=1;
 
             // Save new money
             int money = PlayerPrefs.GetInt("money");

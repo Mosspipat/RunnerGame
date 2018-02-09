@@ -24,6 +24,11 @@ public class CharacterStatus : MonoBehaviour {
         DontDestroyOnLoad(this.gameObject);
     }*/
 	
+    /* void Start()
+    {
+        PlayerPrefs.SetInt("money", 5000);
+    }*/
+
 	void Update () {
         UpdateStock();
         }

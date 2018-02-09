@@ -14,7 +14,7 @@ public class CanvasDontDestroy : MonoBehaviour {
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 

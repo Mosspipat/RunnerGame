@@ -31,7 +31,7 @@ public class SelectionScene : MonoBehaviour {
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 

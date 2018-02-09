@@ -9,13 +9,13 @@ public class UIPlayer : MonoBehaviour {
     playerController PCstatusPlayer;
 
     float score = 0;                                            //score Run
-    public static int intergerScore;
+    public int intergerScore{get;set;}
     public Text scoreText;
 
-    public static int amountMonsterKilled;
+    public int amountMonsterKilled{ get; set;}
 
     public Image coinImageUI;
-    public static int intergerScoreCoin{ set; get;}
+    public int intergerScoreCoin{ set; get;}
     public Text scoreTextCoin;
 
     public static Vector2 sizeCoinImage;
@@ -38,7 +38,7 @@ public class UIPlayer : MonoBehaviour {
     };
 
     void Start () {
-        
+
         intergerScoreCoin = 0;
         distantStartAndEnd = Vector2.Distance(startPosMinimap.position, endPosMinimap.position);
 
@@ -111,17 +111,6 @@ public class UIPlayer : MonoBehaviour {
             }*/
         }
         //Speed up with more Score
-        else if  (TileManagerBlackForest.amountSpawnedPlatform % 10 == 0 && tileManager.bossStage == false &&TileManagerBlackForest.isBackForest == true)       //Bonus Stage and will not start gameplay's starter
-        {                                                                                       // check it boss stage will not spawn Dungeon Stage
-            Debug.Log("open Dungeon");
-
-            //spawn " Gate " at firstDungeon
-            TrapPlatformDarkForest.canGateSpawn = true;  
-
-            //stage " Dungeon is true"
-            TileManagerBlackForest.dungeonStage = true;
-            TileManagerBlackForest.amountDungeonCanSpawn = 5; // set amount stage Can Spawn dungeon
-        }
 
         if (intergerScore % 100 == 0 && intergerScore !=0)
         {
@@ -148,7 +137,6 @@ public class UIPlayer : MonoBehaviour {
 
             //Check QuestComplete
             tileManager.questDistance = true;
-            TileManagerBlackForest.questDistance = true;
         }
         Vector3 distanceMinimap = new Vector3( calDistanceMinimap,0,0);
         playerImage.transform.position = startPosMinimap.transform.position + distanceMinimap;            //player distance in Minimap
