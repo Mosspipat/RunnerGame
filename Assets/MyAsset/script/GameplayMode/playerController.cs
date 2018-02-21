@@ -81,7 +81,11 @@ public class playerController : MonoBehaviour {
     int attackWeapon;
     int defenceWeapon;
 
+    MyKinectController myKinectControl;
+
     void Start () {
+
+        myKinectControl = GameObject.Find("kinectController").GetComponent<MyKinectController>();
 
         soundManagerPlayer = GetComponent<AudioSource>();
 
@@ -116,9 +120,11 @@ public class playerController : MonoBehaviour {
         CC = GameObject.Find("MainCamera").GetComponent<CameraController>();
         isShield = false;
 
-	}
-	
-	void Update () {
+        //Way Start
+        presentWay = GameObject.Find("middleWay").transform.position;
+    }
+    
+    void Update () {
         LevelUP();
         Controller();
         Move();
@@ -135,33 +141,33 @@ public class playerController : MonoBehaviour {
     {
         /* moveSide = Input.GetAxis("Horizontal");*/
         // Middle Move 
-        if (Input.GetKeyDown(KeyCode.A)&& way == "middle")
+        if (Input.GetKeyDown(KeyCode.A)&& way == "middle"||myKinectControl.isMoving == "moveLeft" && presentWay == GameObject.Find("middleWay").transform.position)
         {
-            presentWay = new Vector3(this.transform.position.x + leftWay,this.transform.position.y,this.transform.position.z);
+            presentWay = GameObject.Find("leftWay").transform.position;
             way = "left";
             //Debug.Log("goLeftWay");
             AnimPlayer.SetTrigger("isLeft");
         }
-        if (Input.GetKeyDown(KeyCode.D)&& way == "middle")
+        else if (Input.GetKeyDown(KeyCode.D)&& way == "middle"||myKinectControl.isMoving == "moveRight" && presentWay == GameObject.Find("middleWay").transform.position)
         {
-            presentWay = new Vector3(this.transform.position.x + rightWay,this.transform.position.y,this.transform.position.z);
+            presentWay = GameObject.Find("rightWay").transform.position;
             way = "right";
             //Debug.Log("goRightWay");
             AnimPlayer.SetTrigger("isRight");
         }
         // Left Move
-        if (Input.GetKeyDown(KeyCode.D)&& way == "left")
+        else if (Input.GetKeyDown(KeyCode.D)&& way == "left"||myKinectControl.isMoving == "moveRight" && presentWay == GameObject.Find("leftWay").transform.position)
         {
-            presentWay = new Vector3(this.transform.position.x + rightWay,this.transform.position.y,this.transform.position.z);
+            presentWay = GameObject.Find("middleWay").transform.position;
             way = "middle";
             //Debug.Log("goMiddleWay");
             AnimPlayer.SetTrigger("isRight");
         }
 
         // Right Move
-        if (Input.GetKeyDown(KeyCode.A)&& way == "right")
+        else if (Input.GetKeyDown(KeyCode.A)&& way == "right"||myKinectControl.isMoving== "moveLeft" && presentWay == GameObject.Find("rightWay").transform.position)
         {
-            presentWay = new Vector3(this.transform.position.x + leftWay,this.transform.position.y,this.transform.position.z);
+            presentWay = GameObject.Find("middleWay").transform.position;
             way = "middle";
             //Debug.Log("goMiddleWay");
             AnimPlayer.SetTrigger("isLeft");
@@ -176,14 +182,14 @@ public class playerController : MonoBehaviour {
         if (controlCha.isGrounded)                                                  
         {
             verticalVelpcity = -gravity * Time.deltaTime;                   //add gravity to velcity
-            if (Input.GetKeyDown(KeyCode.Space))                        
+            if (Input.GetKeyDown(KeyCode.Space)||myKinectControl.isJumping == true)                        
             {
                 verticalVelpcity = 4f;                                  // add velocity in single frame
                 StartJump();
                 Invoke("StopJump",0.6f);
             }
 
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S)||myKinectControl.isSliding== true)
             {
                 StartSlide();
                 Invoke("StopSlide", 1);
@@ -219,7 +225,7 @@ public class playerController : MonoBehaviour {
     {
         moveVector = new Vector3(0, verticalVelpcity, 0);                               //move vector.y
 
-        forceSpeed += 10 * Time.deltaTime;
+        forceSpeed += 3 * Time.deltaTime;
         if (move == "run")
         {
             moveVector.z = forceSpeed;                                              //move vector.z 
