@@ -97,6 +97,7 @@
      <Compile Include="Assets\MyAsset\script\weaponShop\ButtonPurchase.cs" />
      <Compile Include="Assets\MyAsset\script\weaponShop\ButtonUpgrade.cs" />
      <Compile Include="Assets\MyKinectController.cs" />
+     <Compile Include="Assets\MyMainKinect.cs" />
      <Compile Include="Assets\PressStageSelect.cs" />
      <Compile Include="Assets\ProfilePlayerMap.cs" />
      <Compile Include="Assets\PropsBehavior.cs" />

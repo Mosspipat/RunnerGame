@@ -147,6 +147,7 @@ public class playerController : MonoBehaviour {
             way = "left";
             //Debug.Log("goLeftWay");
             AnimPlayer.SetTrigger("isLeft");
+            soundManagerPlayer.PlayOneShot(soundStore[2]);
         }
         else if (Input.GetKeyDown(KeyCode.D)&& way == "middle"||myKinectControl.isMoving == "moveRight" && presentWay == GameObject.Find("middleWay").transform.position)
         {
@@ -154,6 +155,7 @@ public class playerController : MonoBehaviour {
             way = "right";
             //Debug.Log("goRightWay");
             AnimPlayer.SetTrigger("isRight");
+            soundManagerPlayer.PlayOneShot(soundStore[2]);
         }
         // Left Move
         else if (Input.GetKeyDown(KeyCode.D)&& way == "left"||myKinectControl.isMoving == "moveRight" && presentWay == GameObject.Find("leftWay").transform.position)
@@ -162,6 +164,7 @@ public class playerController : MonoBehaviour {
             way = "middle";
             //Debug.Log("goMiddleWay");
             AnimPlayer.SetTrigger("isRight");
+            soundManagerPlayer.PlayOneShot(soundStore[2]);
         }
 
         // Right Move
@@ -171,6 +174,7 @@ public class playerController : MonoBehaviour {
             way = "middle";
             //Debug.Log("goMiddleWay");
             AnimPlayer.SetTrigger("isLeft");
+            soundManagerPlayer.PlayOneShot(soundStore[2]);
         }
 
         /*if (Input.GetKeyDown(KeyCode.S))
