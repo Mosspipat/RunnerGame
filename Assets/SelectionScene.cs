@@ -10,7 +10,6 @@ public class SelectionScene : MonoBehaviour {
     public Slider loadbar;
     public Text percentLoaded;
 
-
     int levelPlayer;
     public List<GameObject> UIUnlock;
     public List<Text> textStage;
@@ -34,7 +33,6 @@ public class SelectionScene : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
-
 
     void Start()
     {

@@ -32,6 +32,7 @@ public class EnemyBehavior : MonoBehaviour {
     }
 
 	void Update () {
+        
         if (player.transform.position.z > enemyCheckPlayerPoint && this.gameObject.name == "rabbit")
         {
             BehaviorRabbit();
@@ -86,7 +87,6 @@ public class EnemyBehavior : MonoBehaviour {
         this.transform.Find("fireMonsterRig").GetComponent<Animator>().SetTrigger("isShoot");
         this.transform.Translate(new Vector3(0, 0, 7f * Time.deltaTime));
         FindTarget(player);
-
     }
     void BehaviorSkeleton()
     {
@@ -109,6 +109,7 @@ public class EnemyBehavior : MonoBehaviour {
             Debug.Log("delete Enemy");
         }
     }
+
     void OnTriggerEnter(Collider obj)                               //Interact with item
     {
         if (obj.name == "player")

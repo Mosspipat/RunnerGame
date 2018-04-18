@@ -25,7 +25,7 @@ public class TrapBehavior : MonoBehaviour {
                 this.GetComponent<Animation>()[nameOfTypeAnimation].speed = 0.5f;
                 break;
             case TypeTrap.roof: nameOfTypeAnimation = "actionTrapRoof";
-                this.GetComponent<Animation>()[nameOfTypeAnimation].speed = 0.5f;
+                this.GetComponent<Animation>()[nameOfTypeAnimation].speed = 0.2f;
                 break;
         }
             

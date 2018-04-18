@@ -240,17 +240,20 @@ public class SpawnItemOrEnemy : MonoBehaviour {
     }
     void SpawnSpeedItem(int randomPointer)
     {
-        itemSpawn = Instantiate(ItemSpeed,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemSpeed.transform.rotation) as GameObject;
+        itemSpawn = Instantiate(ItemSpeed,spawnPointer.GetChild(randomPointer).position + Vector3.up * 5f,ItemSpeed.transform.rotation) as GameObject;
+        itemSpawn.transform.GetChild(0).name = "speedItem";
         itemSpawn.name = "speedItem";
     }
     void SpawnMagnetItem(int randomPointer)
     {
-        itemSpawn = Instantiate(ItemMagnet,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemSpeed.transform.rotation) as GameObject;
+        itemSpawn = Instantiate(ItemMagnet,spawnPointer.GetChild(randomPointer).position + Vector3.up * 2f,ItemSpeed.transform.rotation) as GameObject;
+        itemSpawn.transform.GetChild(0).name = "magnetItem";
         itemSpawn.name = "magnetItem";
     }
     void SpawnHealthItem(int randomPointer)
     {
-        itemSpawn = Instantiate(ItemHealth,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemHealth.transform.rotation) as GameObject;
+        itemSpawn = Instantiate(ItemHealth,spawnPointer.GetChild(randomPointer).position + Vector3.up * 2f,ItemHealth.transform.rotation) as GameObject;
+        itemSpawn.transform.GetChild(0).name = "posionItem";
         itemSpawn.name = "posionItem";
     }
     #endregion

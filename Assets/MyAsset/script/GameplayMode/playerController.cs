@@ -305,6 +305,7 @@ public class playerController : MonoBehaviour {
             GameObject smoke = Instantiate(effectImpact, this.transform.position, Quaternion.identity);
             Destroy(smoke, 4f);
             Destroy(obj.gameObject);
+            soundManagerPlayer.PlayOneShot(soundStore[1]);
         }
         else if (obj.name == "speedItem")
         {
@@ -337,6 +338,7 @@ public class playerController : MonoBehaviour {
             UIBarPlayer.GetDamage(1);
             AnimPlayer.SetTrigger("isLegHit");
             BangAnimation();
+            soundManagerPlayer.PlayOneShot(soundStore[1]);
         }
         else if (obj.name == "log")
         {
@@ -344,6 +346,7 @@ public class playerController : MonoBehaviour {
             UIBarPlayer.GetDamage(1);
             AnimPlayer.SetTrigger("isLegHit");
             BangAnimation();
+            soundManagerPlayer.PlayOneShot(soundStore[1]);
         }
         else if (obj.name == "headLog")
         {
@@ -351,6 +354,7 @@ public class playerController : MonoBehaviour {
             UIBarPlayer.GetDamage(1);
             AnimPlayer.SetTrigger("isHeadHit");
             BangAnimation();
+            soundManagerPlayer.PlayOneShot(soundStore[1]);
         }
         else if (obj.tag == "enemy")
         {
@@ -396,15 +400,28 @@ public class playerController : MonoBehaviour {
             }*/
         }
 
+        else if (obj.tag == "trapHead")
+        {
+            Debug.Log("trapHead hit Player");
+            UIBarPlayer.GetDamage(1);
+            AnimPlayer.SetTrigger("isHeadHit");
+            Destroy(obj.gameObject);
+            BangAnimation();
+            soundManagerPlayer.PlayOneShot(soundStore[1]);
+        }
+
         else if (obj.tag == "trap")
         {
-            Debug.Log("enemy hit Player");
+            Debug.Log("trapLeg hit Player");
             UIBarPlayer.GetDamage(1);
             AnimPlayer.SetTrigger("isLegHit");
+            Destroy(obj.gameObject);
             BangAnimation();
+            soundManagerPlayer.PlayOneShot(soundStore[1]);
         }
         else if (obj.name == "bullet")
         {
+            soundManagerPlayer.PlayOneShot(soundStore[1]);
                 if (Progressbar.health <= 0)
             {
                 AnimPlayer.SetTrigger("isDead");

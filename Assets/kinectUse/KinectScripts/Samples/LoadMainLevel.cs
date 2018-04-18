@@ -5,7 +5,6 @@ public class LoadMainLevel : MonoBehaviour
 {
 	private bool levelLoaded = false;
 	
-	
 	void Update() 
 	{
 		KinectManager manager = KinectManager.Instance;
@@ -16,5 +15,4 @@ public class LoadMainLevel : MonoBehaviour
 			Application.LoadLevel(1);
 		}
 	}
-	
 }

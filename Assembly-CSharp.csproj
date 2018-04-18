@@ -84,7 +84,7 @@
      <Compile Include="Assets\MyAsset\script\HouseMode\Slot.cs" />
      <Compile Include="Assets\MyAsset\script\HouseMode\WeaponSelection.cs" />
      <Compile Include="Assets\MyAsset\script\HouseMode\bookIngredient.cs" />
-     <Compile Include="Assets\MyAsset\script\MenuMode\ButtonFunction.cs" />
+     <Compile Include="Assets\MyAsset\script\MenuMode\ButtonFunctionMainMenu.cs" />
      <Compile Include="Assets\MyAsset\script\Object\Bullet.cs" />
      <Compile Include="Assets\MyAsset\script\Object\coin.cs" />
      <Compile Include="Assets\MyAsset\script\cc\FastCommand.cs" />
@@ -100,9 +100,11 @@
      <Compile Include="Assets\MyMainKinect.cs" />
      <Compile Include="Assets\PressStageSelect.cs" />
      <Compile Include="Assets\ProfilePlayerMap.cs" />
+     <Compile Include="Assets\PropTrapRedvolcano.cs" />
      <Compile Include="Assets\PropsBehavior.cs" />
      <Compile Include="Assets\Randomcloud.cs" />
      <Compile Include="Assets\SelectionScene.cs" />
+     <Compile Include="Assets\SettingMenu.cs" />
      <Compile Include="Assets\ShowcaseSystem.cs" />
      <Compile Include="Assets\SoundManager.cs" />
      <Compile Include="Assets\SubMission.cs" />
@@ -182,6 +184,7 @@
      <Compile Include="Assets\kinectUse\KinectScripts\Samples\SimpleGestureListener.cs" />
      <Compile Include="Assets\kinectUse\OverlayDemo\Scripts\KinectOverlayer.cs" />
      <Compile Include="Assets\propTrapDarkForest.cs" />
+     <Compile Include="Assets\soundEnemyBehavior.cs" />
      <Compile Include="Assets\statusPlayer.cs" />
      <None Include="Assets\allOtherAsset\OtherAsset\Fantasy Skybox FREE\Readme.txt" />
      <None Include="Assets\allOtherAsset\Medieval_House\Info.txt" />
