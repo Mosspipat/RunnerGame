@@ -960,18 +960,26 @@ public class KinectGestures
 
                         //jump more than 1.3 meter Unity && less than 1.5 meter Unity (Check "Jump" work)
                         if(jointsTracked[hipCenterIndex] && 
-                            (jointsPos[hipCenterIndex].y > 1.3f) && (jointsPos[hipCenterIndex].y < 1.5f))
+                            (jointsPos[hipCenterIndex].y > 1.25f) && (jointsPos[hipCenterIndex].y < 1.8f))
                         {
-                            GameObject.Find("kinectController").GetComponent<MyKinectController>().isJumping = true;
-                            SetGestureJoint(ref gestureData, timestamp, hipCenterIndex, jointsPos[hipCenterIndex]);
-                            gestureData.progress = 0.5f;
+                            if (GameObject.Find("kinectController").GetComponent<MyKinectController>().canJump == true)
+                            {
+                                GameObject.Find("kinectController").GetComponent<MyKinectController>().isJumping = true;
+                                SetGestureJoint(ref gestureData, timestamp, hipCenterIndex, jointsPos[hipCenterIndex]);
+                                gestureData.progress = 0.5f;
+                            }
                         }
                         break;
                 
                     case 1:  // gesture phase 2 = complete
-                        if((timestamp - gestureData.timestamp) < 1.5f)
+                        if((timestamp - gestureData.timestamp) < 1.8f)
                         {
-                            
+                            //new logic for not loop Jump
+                            if (GameObject.Find("kinectController").GetComponent<MyKinectController>().canJump == false)
+                            {
+                                GameObject.Find("kinectController").GetComponent<MyKinectController>().isJumping = false;
+                            }
+
                             bool isInPose = jointsTracked[hipCenterIndex] &&
                                 (jointsPos[hipCenterIndex].y - gestureData.jointPos.y) > 0.15f && 
                                 Mathf.Abs(jointsPos[hipCenterIndex].x - gestureData.jointPos.x) < 0.2f;
@@ -1001,7 +1009,13 @@ public class KinectGestures
                         if(jointsTracked[hipCenterIndex] && 
                             (jointsPos[hipCenterIndex].y <= 0.9f))
                         {
+                            // logic for slide Stop
+                            if (GameObject.Find("kinectController").GetComponent<MyKinectController>().canSlide == true)
+                            {
+                                GameObject.Find("kinectController").GetComponent<MyKinectController>().isSliding = true;
+                            }
                             Debug.Log("pos Slide");
+
 							SetGestureJoint(ref gestureData, timestamp, hipCenterIndex, jointsPos[hipCenterIndex]);
 							gestureData.progress = 0.5f;
 						}
@@ -1010,7 +1024,7 @@ public class KinectGestures
 					case 1:  // gesture phase 2 = complete
 						if((timestamp - gestureData.timestamp) < 1.5f)
 						{
-                            GameObject.Find("kinectController").GetComponent<MyKinectController>().isSliding = true;
+                            GameObject.Find("kinectController").GetComponent<MyKinectController>().isSliding = false;
                             Debug.Log("stop Slide");
                             bool isInPose = jointsTracked[hipCenterIndex] &&
                                 (jointsPos[hipCenterIndex].y - gestureData.jointPos.y) < -0.15f && 

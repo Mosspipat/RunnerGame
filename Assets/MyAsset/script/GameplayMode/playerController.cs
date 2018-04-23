@@ -188,6 +188,8 @@ public class playerController : MonoBehaviour {
             verticalVelpcity = -gravity * Time.deltaTime;                   //add gravity to velcity
             if (Input.GetKeyDown(KeyCode.Space)||myKinectControl.isJumping == true)                        
             {
+                myKinectControl.canJump = false;
+              
                 verticalVelpcity = 4f;                                  // add velocity in single frame
                 StartJump();
                 Invoke("StopJump",0.6f);
@@ -195,6 +197,7 @@ public class playerController : MonoBehaviour {
 
             if (Input.GetKeyDown(KeyCode.S)||myKinectControl.isSliding== true)
             {
+                myKinectControl.canSlide = false;
                 StartSlide();
                 Invoke("StopSlide", 1);
             }
@@ -541,6 +544,7 @@ public class playerController : MonoBehaviour {
     {
         controlCha.center = new Vector3(controlCha.center.x,controlCha.center.y*2,controlCha.center.z);
         controlCha.height *= 2;
+        myKinectControl.canSlide = true;
     }
 
     void StartJump()
@@ -556,6 +560,8 @@ public class playerController : MonoBehaviour {
         BCPlayer.center /= 2;
         controlCha.center = new Vector3(controlCha.center.x,controlCha.center.y/1.5f,controlCha.center.z);
         controlCha.height *= 2;
+
+        myKinectControl.canJump = true;
     }
 
     void StartRun()
