@@ -6,6 +6,7 @@ public class PressStageSelect : MonoBehaviour {
 
     SelectionScene selectScene;
     public int stage;
+    public int lengthMap;
 
 	void Start () {
         selectScene = GameObject.Find("SceneSelectManager").GetComponent<SelectionScene>();
@@ -15,5 +16,9 @@ public class PressStageSelect : MonoBehaviour {
     {
         selectScene.stageSeleted = stage;
         selectScene.GoToLevelGreenField();
+
+
+        //sendLenghtMap
+        UIPlayer.mapLengthMax = lengthMap;
     }
 }

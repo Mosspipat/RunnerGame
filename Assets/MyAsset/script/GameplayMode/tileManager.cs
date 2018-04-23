@@ -40,7 +40,6 @@ public class tileManager : MonoBehaviour {
     float PosTerrianPlayerSecond = 200;
     float nextMoveTerrianZ = 400f;
 
-
     public static int amountSpawnedPlatform; 
 
     public List<GameObject> typePlatformObstacleGreen = new List<GameObject>(); //1-2

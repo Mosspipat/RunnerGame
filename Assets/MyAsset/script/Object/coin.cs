@@ -15,6 +15,7 @@ public class coin : MonoBehaviour {
 
 	void Start () {
 
+        name = "coin";
         uiPlayer = GameObject.Find("player/UIPlayer").GetComponent<UIPlayer>();
 
         player = GameObject.Find("player");

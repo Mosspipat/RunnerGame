@@ -28,7 +28,7 @@ public class UIPlayer : MonoBehaviour {
     float distantStartAndEnd;
     public Transform startPosMinimap;
     public Transform endPosMinimap;
-    float mapLengthMax = 1000;                //Max Range Map
+    public static float mapLengthMax;              //Max Range Map
     public static float distancePlayermake;
 
     public enum Stages
@@ -38,6 +38,8 @@ public class UIPlayer : MonoBehaviour {
     };
 
     void Start () {
+
+        ResetLength(mapLengthMax);
 
         intergerScoreCoin = 0;
         distantStartAndEnd = Vector2.Distance(startPosMinimap.position, endPosMinimap.position);
@@ -58,8 +60,10 @@ public class UIPlayer : MonoBehaviour {
         coinImageUI.rectTransform.sizeDelta =  Vector2.Lerp( new Vector2(coinImageUI.rectTransform.sizeDelta.x
             ,coinImageUI.rectTransform.sizeDelta.y) ,
             sizeCoinImage,0.7f);                                    //lerp starter Image coin Size
-        
-        scoreText.text = intergerScore.ToString()+" mile";
+
+        int distaceToCpmplete = (int)UIPlayer.mapLengthMax - intergerScore;
+
+        scoreText.text = distaceToCpmplete.ToString() +"meter";
         RunScore();
         CoinScore();
         EventGameplay();
@@ -128,7 +132,7 @@ public class UIPlayer : MonoBehaviour {
     #region miniMap And CheckQuest
     void Minimap()
     {
-        float calDistanceMinimapMax = distantStartAndEnd;
+       // float calDistanceMinimapMax = distantStartAndEnd;
         float calDistanceMinimap = (intergerScore / mapLengthMax) * distantStartAndEnd; 
         if (calDistanceMinimap >= distantStartAndEnd)                                       //Check if miniPlayer has "finished distance" Stop miniplayer
         {
@@ -137,10 +141,19 @@ public class UIPlayer : MonoBehaviour {
 
             //Check QuestComplete
             tileManager.questDistance = true;
+            tileManager.dungeonStage = false;
         }
         Vector3 distanceMinimap = new Vector3( calDistanceMinimap,0,0);
         playerImage.transform.position = startPosMinimap.transform.position + distanceMinimap;            //player distance in Minimap
         /*miniMap.fillAmount = 1f;*/        //Error Check
+    }
+    #endregion
+
+    #region resetMaxLengthMap
+    void ResetLength(float lengthMax)
+    {
+        mapLengthMax = 0;
+        mapLengthMax = lengthMax;
     }
     #endregion
 }

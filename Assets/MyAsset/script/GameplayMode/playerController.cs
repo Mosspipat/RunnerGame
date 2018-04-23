@@ -291,14 +291,16 @@ public class playerController : MonoBehaviour {
     #region Check hit Player
     void OnTriggerEnter(Collider obj)                               //Interact with item
     {
-        if (obj.name == "bariaItem")
+        /* if (obj.name == "bariaItem")
         {
             isShield = true;
             particleShield.SetActive(true);
             Invoke("StopShield", timeShield);
             Destroy(obj.gameObject);
-        }
-        else if ((obj.tag == "enemy" || obj.tag == "obstacle") && isShield == true||isQuickRun == true)
+
+            soundManagerPlayer.PlayOneShot(soundStore[5]);
+        }*/
+        if ((obj.tag == "enemy" || obj.tag == "obstacle") && isShield == true || isQuickRun == true)
         {
             Debug.Log("shield protection");
             particleShield.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);  
@@ -309,12 +311,20 @@ public class playerController : MonoBehaviour {
         }
         else if (obj.name == "speedItem")
         {
+            // +Shield effect
+            isShield = true;
+            particleShield.SetActive(true);
+            Invoke("StopShield", timeShield);
+            Destroy(obj.gameObject);
+
+            //+ Speed Effect
             CC.isSpeed = true;
             move = "fastRun";
             particleQuickRun.SetActive(true);
             Invoke("NormalMove", timeQuick);
             Destroy(obj.gameObject);
             Debug.Log("speedGet");
+            soundManagerPlayer.PlayOneShot(soundStore[4]);
         }
         else if (obj.name == "magnetItem")
         {
@@ -322,12 +332,19 @@ public class playerController : MonoBehaviour {
             Destroy(obj.gameObject);
             isMagnetEffect = true;
             Invoke("StopMagnet", timeMagnet);
+            soundManagerPlayer.PlayOneShot(soundStore[7]);
         }
         else if (obj.name == "posionItem")
         {
             Progressbar.health++;
             Destroy(obj.gameObject);
+            soundManagerPlayer.PlayOneShot(soundStore[6]);
         }
+        else if ((obj.name == "coin"))
+        {
+            soundManagerPlayer.PlayOneShot(soundStore[3]);
+        }
+
         else if (!isShield)
         {
          if (obj.name == "obstacle_tree")

@@ -98,7 +98,7 @@ public class SpawnItemOrEnemy : MonoBehaviour {
         }
         else
         {
-            randomSpawn = Random.Range(10, 15); 
+            randomSpawn = Random.Range(10, 14); 
         }
             
 
@@ -150,21 +150,21 @@ public class SpawnItemOrEnemy : MonoBehaviour {
                 SpawnCoin();
                 break;
             case 11:
-                int randomPointerSpawnShield = Random.Range(0, 9);
-                SpawnShieldItem(randomPointerSpawnShield);
-                break;
-            case 12:
                 int randomPointerSpawnMagnet = Random.Range(0, 9);
                 SpawnMagnetItem(randomPointerSpawnMagnet);
                 break;
-            case 13:
+            case 12:
                 int randomPointerSpawnSpeed = Random.Range(0, 9);
                 SpawnSpeedItem(randomPointerSpawnSpeed);
                 break;
-            case 14:
+            case 13:
                 int randomPointerSpawnHealth = Random.Range(0, 9);
                 SpawnHealthItem(randomPointerSpawnHealth);
                 break;
+        /* case 14:
+                int randomPointerSpawnShield = Random.Range(0, 9);
+                SpawnShieldItem(randomPointerSpawnShield);
+                break;*/
         }
     }
 
@@ -240,8 +240,8 @@ public class SpawnItemOrEnemy : MonoBehaviour {
     }
     void SpawnSpeedItem(int randomPointer)
     {
-        itemSpawn = Instantiate(ItemSpeed,spawnPointer.GetChild(randomPointer).position + Vector3.up * 5f,ItemSpeed.transform.rotation) as GameObject;
-        itemSpawn.transform.GetChild(0).name = "speedItem";
+        itemSpawn = Instantiate(ItemSpeed,spawnPointer.GetChild(randomPointer).position + Vector3.up * 1f,ItemSpeed.transform.rotation) as GameObject;
+        itemSpawn.transform.GetChild(0).GetChild(0).name = "speedItem";
         itemSpawn.name = "speedItem";
     }
     void SpawnMagnetItem(int randomPointer)
