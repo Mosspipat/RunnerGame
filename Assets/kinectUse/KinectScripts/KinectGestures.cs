@@ -960,7 +960,7 @@ public class KinectGestures
 
                         //jump more than 1.3 meter Unity && less than 1.5 meter Unity (Check "Jump" work)
                         if(jointsTracked[hipCenterIndex] && 
-                            (jointsPos[hipCenterIndex].y > 1.25f) && (jointsPos[hipCenterIndex].y < 1.8f))
+                            (jointsPos[hipCenterIndex].y > 1.3f) && (jointsPos[hipCenterIndex].y < 1.5f))
                         {
                             if (GameObject.Find("kinectController").GetComponent<MyKinectController>().canJump == true)
                             {
@@ -972,7 +972,7 @@ public class KinectGestures
                         break;
                 
                     case 1:  // gesture phase 2 = complete
-                        if((timestamp - gestureData.timestamp) < 1.8f)
+                        if((timestamp - gestureData.timestamp) < 0.5f) //1.5f
                         {
                             //new logic for not loop Jump
                             if (GameObject.Find("kinectController").GetComponent<MyKinectController>().canJump == false)
@@ -1022,7 +1022,7 @@ public class KinectGestures
 						break;
 				
 					case 1:  // gesture phase 2 = complete
-						if((timestamp - gestureData.timestamp) < 1.5f)
+						if((timestamp - gestureData.timestamp) < 0.5f) //1.5f
 						{
                             GameObject.Find("kinectController").GetComponent<MyKinectController>().isSliding = false;
                             Debug.Log("stop Slide");

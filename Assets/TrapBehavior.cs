@@ -19,13 +19,13 @@ public class TrapBehavior : MonoBehaviour {
         switch (Trap)
         {
             case TypeTrap.wall: nameOfTypeAnimation = "actionTrapWall";
-                this.GetComponent<Animation>()[nameOfTypeAnimation].speed = 0.3f;                  //set this to Speed up/Speed down Animation;
+                this.GetComponent<Animation>()[nameOfTypeAnimation].speed = 0.2f;//0.3                  //set this to Speed up/Speed down Animation;
                 break;
             case TypeTrap.floor: nameOfTypeAnimation = "actionTrapFloor";
-                this.GetComponent<Animation>()[nameOfTypeAnimation].speed = 0.5f;
+                this.GetComponent<Animation>()[nameOfTypeAnimation].speed = 0.3f;//0.5
                 break;
             case TypeTrap.roof: nameOfTypeAnimation = "actionTrapRoof";
-                this.GetComponent<Animation>()[nameOfTypeAnimation].speed = 0.2f;
+                this.GetComponent<Animation>()[nameOfTypeAnimation].speed = 0.1f;//0.2
                 break;
         }
             

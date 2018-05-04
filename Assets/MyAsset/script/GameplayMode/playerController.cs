@@ -177,6 +177,7 @@ public class playerController : MonoBehaviour {
             soundManagerPlayer.PlayOneShot(soundStore[2]);
         }
 
+        myKinectControl.isMoving = "notMove";
         /*if (Input.GetKeyDown(KeyCode.S))
         {
             Debug.Log("slide");
@@ -439,6 +440,7 @@ public class playerController : MonoBehaviour {
             BangAnimation();
             soundManagerPlayer.PlayOneShot(soundStore[1]);
         }
+
         else if (obj.name == "bullet")
         {
             soundManagerPlayer.PlayOneShot(soundStore[1]);
@@ -535,6 +537,7 @@ public class playerController : MonoBehaviour {
     #region actionControl
     void StartSlide()
     {
+        soundManagerPlayer.PlayOneShot(soundStore[8]);
         AnimPlayer.SetTrigger("isSlide");
         controlCha.center = new Vector3(controlCha.center.x,controlCha.center.y/2,controlCha.center.z);
         controlCha.height /= 2;
@@ -549,6 +552,7 @@ public class playerController : MonoBehaviour {
 
     void StartJump()
     {
+        soundManagerPlayer.PlayOneShot(soundStore[8]);
         AnimPlayer.SetTrigger("isJump");
         BCPlayer.center *= 2;
         controlCha.center = new Vector3(controlCha.center.x,controlCha.center.y*1.5f,controlCha.center.z);
