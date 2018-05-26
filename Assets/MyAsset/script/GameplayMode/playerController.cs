@@ -139,13 +139,11 @@ public class playerController : MonoBehaviour {
  
     void Controller()
     {
-        /* moveSide = Input.GetAxis("Horizontal");*/
         // Middle Move 
         if (Input.GetKeyDown(KeyCode.A)&& way == "middle"||myKinectControl.isMoving == "moveLeft" && presentWay == GameObject.Find("middleWay").transform.position)
         {
             presentWay = GameObject.Find("leftWay").transform.position;
             way = "left";
-            //Debug.Log("goLeftWay");
             AnimPlayer.SetTrigger("isLeft");
             soundManagerPlayer.PlayOneShot(soundStore[2]);
         }
@@ -153,7 +151,6 @@ public class playerController : MonoBehaviour {
         {
             presentWay = GameObject.Find("rightWay").transform.position;
             way = "right";
-            //Debug.Log("goRightWay");
             AnimPlayer.SetTrigger("isRight");
             soundManagerPlayer.PlayOneShot(soundStore[2]);
         }
@@ -162,7 +159,6 @@ public class playerController : MonoBehaviour {
         {
             presentWay = GameObject.Find("middleWay").transform.position;
             way = "middle";
-            //Debug.Log("goMiddleWay");
             AnimPlayer.SetTrigger("isRight");
             soundManagerPlayer.PlayOneShot(soundStore[2]);
         }
@@ -172,17 +168,11 @@ public class playerController : MonoBehaviour {
         {
             presentWay = GameObject.Find("middleWay").transform.position;
             way = "middle";
-            //Debug.Log("goMiddleWay");
             AnimPlayer.SetTrigger("isLeft");
             soundManagerPlayer.PlayOneShot(soundStore[2]);
         }
 
         myKinectControl.isMoving = "notMove";
-        /*if (Input.GetKeyDown(KeyCode.S))
-        {
-            Debug.Log("slide");
-            // player play animation slide;
-        }*/
 
         if (controlCha.isGrounded)                                                  
         {

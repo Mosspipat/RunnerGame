@@ -16,8 +16,8 @@ public class Progressbar : MonoBehaviour {
     public Text healthText;
     public Image loadEnergybar;
 
-    public Text amountTreasure;
-    public Text fullAmountTreasure;
+    //public Text amountTreasure;
+    //public Text fullAmountTreasure;
 
 
     public float maxHealth;
@@ -54,8 +54,9 @@ public class Progressbar : MonoBehaviour {
         loadHealthbar = GameObject.Find("ProgressHealthBar/loadHealthBar").GetComponent<Image>();
         loadEnergybar = GameObject.Find("ProgressEnergyBar/loadEnergyBar").GetComponent<Image>();
 
-        amountTreasure =  GameObject.Find("treasureCollect/amount").GetComponent<Text>();
-        fullAmountTreasure = GameObject.Find("treasureCollect/fullAmount").GetComponent<Text>();
+        //tresure UI
+        //amountTreasure =  GameObject.Find("treasureCollect/amount").GetComponent<Text>();
+        //fullAmountTreasure = GameObject.Find("treasureCollect/fullAmount").GetComponent<Text>();
 
         powerAttackText = GameObject.Find("powerStatus/attack/attackPower").GetComponent<Text>();
         powerDefenceText = GameObject.Find("powerStatus/defence/defencePower").GetComponent<Text>();
@@ -76,7 +77,8 @@ public class Progressbar : MonoBehaviour {
         EnergyBar();
         skillTime();
         LowHealhEffectCheck();
-        TreasureText();
+        //Treasuer UI
+        //TreasureText();
         PowerStatusUpdate();
         TimerAttackIncreasing();
     }
@@ -213,7 +215,7 @@ public class Progressbar : MonoBehaviour {
     #endregion
 
     #region CollectionTreasureMapUpdate
-    void TreasureText()
+    /*void TreasureText()
     {
         amountTreasure.text = " Collected " + amountTreasureInt.ToString();
         fullAmountTreasure.text = "/ " +fullAmountTresureInt.ToString();
@@ -226,7 +228,7 @@ public class Progressbar : MonoBehaviour {
 
             tileManager.questCollect= true; 
         }
-    }
+    }*/
     #endregion
 
     #region PowerStatusUpdate
